@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/race_road"
+    android:id="@+id/main"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/finalScoreTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/press_start_2p"
+        android:gravity="center"
+        android:visibility="gone"
+        android:textSize="36sp"
+        android:shadowDy="10.5"
+        android:shadowDx="10.5"
+        android:shadowColor="#E64D2C00"
+        android:shadowRadius="2"
+        android:text="@string/score"
+        android:textColor="#FF3C00"
+        android:elevation="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/playBtn"
+        android:layout_width="170dp"
+        android:layout_height="76dp"
+        android:backgroundTint="#0066FF"
+        android:elevation="1.5dp"
+        android:fontFamily="@font/press_start_2p"
+        android:gravity="center"
+        android:onClick="startGame"
+        android:visibility="gone"
+        android:text="Play!"
+        android:shadowDy="7.5"
+        android:shadowDx="7.5"
+        android:shadowColor="@color/black"
+        android:shadowRadius="4.75"
+        android:textSize="22sp"
+        app:cornerRadius="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.725" />
+
+    <TextView
+        android:id="@+id/scoreTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/press_start_2p"
+        android:shadowDy="3.33"
+        android:shadowDx="3.33"
+        android:shadowColor="#E64D2C00"
+        android:shadowRadius="1.5"
+        android:text="@string/score"
+        android:textColor="#FF3C00"
+        android:elevation="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.925"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0175" />
+
+     <ImageView
+        android:id="@+id/player"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+         android:elevation="1dp"
+        app:layout_constraintWidth_percent=".2105263158"
+        app:layout_constraintHeight_percent=".2"
+        android:src="@drawable/blue_car"
+         android:scaleY="0.975"
+         android:scaleX="0.975"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.95" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.075"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0125">
+
+        <ImageView
+            android:id="@+id/life1"
+            android:layout_width="25dp"
+            android:layout_height="40dp"
+            app:srcCompat="@drawable/blue_car" />
+
+        <ImageView
+            android:id="@+id/life2"
+            android:layout_width="25dp"
+            android:layout_height="40dp"
+            app:srcCompat="@drawable/blue_car" />
+
+        <ImageView
+            android:id="@+id/life3"
+            android:layout_width="25dp"
+            android:layout_height="40dp"
+            app:srcCompat="@drawable/blue_car" />
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

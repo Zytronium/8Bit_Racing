@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">8Bit Racing</string>
+    <string name="score">Score: %s</string>
+</resources>
