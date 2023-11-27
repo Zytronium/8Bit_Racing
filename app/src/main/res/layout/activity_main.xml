@@ -38,6 +38,7 @@
         android:gravity="center"
         android:onClick="startGame"
         android:visibility="gone"
+        tools:visibility="visible"
         android:text="Play!"
         android:shadowDy="7.5"
         android:shadowDx="7.5"
@@ -117,6 +118,23 @@
             app:srcCompat="@drawable/blue_car" />
 
     </LinearLayout>
+
+    <Switch
+        android:id="@+id/theme_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Theme"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="28sp"
+        android:textOff="Theme: Race Track"
+        android:textOn="Theme: Space Race"
+        android:visibility="gone"
+        tools:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/playBtn"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

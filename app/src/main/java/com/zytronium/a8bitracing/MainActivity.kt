@@ -10,6 +10,7 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.Switch
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.ViewCompat
@@ -27,16 +28,17 @@ class MainActivity : AppCompatActivity() {
     private lateinit var life3: ImageView
     private lateinit var scoreText: TextView
     private lateinit var playButton: Button
+    private lateinit var themeSwitch: Switch
     private lateinit var finalScoreText: TextView
 
     private var gamePlaying: Boolean = true
     private var lane: Int = 2
-    private var gameSpeed: Int = 2000
+    private var gameSpeed: Int = 1000
     private var noSpawnLane: Int = 0
     private var previousSpawnLane: Int = 0
     private var playerLives: Int = 3
     private var score: Int = 0
-    private var spaceMode: Boolean = false
+    private var spaceMode: Boolean = true
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,11 +52,15 @@ class MainActivity : AppCompatActivity() {
         scoreText = findViewById(R.id.scoreTxt)
         finalScoreText = findViewById(R.id.finalScoreTxt)
         playButton = findViewById(R.id.playBtn)
+        themeSwitch = findViewById(R.id.theme_switch)
         fs()
 
-        if(spaceMode) screen.background = getDrawable(R.drawable.race_space)
-        if(spaceMode) player.setImageDrawable(getDrawable(R.drawable.red_raceship))
         if(spaceMode) {
+            screen.background = getDrawable(R.drawable.race_space)
+            player.setImageDrawable(getDrawable(R.drawable.blue_raceship))
+            life1.setImageDrawable(getDrawable(R.drawable.blue_raceship))
+            life2.setImageDrawable(getDrawable(R.drawable.blue_raceship))
+            life3.setImageDrawable(getDrawable(R.drawable.blue_raceship))
             player.layoutParams.width = (pixelWidth() * 12).toInt()
             player.layoutParams.height = (pixelHeight() * 18).toInt()
         }
@@ -69,7 +75,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         play()
-        keepScore()
+//        keepScore()
 
     }
 
@@ -82,31 +88,59 @@ class MainActivity : AppCompatActivity() {
     private fun keepScore() {
         scoreText.text = getString(R.string.score, score.toString())
         when(score) {
-            1 -> gameSpeed = 1750
-            3 -> gameSpeed = 1500
-            7 -> gameSpeed = 1250
-            20 -> gameSpeed = 1000
-            35 -> gameSpeed = 750
-            85 -> gameSpeed = 500
-            150 -> gameSpeed = 250
-            220 -> gameSpeed = 150
-            305 -> gameSpeed = 125
-            390 -> gameSpeed = 105
-            505 -> gameSpeed = 75
-        }
-        Handler().postDelayed({
-            if(gamePlaying) {
-                score++
-                keepScore()
+            0 -> gameSpeed = 1000
+            1 -> gameSpeed = 1500
+            2 -> gameSpeed = 2000
+            5 -> gameSpeed = 1875
+            10 -> gameSpeed = 1750
+            15 -> gameSpeed = 1500
+            20 -> gameSpeed = 1250
+            25 -> gameSpeed = 1125
+            30 -> gameSpeed = 1000
+            else -> {
+                if((score.toString().endsWith("0") && score <= 150) || ((score.toString().endsWith("00") || score.toString().endsWith("20") || score.toString().endsWith("40") || score.toString().endsWith("60") || score.toString().endsWith("80")) && score <= 220) || ((score.toString().endsWith("00") || score.toString().endsWith("50")) && score >= 250) )
+                gameSpeed = (gameSpeed * if(score <= 120) (7.0/8.0) else if(score <= 220) (15.0/16.0) else (31.0/32.0)).toInt()
             }
-        }, 1000)
+//            15 -> gameSpeed = 1333
+//            25 -> gameSpeed = 1125
+//            45 -> gameSpeed = 1000
+//            60 -> gameSpeed = 750
+//            90 -> gameSpeed = 550
+//            100 -> gameSpeed = 375
+//            125 -> gameSpeed = 250
+//            155 -> gameSpeed = 225
+//            285 -> gameSpeed = 195
+//            210 -> gameSpeed = 170
+//            245 -> gameSpeed = 125
+//            280 -> gameSpeed = 100
+//            300 -> gameSpeed = 90
+//            315 -> gameSpeed = 75
+//            360 -> gameSpeed = 70
+//            390 -> gameSpeed = 65
+//            425 -> gameSpeed = 60
+//            460 -> gameSpeed = 55
+//            500 -> gameSpeed = 50
+
+        }
+//        Handler().postDelayed({
+//            if(gamePlaying) {
+//                score++
+//                keepScore()
+//            }
+//        }, gameSpeed.toLong())
     }
 
     private fun play() {
+        scoreText.text = getString(R.string.score, score.toString())
         Handler().postDelayed({
             if(gamePlaying) {
                 moveCars()
                 generateCars()
+                if(gamePlaying) {
+                    score++
+                    scoreText.text = getString(R.string.score, score.toString())
+                }
+                keepScore()
                 play()
             }
         }, gameSpeed.toLong() )
@@ -154,6 +188,7 @@ class MainActivity : AppCompatActivity() {
                 if(playerLives <= 0) {
                     screen.setOnTouchListener(null)
                     playButton.visibility = View.VISIBLE
+//                    themeSwitch.visibility = View.VISIBLE
                     finalScoreText.visibility = View.VISIBLE
                     gamePlaying = false
                     finalScoreText.text = getString(R.string.score, score.toString())
@@ -301,7 +336,9 @@ class MainActivity : AppCompatActivity() {
         lParams.horizontalBias = 0.5f
         lParams.verticalBias = 0.0125f
 
-        newCar.setImageDrawable(if(spaceMode) getDrawable(R.drawable.red_raceship) else if(Random.nextBoolean()) getDrawable(R.drawable.red_car) else getDrawable(R.drawable.green_car)) //{
+        newCar.setImageDrawable(if(spaceMode) {
+            if (Random.nextBoolean()) getDrawable(R.drawable.red_raceship) else getDrawable(R.drawable.green_raceship)
+        } else if(Random.nextBoolean()) getDrawable(R.drawable.red_car) else getDrawable(R.drawable.green_car)) //{
         //    true -> getDrawable(R.drawable.red_car)
         //    false -> getDrawable(R.drawable.green_car)
         //})
