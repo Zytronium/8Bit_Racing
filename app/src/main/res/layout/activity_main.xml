@@ -28,30 +28,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/playBtn"
-        android:layout_width="170dp"
-        android:layout_height="76dp"
-        android:backgroundTint="#0066FF"
-        android:elevation="1.5dp"
-        android:fontFamily="@font/press_start_2p"
-        android:gravity="center"
-        android:onClick="startGame"
-        android:visibility="gone"
-        tools:visibility="visible"
-        android:text="Play!"
-        android:shadowDy="7.5"
-        android:shadowDx="7.5"
-        android:shadowColor="@color/black"
-        android:shadowRadius="4.75"
-        android:textSize="22sp"
-        app:cornerRadius="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.725" />
-
     <TextView
         android:id="@+id/scoreTxt"
         android:layout_width="wrap_content"
@@ -87,6 +63,50 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.95" />
 
+
+    <Button
+        android:id="@+id/playBtn"
+        android:layout_width="170dp"
+        android:layout_height="76dp"
+        android:backgroundTint="#0066FF"
+        android:elevation="1.5dp"
+        android:fontFamily="@font/press_start_2p"
+        android:gravity="center"
+        android:onClick="startGame"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:text="Play!"
+        android:shadowDy="7.5"
+        android:shadowDx="7.5"
+        android:shadowColor="@color/black"
+        android:shadowRadius="4.75"
+        android:textSize="22sp"
+        app:cornerRadius="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.725" />
+
+    <Switch
+        android:id="@+id/theme_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="1.5dp"
+        android:text="Theme"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="28sp"
+        android:textOff="Theme: Race Track"
+        android:textOn="Theme: Space Race"
+        android:visibility="gone"
+        tools:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/playBtn"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -121,23 +141,5 @@
             app:srcCompat="@drawable/blue_car" />
 
     </LinearLayout>
-
-    <Switch
-        android:id="@+id/theme_switch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Theme"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:textSize="28sp"
-        android:textOff="Theme: Race Track"
-        android:textOn="Theme: Space Race"
-        android:visibility="gone"
-        tools:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/playBtn"
-        tools:ignore="UseSwitchCompatOrMaterialXml" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

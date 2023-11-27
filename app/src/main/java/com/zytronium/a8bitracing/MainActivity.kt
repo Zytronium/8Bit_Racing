@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
     private var previousSpawnLane: Int = 0
     private var playerLives: Int = 3
     private var score: Int = 0
-    private var spaceMode: Boolean = true
+    private var spaceMode: Boolean = false
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
