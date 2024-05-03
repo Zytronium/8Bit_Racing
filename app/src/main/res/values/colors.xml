@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="pause_btn_active">#D9FF3300</color>
+    <color name="pause_btn_inactive">#B3996D63</color>
+    <color name="light_blue">#0090FF</color>
+    <color name="red_orange">#FF3300</color>
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>

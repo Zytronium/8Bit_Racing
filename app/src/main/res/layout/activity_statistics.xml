@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/race_road_blur"
+    tools:context=".Statistics">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="13dp"
+        android:elevation="11.5dp"
+        android:fontFamily="@font/press_start_2p"
+        android:gravity="center"
+        android:padding="5.5dp"
+        android:shadowColor="#E64D1F00"
+        android:shadowDx="4"
+        android:shadowDy="4"
+        android:shadowRadius="3.125"
+        android:text="@string/saved_data"
+        android:textAllCaps="false"
+        android:textColor="@color/red_orange"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6125"
+        app:layout_constraintStart_toEndOf="@+id/backBTN"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.8495" />
+
+    <Button
+        android:id="@+id/backBTN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#A11499FF"
+        android:elevation="11dp"
+        android:fontFamily="@font/press_start_2p"
+        android:gravity="center"
+        android:onClick="back"
+        android:padding="2.5dp"
+        android:shadowColor="#E64D1F00"
+        android:shadowDx="3.25"
+        android:shadowDy="3.25"
+        android:shadowRadius="2.5"
+        android:text="@string/back_button"
+        android:textAllCaps="false"
+        android:textColor="@color/red_orange"
+        android:textSize="11.75sp"
+        app:cornerRadius="17.6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.056"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.018" />
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="805dp"
+        android:orientation="vertical"
+        android:padding="6dp"
+        android:scrollbarSize="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/backBTN">
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/press_start_2p"
+                android:gravity="center"
+                android:shadowColor="#E64D1F00"
+                android:shadowDx="3.5"
+                android:shadowDy="3.5"
+                android:shadowRadius="4.5"
+                android:text="THIS IS A WIP STATISTICS SCREEN. A MORE POLISHED STATS SCREEN IS COMING SOON."
+                android:textColor="@color/red_orange"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/press_start_2p"
+                android:gravity="center"
+                android:shadowColor="#E64D1F00"
+                android:shadowDx="3.125"
+                android:shadowDy="3.125"
+                android:shadowRadius="4.5"
+                android:text="@string/all_saved_data"
+                android:textColor="@color/red_orange"
+                android:textSize="11sp" />
+
+            <TextView
+                android:id="@+id/StatSpaceMode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="8dp"
+                android:fontFamily="@font/press_start_2p"
+                android:gravity="center"
+                android:padding="20dp"
+                android:shadowColor="#E64D1F00"
+                android:shadowDx="7.5"
+                android:shadowDy="7.5"
+                android:shadowRadius="4.75"
+                android:text=""
+                android:textAllCaps="false"
+                android:textColor="@color/red_orange"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/StatDifficulty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="8dp"
+                android:fontFamily="@font/press_start_2p"
+                android:gravity="center"
+                android:padding="20dp"
+                android:shadowColor="#E64D1F00"
+                android:shadowDx="7.5"
+                android:shadowDy="7.5"
+                android:shadowRadius="4.75"
+                android:text=""
+                android:textAllCaps="false"
+                android:textColor="@color/red_orange"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/StatPersonalFastest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="8dp"
+                android:fontFamily="@font/press_start_2p"
+                android:gravity="center"
+                android:padding="20dp"
+                android:shadowColor="#E64D1F00"
+                android:shadowDx="7.5"
+                android:shadowDy="7.5"
+                android:shadowRadius="4.75"
+                android:text=""
+                android:textAllCaps="false"
+                android:textColor="@color/red_orange"
+                android:textSize="18sp" />
+
+
+            <TextView
+                android:id="@+id/StatHiScore1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="8dp"
+                android:fontFamily="@font/press_start_2p"
+                android:gravity="center"
+                android:padding="20dp"
+                android:shadowColor="#E64D1F00"
+                android:shadowDx="7.5"
+                android:shadowDy="7.5"
+                android:shadowRadius="4.75"
+                android:text=""
+                android:textAllCaps="false"
+                android:textColor="@color/red_orange"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/StatHiScore2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="8dp"
+                android:fontFamily="@font/press_start_2p"
+                android:gravity="center"
+                android:padding="20dp"
+                android:shadowColor="#E64D1F00"
+                android:shadowDx="7.5"
+                android:shadowDy="7.5"
+                android:shadowRadius="4.75"
+                android:text=""
+                android:textAllCaps="false"
+                android:textColor="@color/red_orange"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/StatHiScore3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="8dp"
+                android:fontFamily="@font/press_start_2p"
+                android:gravity="center"
+                android:padding="20dp"
+                android:shadowColor="#E64D1F00"
+                android:shadowDx="7.5"
+                android:shadowDy="7.5"
+                android:shadowRadius="4.75"
+                android:text=""
+                android:textAllCaps="false"
+                android:textColor="@color/red_orange"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/StatHiScore4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="8dp"
+                android:fontFamily="@font/press_start_2p"
+                android:gravity="center"
+                android:padding="20dp"
+                android:shadowColor="#E64D1F00"
+                android:shadowDx="7.5"
+                android:shadowDy="7.5"
+                android:shadowRadius="4.75"
+                android:text=""
+                android:textAllCaps="false"
+                android:textColor="@color/red_orange"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/statsTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="8dp"
+                android:fontFamily="@font/press_start_2p"
+                android:gravity="center"
+                android:padding="20dp"
+                android:shadowColor="#E64D1F00"
+                android:shadowDx="7.05"
+                android:shadowDy="7.05"
+                android:shadowRadius="4.75"
+                android:text=""
+                android:textAllCaps="false"
+                android:textColor="@color/red_orange"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/StatAppVersionName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="8dp"
+                android:fontFamily="@font/press_start_2p"
+                android:gravity="center"
+                android:padding="20dp"
+                android:shadowColor="#E64D1F00"
+                android:shadowDx="1.5"
+                android:shadowDy="1.5"
+                android:shadowRadius="3.75"
+                android:text=""
+                android:textAllCaps="false"
+                android:textColor="@color/red_orange"
+                android:textSize="12sp" />
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

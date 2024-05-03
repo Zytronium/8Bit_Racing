@@ -2,144 +2,325 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/race_road"
-    android:id="@+id/main"
+    android:background="#020302"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/finalScoreTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/press_start_2p"
-        android:gravity="center"
-        android:visibility="gone"
-        android:textSize="36sp"
-        android:shadowDy="10.5"
-        android:shadowDx="10.5"
-        android:shadowColor="#E64D2C00"
-        android:shadowRadius="2"
-        android:text="@string/score"
-        android:textColor="#FF3C00"
-        android:elevation="1dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/display"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/race_road">
 
-    <TextView
-        android:id="@+id/scoreTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/press_start_2p"
-        android:shadowDy="3.33"
-        android:shadowDx="3.33"
-        android:shadowColor="#E64D2C00"
-        android:shadowRadius="1.5"
-        android:text="@string/score"
-        android:textColor="#FF3C00"
-        android:elevation="1dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.925"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0175" />
+        <ImageButton
+            android:id="@+id/btn_pause"
+            android:layout_width="58dp"
+            android:layout_height="58dp"
+            android:backgroundTint="@color/pause_btn_active"
+            android:contentDescription="Pause"
+            android:elevation="10dp"
+            android:onClick="menuButton"
+            android:padding="7dp"
+            android:scaleType="fitXY"
+            android:src="@android:drawable/ic_media_pause"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0375"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.00625"
+            tools:ignore="HardcodedText" />
 
-     <ImageView
-        android:id="@+id/player"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-         android:elevation="1dp"
-        app:layout_constraintWidth_percent=".2105263158"
-        app:layout_constraintHeight_percent=".2"
-        android:src="@drawable/blue_car"
-         android:scaleY="0.975"
-         android:scaleX="0.975"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.95" />
+        <TextView
+            android:id="@+id/finalScoreTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="11dp"
+            android:fontFamily="@font/press_start_2p"
+            android:gravity="center"
+            android:shadowColor="#E64D1F00"
+            android:shadowDx="10.5"
+            android:shadowDy="10.5"
+            android:shadowRadius="2"
+            android:text="@string/score"
+            android:textColor="@color/red_orange"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
 
 
-    <Button
-        android:id="@+id/playBtn"
-        android:layout_width="170dp"
-        android:layout_height="76dp"
-        android:backgroundTint="#0066FF"
-        android:elevation="1.5dp"
-        android:fontFamily="@font/press_start_2p"
-        android:gravity="center"
-        android:onClick="startGame"
-        android:visibility="gone"
-        tools:visibility="visible"
-        android:text="Play!"
-        android:shadowDy="7.5"
-        android:shadowDx="7.5"
-        android:shadowColor="@color/black"
-        android:shadowRadius="4.75"
-        android:textSize="22sp"
-        app:cornerRadius="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.725" />
+        <TextView
+            android:id="@+id/newRecordTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="11dp"
+            android:fontFamily="@font/press_start_2p"
+            android:gravity="center"
+            android:paddingBottom="10dp"
+            android:shadowColor="#E64D1F00"
+            android:shadowDx="10.5"
+            android:shadowDy="10.5"
+            android:shadowRadius="2"
+            android:text="NEW RECORD!"
+            android:textColor="@color/red_orange"
+            android:textSize="22sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/highScoreTxt"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:visibility="visible" />
 
-    <Switch
-        android:id="@+id/theme_switch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:elevation="1.5dp"
-        android:text="Theme"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:textSize="28sp"
-        android:textOff="Theme: Race Track"
-        android:textOn="Theme: Space Race"
-        android:visibility="gone"
-        tools:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/playBtn"
-        tools:ignore="UseSwitchCompatOrMaterialXml" />
+        <TextView
+            android:id="@+id/highScoreTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="11dp"
+            android:fontFamily="@font/press_start_2p"
+            android:gravity="center"
+            android:paddingBottom="10dp"
+            android:shadowColor="#E64D1F00"
+            android:shadowDx="10.5"
+            android:shadowDy="10.5"
+            android:shadowRadius="2"
+            android:text="@string/hi_score"
+            android:textColor="@color/red_orange"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/finalScoreTxt"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:visibility="visible" />
 
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:elevation="1dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.075"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0125">
-
-        <ImageView
-            android:id="@+id/life1"
-            android:layout_width="25dp"
-            android:layout_height="40dp"
-            android:padding="5dp"
-            app:srcCompat="@drawable/blue_car" />
+        <TextView
+            android:id="@+id/scoreTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="16dp"
+            android:fontFamily="@font/press_start_2p"
+            android:shadowColor="#E64D1F00"
+            android:shadowDx="3.33"
+            android:shadowDy="3.33"
+            android:shadowRadius="1.5"
+            android:text="@string/score"
+            android:textColor="#FF3C00"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.018" />
 
         <ImageView
-            android:id="@+id/life2"
-            android:layout_width="25dp"
-            android:layout_height="40dp"
+            android:id="@+id/player"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:elevation="10dp"
+            android:scaleX="0.975"
+            android:scaleY="0.975"
+            android:src="@drawable/blue_car"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent=".2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.95"
+            app:layout_constraintWidth_percent=".2105263158" />
+
+        <LinearLayout
+            android:id="@+id/postgame_menu_options"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="15dp"
+            android:gravity="center"
+            android:orientation="vertical"
             android:padding="5dp"
-            app:srcCompat="@drawable/blue_car" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.775">
 
-        <ImageView
-            android:id="@+id/life3"
-            android:layout_width="25dp"
-            android:layout_height="40dp"
-            android:padding="5dp"
-            app:srcCompat="@drawable/blue_car" />
+            <Button
+                android:id="@+id/btn_resume"
+                android:layout_width="wrap_content"
+                android:layout_height="86dp"
+                android:backgroundTint="@color/light_blue"
+                android:elevation="11.5dp"
+                android:fontFamily="@font/press_start_2p"
+                android:gravity="center"
+                android:lineSpacingExtra="14dp"
+                android:onClick="menuButton"
+                android:paddingTop="8dp"
+                android:shadowColor="#E64D1F00"
+                android:shadowDx="7.5"
+                android:shadowDy="7.5"
+                android:shadowRadius="4.75"
+                android:text=" Resume "
+                android:textColor="@color/red_orange"
+                android:textSize="21sp"
+                android:visibility="gone"
+                app:cornerRadius="23dp"/>
+            <Button
+                android:id="@+id/btn_play"
+                android:layout_width="wrap_content"
+                android:layout_height="86dp"
+                android:backgroundTint="@color/light_blue"
+                android:elevation="11.5dp"
+                android:fontFamily="@font/press_start_2p"
+                android:gravity="center"
+                android:lineSpacingExtra="14dp"
+                android:onClick="startGame"
+                android:paddingTop="8dp"
+                android:shadowColor="#E64D1F00"
+                android:shadowDx="7.5"
+                android:shadowDy="7.5"
+                android:shadowRadius="4.75"
+                android:text="Play\n Again! "
+                android:textColor="@color/red_orange"
+                android:textSize="21sp"
+                android:visibility="gone"
+                app:cornerRadius="23dp"
+                tools:visibility="visible" />
 
-    </LinearLayout>
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="15dp" />
 
+            <Button
+                android:id="@+id/btn_menu"
+                android:layout_width="wrap_content"
+                android:layout_height="86dp"
+                android:backgroundTint="@color/light_blue"
+                android:elevation="11.5dp"
+                android:fontFamily="@font/press_start_2p"
+                android:gravity="center"
+                android:lineSpacingExtra="14dp"
+                android:onClick="mainMenu"
+                android:paddingTop="8dp"
+                android:shadowColor="#E64D1F00"
+                android:shadowDx="7.5"
+                android:shadowDy="7.5"
+                android:shadowRadius="4.75"
+                android:text=" Main \n  Menu  "
+                android:textColor="@color/red_orange"
+                android:textSize="21sp"
+                android:visibility="gone"
+                app:cornerRadius="23dp"
+                tools:visibility="visible" />
+
+            <Space
+                android:layout_width="1dp"
+                android:layout_height="19dp" />
+
+            <Switch
+                android:id="@+id/theme_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="11.5dp"
+                android:fontFamily="@font/press_start_2p"
+                android:paddingTop="12dp"
+                android:shadowColor="@color/black"
+                android:shadowDx="7.5"
+                android:shadowDy="7.5"
+                android:shadowRadius="4.75"
+                android:text="Theme"
+                android:textColor="@color/white"
+                android:textOff="@string/theme_race_track"
+                android:textOn="@string/theme_space_race"
+                android:textSize="22sp"
+                android:visibility="gone"
+                tools:ignore="UseSwitchCompatOrMaterialXml"
+                tools:visibility="visible" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="11dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0125">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:elevation="11dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0125">
+
+                <ImageView
+                    android:id="@+id/life1"
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    android:padding="4dp"
+                    app:srcCompat="@drawable/life" />
+
+                <ImageView
+                    android:id="@+id/life2"
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    android:padding="4dp"
+                    app:srcCompat="@drawable/life" />
+
+                <ImageView
+                    android:id="@+id/life3"
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    android:padding="4dp"
+                    app:srcCompat="@drawable/life" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:elevation="16dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0125">
+
+                <ImageView
+                    android:id="@+id/life4"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:padding="4dp"
+                    android:visibility="gone"
+                    app:srcCompat="@drawable/life"
+                    tools:visibility="visible" />
+
+                <ImageView
+                    android:id="@+id/life5"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:padding="4dp"
+                    android:visibility="gone"
+                    app:srcCompat="@drawable/life"
+                    tools:visibility="visible" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
