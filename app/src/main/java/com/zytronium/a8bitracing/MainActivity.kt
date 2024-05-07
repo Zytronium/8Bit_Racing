@@ -24,6 +24,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.core.view.forEach
+import kotlin.math.roundToInt
 import kotlin.random.Random
 
 var slowMusic: MediaPlayer? = null
@@ -361,7 +362,7 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
         cars.forEach { car: ImageView ->
             if(collided(player, car)) {
                 if(car.tag.toString().contains("life")) {
-                    if(playerLives < 5) playerLives ++
+                    if(playerLives < 5) playerLives ++ else score += (5 + (5*(roundDownToInt(score/100.0) ) ) )
                 } else {
                     playerLives--
                     scoreSinceLastHit = 0
@@ -405,6 +406,10 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
                 }
             }
         }
+    }
+
+    private fun roundDownToInt(input: Double): Int {
+        return input.toString().split(".").first().toInt()
     }
 
     private fun doGameOverTimeout() {
