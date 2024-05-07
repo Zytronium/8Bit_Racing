@@ -170,11 +170,11 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
     }
 
     private fun updateLives() {
-        life1.visibility = if(playerLives >= 1) View.VISIBLE else View.INVISIBLE // test comment
-        life2.visibility = if(playerLives >= 2) View.VISIBLE else View.INVISIBLE
-        life3.visibility = if(playerLives >= 3) View.VISIBLE else View.INVISIBLE
-        life4.visibility = if(playerLives >= 4) View.VISIBLE else View.INVISIBLE
-        life5.visibility = if(playerLives >= 5) View.VISIBLE else View.INVISIBLE
+        life1.visibility = if(playerLives >= 1) View.VISIBLE else View.GONE // test comment
+        life2.visibility = if(playerLives >= 2) View.VISIBLE else View.GONE
+        life3.visibility = if(playerLives >= 3) View.VISIBLE else View.GONE
+        life4.visibility = if(playerLives >= 4) View.VISIBLE else View.GONE
+        life5.visibility = if(playerLives >= 5) View.VISIBLE else View.GONE
     }
 
     private fun keepScore() {
