@@ -47,7 +47,6 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
     private var rot3end =  (-6..6).random().toFloat()
 
     private lateinit var screen: ConstraintLayout
-//    private lateinit var display: ConstraintLayout
     private lateinit var player: ImageView
     private lateinit var life1: ImageView
     private lateinit var life2: ImageView
@@ -450,21 +449,21 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
             return rect1.intersect(rect2)
         }
 
-        private fun vibrate(time: Long) {
-            val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-            if(vibrator.hasVibrator()) {
-                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    vibrator.vibrate(
-                        VibrationEffect.createOneShot(
-                            time,
-                            VibrationEffect.DEFAULT_AMPLITUDE
-                        )
+    private fun vibrate(time: Long) {
+        val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+        if (vibrator.hasVibrator()) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                vibrator.vibrate(
+                    VibrationEffect.createOneShot(
+                        time,
+                        VibrationEffect.DEFAULT_AMPLITUDE
                     )
-                } else {
-                    vibrator.vibrate(time)
-                }
+                )
+            } else {
+                vibrator.vibrate(time)
             }
         }
+    }
 
     private fun generateCars() {
         when ((1..7).random()) {
