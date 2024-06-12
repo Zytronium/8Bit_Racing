@@ -30,21 +30,7 @@ var slowMusic: MediaPlayer? = null
 var fastMusic: MediaPlayer? = null
 
 class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks {
-
-    private var difficulty = MainMenuActivity.Difficulty.difficulty
-
-    private var isAppInForeground = true
-    private var progressing = false
-    private var pauseCooldown = false
-    private var musicFaded = false
-
-    private var rot1start =  0f
-    private var rot1end =  (-6..6).random().toFloat()
-    private var rot2start =  0f
-    private var rot2end =  (-6..6).random().toFloat()
-    private var rot3start =  0f
-    private var rot3end =  (-6..6).random().toFloat()
-
+    /* uninitialized things */
     private lateinit var screen: ConstraintLayout
     private lateinit var player: ImageView
     private lateinit var life1: ImageView
@@ -61,16 +47,38 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
     private lateinit var themeSwitch: Switch
     private lateinit var shared : SharedPreferences // saved data
 
+    /* rotation variables */
+    private var rot1start =  0f
+    private var rot1end =  (-6..6).random().toFloat()
+    private var rot2start =  0f
+    private var rot2end =  (-6..6).random().toFloat()
+    private var rot3start =  0f
+    private var rot3end =  (-6..6).random().toFloat()
+
+    /* misc game conditions */
+    private var difficulty = MainMenuActivity.Difficulty.difficulty
+    private var spaceMode = false
+    private var isAppInForeground = true
+    private var musicFaded = false
+    private var gamePlaying = true
+    private var progressing = false
+    private var superSpeed: Boolean = false
+    private var paused = false // only if paused from pause button. Intentional
+    private var playing = 0 // this should prevent it from playing twice, causing the game to progress twice as fast after resuming. Playing should always either be 1 or 0. If it's not, then the game realizes it's progressing twice as fast, and fixes it.
+    private var pauseCooldown = false
     private var gameOverTimeout: Long = 0L
-    private var slowMusicVol = 1F
-    private var gamePlaying: Boolean = true
-    private var lane: Int = 2
-    private var gameSpeed: Double = 1000.0
-    private var noSpawnLane: Int = 0
-    private var previousSpawnLane: Int = 0
-    private var noTrapFailsafe = false
-    private var playerLives: Int = 3
     private var scoreSinceLastHit: Int = 0
+    private var slowMusicVol = 1F
+    private var gameSpeed: Double = 1000.0
+    private var playerLives: Int = 3
+
+    /* lane variables */
+    private var noTrapFailsafe = false
+    private var previousSpawnLane: Int = 0
+    private var noSpawnLane: Int = 0
+    private var lane: Int = 2
+
+    /* score variables */
     private var hiScoreBeat: Boolean = false
     private var score: Int = 0
     private var highScore: Int = 0
@@ -79,10 +87,6 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
     private var highScore3: Int = 0
     private var highScore4: Int = 0
     private var personalFastest: Float = 0F
-    private var spaceMode: Boolean = false
-    private var superSpeed: Boolean = false
-    private var paused = false //only if paused from pause button. Intentional
-    private var playing = 0 // this should prevent it from playing twice, causing the game to progress twice as fast after resuming. Playing should always either be 1 or 0. If it's not, then the game realizes it's progressing twice as fast, and fixes it.
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -90,7 +94,6 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
         setContentView(R.layout.activity_main)
         shared = getSharedPreferences("Zytron8BitRaceData", Context.MODE_PRIVATE) // saved data
         screen = findViewById(R.id.display)
-//        display = findViewById(R.id.display)
         player = findViewById(R.id.player)
         life1 = findViewById(R.id.life1)
         life2 = findViewById(R.id.life2)
@@ -106,10 +109,9 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
         themeSwitch = findViewById(R.id.theme_switch)
         slowMusic = MediaPlayer.create(this, R.raw.racemusicjetanger)
         fastMusic = MediaPlayer.create(this, R.raw.fastspaceracemusicsuccubus)
+
         fs()
-
         application.registerActivityLifecycleCallbacks(this)
-
         readData()
 
         themeSwitch.text = if(themeSwitch.isChecked) themeSwitch.textOn else themeSwitch.textOff
@@ -139,30 +141,38 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
             true
         }
         play()
-        if(difficulty != 4) playSlowMusic()
-        else playFastMusic()
+        if(difficulty != 4)
+            playSlowMusic()
+        else
+            playFastMusic()
     }
 
     private fun setTextures() {
         if(spaceMode) {
             screen.background = AppCompatResources.getDrawable(this, R.drawable.race_space)
             player.setImageDrawable(AppCompatResources.getDrawable(this, R.drawable.blue_raceship))
-//            player.layoutParams.width = (pixelWidth() * 12).toInt()
-//            player.layoutParams.height = (pixelHeight() * 18).toInt()
             getCars().forEach { car: ImageView ->
-                car.setImageDrawable(AppCompatResources.getDrawable(this, if(car.tag.toString().contains("red")) R.drawable.red_raceship else if(car.tag.toString().contains("green")) R.drawable.green_raceship else R.drawable.plus_one_life))
-//                car.layoutParams.width = (pixelWidth() * 12).toInt()
-//                car.layoutParams.height = (pixelHeight() * 18).toInt()
+                car.setImageDrawable(AppCompatResources.getDrawable(
+                    this,
+                    if (car.tag.toString().contains("red")) R.drawable.red_raceship
+                    else if (car.tag.toString().contains("green"))
+                        R.drawable.green_raceship
+                    else
+                        R.drawable.plus_one_life
+                )
+                )
             }
         } else {
             screen.background = AppCompatResources.getDrawable(this, R.drawable.race_road)
             player.setImageDrawable(AppCompatResources.getDrawable(this, R.drawable.blue_car))
-//            player.layoutParams.width = (pixelWidth() * 8).toInt()
-//            player.layoutParams.height = (pixelHeight() * 16).toInt()
             getCars().forEach { car: ImageView ->
-                car.setImageDrawable(AppCompatResources.getDrawable(this, if(car.tag.toString().contains("red")) R.drawable.red_car else if(car.tag.toString().contains("green")) R.drawable.green_car else R.drawable.plus_one_life))
-//                car.layoutParams.width = (pixelWidth() * 8).toInt()
-//                car.layoutParams.height = (pixelHeight() * 16).toInt()
+                car.setImageDrawable(AppCompatResources.getDrawable(
+                    this,
+                    if (car.tag.toString().contains("red"))
+                        R.drawable.red_car else if(car.tag.toString().contains("green"))
+                            R.drawable.green_car else R.drawable.plus_one_life
+                )
+                )
             }
         }
     }
@@ -215,7 +225,23 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
                                 && score >= 450)
 
                 )
-                    gameSpeed = (gameSpeed * if(score <= 35) (11.0 / 12.0) else if(score <= 60) (7.0 / 8.0) else if(score <= 105) (11.0 / 12.0) /*else if(score <= 130) (7.0 / 8.0) else if(score <= 260) (11.0 / 12.0)*/ else if(score <= 220) (15.0 / 16.0) else if(score <= 366) (31.0 / 32.0) else (63.0 / 64.0))
+                    gameSpeed *=
+                        if(score <= 35)
+                                (11.0 / 12.0)
+                        else if(score <= 60)
+                                (7.0 / 8.0)
+                        else if(score <= 105)
+                                (11.0 / 12.0)
+                        /*else if(score <= 130)
+                        (7.0 / 8.0)
+                        else if(score <= 260)
+                        (11.0 / 12.0)*/
+                        else if(score <= 220)
+                                (15.0 / 16.0)
+                        else if(score <= 366)
+                                (31.0 / 32.0)
+                        else
+                                (63.0 / 64.0)
             }
         }
     }
@@ -258,7 +284,8 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
         if(adjustedGameSpeed() <= 310 && (fastMusic == null || !fastMusic!!.isPlaying) && score > 3) {
             if(slowMusic!!.isPlaying && !musicFaded) {
                 fadeSlowMusic()
-            } else if(!slowMusic!!.isPlaying) playFastMusic()
+            }
+            else if(!slowMusic!!.isPlaying) playFastMusic()
         }
         if(score == highScore) rainbowText(scoreText, 1f, 14)
     }
@@ -303,7 +330,8 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
             Handler().postDelayed({
                 fadeSlowMusic()
             }, 90)
-        } else slowMusic!!.stop()
+        }
+        else slowMusic!!.stop()
     }
 
     private fun adjustedGameSpeed(): Long { //NOTE: SuperSpeed can mess with when music fades to fast music, and COULD (but probably won't due to certain failsafes) cause it to play fast music more than once. Consider moving the superSpeed multiplier to outside of this function.
@@ -348,11 +376,9 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
             }
 
             car.y += (screen.measuredHeight / 4)
-
         }
 
         checkCollisions(cars)
-
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -367,6 +393,7 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
                     superSpeed = false
                     shakeScreen()
                 }
+
                 updateLives()
                 vibrate(if(car.tag.toString().contains("life")) 20 else 175)
                 car.tag = null
@@ -378,6 +405,7 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
                         gameOverTimeout = 350L
                         doGameOverTimeout()
                     }
+
                     menuButton.visibility = View.VISIBLE
                     findViewById<ImageButton>(R.id.btn_pause).visibility = View.GONE
                     playButton.visibility = View.VISIBLE
@@ -458,9 +486,7 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
                         VibrationEffect.DEFAULT_AMPLITUDE
                     )
                 )
-            } else {
-                vibrator.vibrate(time)
-            }
+            } else vibrator.vibrate(time)
         }
     }
 
