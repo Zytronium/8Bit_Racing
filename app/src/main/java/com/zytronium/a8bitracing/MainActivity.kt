@@ -1,5 +1,3 @@
-@file:Suppress("DEPRECATION")
-
 package com.zytronium.a8bitracing
 
 import android.animation.ObjectAnimator
@@ -154,7 +152,8 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
             getCars().forEach { car: ImageView ->
                 car.setImageDrawable(AppCompatResources.getDrawable(
                     this,
-                    if (car.tag.toString().contains("red")) R.drawable.red_raceship
+                    if (car.tag.toString().contains("red"))
+                        R.drawable.red_raceship
                     else if (car.tag.toString().contains("green"))
                         R.drawable.green_raceship
                     else
@@ -169,8 +168,11 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
                 car.setImageDrawable(AppCompatResources.getDrawable(
                     this,
                     if (car.tag.toString().contains("red"))
-                        R.drawable.red_car else if(car.tag.toString().contains("green"))
-                            R.drawable.green_car else R.drawable.plus_one_life
+                        R.drawable.red_car
+                    else if(car.tag.toString().contains("green"))
+                        R.drawable.green_car
+                    else
+                        R.drawable.plus_one_life
                 )
                 )
             }
