@@ -388,7 +388,7 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
         cars.forEach { car: ImageView ->
             if(collided(player, car)) {
                 if(car.tag.toString().contains("life")) {
-                    if(playerLives < 5) playerLives ++ else score += (5 + (5*(roundDownToInt(score/100.0) ) ) )
+                    if(playerLives < 5) playerLives++ else score += (5 + (5 * (roundDownToInt(score / 100.0))))
                 } else {
                     playerLives--
                     scoreSinceLastHit = 0
@@ -429,7 +429,8 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
                         animateRecordScoreText()
                     }
                     vibrate(333)
-                    if(adjustedGameSpeed().toFloat() < personalFastest) personalFastest = adjustedGameSpeed().toFloat()
+                    if(adjustedGameSpeed().toFloat() < personalFastest)
+                        personalFastest = adjustedGameSpeed().toFloat()
                     saveData()
                 }
             }
