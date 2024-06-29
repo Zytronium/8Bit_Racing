@@ -18,7 +18,6 @@ import androidx.core.view.WindowInsetsControllerCompat
 
 class Statistics : AppCompatActivity(), Application.ActivityLifecycleCallbacks {
 
-
     private lateinit var shared : SharedPreferences // saved data
     private var spaceMode = false
     private var personalFastest = 0F
@@ -27,7 +26,6 @@ class Statistics : AppCompatActivity(), Application.ActivityLifecycleCallbacks {
     private var highScore3 = 0
     private var highScore4 = 0
     private var difficulty = 0
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +47,6 @@ class Statistics : AppCompatActivity(), Application.ActivityLifecycleCallbacks {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
 
         fs()
 
@@ -76,9 +73,6 @@ class Statistics : AppCompatActivity(), Application.ActivityLifecycleCallbacks {
         findViewById<TextView>(R.id.StatAppVersionName).text = "App Version Name:\n${BuildConfig.VERSION_NAME}"
 
         findViewById<ConstraintLayout>(R.id.main).setBackgroundResource(if(!spaceMode) R.drawable.race_road_blur else R.drawable.race_space_blur)
-
-
-
     }
 
     private fun fs() {
@@ -130,5 +124,4 @@ class Statistics : AppCompatActivity(), Application.ActivityLifecycleCallbacks {
     override fun onActivityDestroyed(activity: Activity) {
 //        TODO("Not yet implemented")
     }
-
 }
