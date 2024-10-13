@@ -321,6 +321,7 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
             animator6.start()
         },78L)
     }
+
     private fun fadeSlowMusic() { //(and then play fast music)
         musicFaded = true
         if(slowMusicVol > 0F) {
@@ -472,12 +473,12 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
     }
 
     private fun collided(object1: View, object2: View): Boolean {
-            val rect1 = Rect()
-            object1.getHitRect(rect1)
-            val rect2 = Rect()
-            object2.getHitRect(rect2)
-            return rect1.intersect(rect2)
-        }
+        val rect1 = Rect()
+        object1.getHitRect(rect1)
+        val rect2 = Rect()
+        object2.getHitRect(rect2)
+        return rect1.intersect(rect2)
+    }
 
     private fun vibrate(time: Long) {
         val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
@@ -621,8 +622,10 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
                 }
             }
         }
-        if((0..80).random() == 44 && (noSpawnLane != 0 || previousSpawnLane == 0)) spawnLife(noSpawnLane)
-        else if((0..81).random() == 44 && difficulty == 4 && (noSpawnLane != 0 || previousSpawnLane == 0)) spawnLife(noSpawnLane)
+        if((0..80).random() == 44 && (noSpawnLane != 0 || previousSpawnLane == 0))
+            spawnLife(noSpawnLane)
+        else if((0..81).random() == 44 && difficulty == 4 && (noSpawnLane != 0 || previousSpawnLane == 0))
+            spawnLife(noSpawnLane)
     }
 
     private fun spawnLife(lane: Int) {
@@ -659,7 +662,6 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
 
         if(newLife != null) {
             newLife!!.tag = "1life"
-
             screen.addView(newLife)
         }
     }
@@ -737,7 +739,7 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
 
     private fun playSlowMusic() {
         if(slowMusic == null) {
-            slowMusic!!.isLooping = true
+            slowMusic?.isLooping = true
             slowMusic!!.start()
 
         } else {
@@ -749,7 +751,7 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
 
     private fun playFastMusic() {
         if(fastMusic == null) {
-            fastMusic!!.isLooping = true
+            fastMusic?.isLooping = true
             fastMusic!!.start()
 
         } else if(!fastMusic!!.isLooping) {
