@@ -16,11 +16,12 @@
         tools:targetApi="33">
         <activity
             android:name=".Statistics"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".MainMenuActivity"
             android:exported="true"
-            android:screenOrientation="sensorPortrait">
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,7 +31,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="false"
-            android:screenOrientation="sensorPortrait"
+            android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
 
         <meta-data
