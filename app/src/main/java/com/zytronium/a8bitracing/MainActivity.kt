@@ -22,6 +22,9 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.core.view.forEach
+import java.text.DecimalFormat
+import kotlin.math.log10
+import kotlin.math.pow
 import kotlin.random.Random
 
 var slowMusic: MediaPlayer? = null
@@ -37,6 +40,7 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
     private lateinit var life4: ImageView
     private lateinit var life5: ImageView
     private lateinit var scoreText: TextView
+    private lateinit var speedometerText: TextView
     private lateinit var recordScoreText: TextView
     private lateinit var highScoreText: TextView
     private lateinit var finalScoreText: TextView
@@ -99,6 +103,7 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
         life4 = findViewById(R.id.life4)
         life5 = findViewById(R.id.life5)
         scoreText = findViewById(R.id.scoreTxt)
+        speedometerText = findViewById(R.id.speedometer)
         recordScoreText = findViewById(R.id.newRecordTxt)
         highScoreText = findViewById(R.id.highScoreTxt)
         finalScoreText = findViewById(R.id.finalScoreTxt)
@@ -187,72 +192,37 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
         life5.visibility = if(playerLives >= 5) View.VISIBLE else View.GONE
     }
 
-    private fun keepScore() {
-        scoreText.text = getString(R.string.score, score.toString())
-        when (score) {
-            0 -> gameSpeed = 1000.0
-            1 -> gameSpeed = 1500.0
-            2 -> gameSpeed = 2000.0
-            3 -> gameSpeed = 1875.0
-            4 -> gameSpeed = 1750.0
-            5 -> gameSpeed = 1500.0
-            7 -> gameSpeed = 1375.0
-            10 -> gameSpeed = 1250.0
-            15 -> gameSpeed = 1125.0
-            20 -> gameSpeed = 1000.0
-            25 -> gameSpeed = 930.0
-            else -> {
-                if(
-                    ((score.toString().endsWith("0")
-                            || score.toString().endsWith("5"))
-                                && score <= 40)
+    private fun incrementGameSpeed() {
+        updateScore()
 
-                    || (score.toString().endsWith("0")
-                                && score <= 140)
+        val initialSpeed = 1500.0  // Starting speed (ms per tick)
+        val speedCap = 100.0        // Minimum game speed limit
+        val baseDecayRate = 0.0225   // Base rate at which speed decreases (lower to slow the rate more over time)
+        val adjustmentFactor = 0.9975  // Multiplier to decrease the rate of speed change (closer to 1 means slower decrease over time)
 
-                    || ((score.toString().endsWith("00")
-                            || score.toString().endsWith("20")
-                            || score.toString().endsWith("40")
-                            || score.toString().endsWith("60")
-                            || score.toString().endsWith("80"))
-                                && score <= 240)
+        // Calculate the decay based on score
+        gameSpeed = initialSpeed / (1.0 + baseDecayRate * score) * adjustmentFactor.pow(score.toDouble())
 
-                    || ((score.toString().endsWith("00")
-                            || score.toString().endsWith("33")
-                            || score.toString().endsWith("66"))
-                                && score <= 433)
-
-                    || ((score.toString().endsWith("00")
-                            || score.toString().endsWith("50"))
-                                && score >= 450)
-
-                )
-                    gameSpeed *=
-                        if(score <= 35)
-                                (11.0 / 12.0)
-                        else if(score <= 60)
-                                (7.0 / 8.0)
-                        else if(score <= 105)
-                                (11.0 / 12.0)
-                        /*else if(score <= 130)
-                        (7.0 / 8.0)
-                        else if(score <= 260)
-                        (11.0 / 12.0)*/
-                        else if(score <= 220)
-                                (15.0 / 16.0)
-                        else if(score <= 366)
-                                (31.0 / 32.0)
-                        else
-                                (63.0 / 64.0)
-            }
+        // Ensure the gameSpeed doesn't fall below the speedCap
+        if (gameSpeed < speedCap) {
+            gameSpeed = speedCap
         }
+
+        // Update the speedometer or other UI elements here
+    }
+
+
+    private fun updateScore() {
+        val df = DecimalFormat("#.#")
+        scoreText.text = getString(R.string.score, score.toString())
+        speedometerText.text = getString(R.string.speed, df.format((1.0 / (adjustedGameSpeed() / 1000.0)) * 10))
     }
 
     private fun play() {
         playing++
         if(playing == 1) {
             spaceMode = themeSwitch.isChecked
-            scoreText.text = getString(R.string.score, score.toString())
+            updateScore()
             progressing = true
             progressRace()
         } else if(playing > 1) {
@@ -270,9 +240,9 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
                 if(gamePlaying) { // repeated if statement here in case player died during the last 2 lines
                     score++
                     scoreSinceLastHit++
-                    scoreText.text = getString(R.string.score, score.toString())
+                    updateScore() // may be redundant due to being used in incrementGameSpeed()
                 }
-                keepScore()
+                incrementGameSpeed()
                 if(scoreSinceLastHit >= ((100.0 + score / 4.0) / 2.0).toInt()) {
                     superSpeed = true
                 }

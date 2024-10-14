@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Infinite 8Bit Racing</string>
     <string name="score">Score: %s</string>
+    <string name="speed">Speed: %s SU</string>
     <string name="hi_score">High Score: %s</string>
     <string name="skill_level_1">Impatient Driver\n(easy)</string>
     <!--    <string name="skill_level_2">Fast Driver</string>-->

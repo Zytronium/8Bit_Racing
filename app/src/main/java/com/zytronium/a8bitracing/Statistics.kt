@@ -15,6 +15,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import java.text.DecimalFormat
 
 class Statistics : AppCompatActivity(), Application.ActivityLifecycleCallbacks {
 
@@ -52,7 +53,9 @@ class Statistics : AppCompatActivity(), Application.ActivityLifecycleCallbacks {
 
         application.registerActivityLifecycleCallbacks(this)
 
-        var allData = shared.all
+        val allData = shared.all
+        val df = DecimalFormat("#.#")
+        val fastest = 1.0 / (allData["Personal Fastest"] as Float / 1000.0) * 10.0
 
         findViewById<TextView>(R.id.statsTxt).text = "All raw data:\n${allData}"
 
@@ -60,7 +63,7 @@ class Statistics : AppCompatActivity(), Application.ActivityLifecycleCallbacks {
 
         findViewById<TextView>(R.id.StatDifficulty).text = "Difficulty:\n${allData["Difficulty"]}"
 
-        findViewById<TextView>(R.id.StatPersonalFastest).text = "Personal Fastest (time in ms between cars moving):\n${allData["Personal Fastest"]}"
+        findViewById<TextView>(R.id.StatPersonalFastest).text = "Personal Fastest (ticks per second * 10):\n${df.format(fastest)} SU"
 
         findViewById<TextView>(R.id.StatHiScore1).text = "Personal Best Lvl1:\n${allData["Personal Best Lvl1"]}"
 
