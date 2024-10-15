@@ -23,12 +23,12 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.core.view.forEach
 import java.text.DecimalFormat
-import kotlin.math.log10
 import kotlin.math.pow
 import kotlin.random.Random
 
 var slowMusic: MediaPlayer? = null
 var fastMusic: MediaPlayer? = null
+const val riftRidersTest = false
 
 class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks {
     /* uninitialized things */
@@ -151,7 +151,23 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
     }
 
     private fun setTextures() {
-        if(spaceMode) {
+        if(spaceMode && riftRidersTest) {
+            screen.background = AppCompatResources.getDrawable(this, R.drawable.race_subspace_rift)
+            player.setImageDrawable(AppCompatResources.getDrawable(this, R.drawable.blue_rift_racer))
+            getCars().forEach { car: ImageView ->
+                car.setImageDrawable(AppCompatResources.getDrawable(
+                    this,
+                    if (car.tag.toString().contains("red"))
+                        R.drawable.red_rift_racer
+                    else if (car.tag.toString().contains("green"))
+                        R.drawable.green_rift_racer
+                    else
+                        R.drawable.plus_one_life
+                )
+                )
+            }
+        }
+        else if(spaceMode) {
             screen.background = AppCompatResources.getDrawable(this, R.drawable.race_space)
             player.setImageDrawable(AppCompatResources.getDrawable(this, R.drawable.blue_raceship))
             getCars().forEach { car: ImageView ->
@@ -651,7 +667,9 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
         lParams.verticalBias = 0.0125f
 
         val colorBool = !Random.nextBoolean()
-        newCar.setImageDrawable(if(spaceMode) {
+        newCar.setImageDrawable(if(spaceMode && riftRidersTest) {
+            if (colorBool) AppCompatResources.getDrawable(this, R.drawable.red_rift_racer) else AppCompatResources.getDrawable(this, R.drawable.green_rift_racer)
+        } else if(spaceMode) {
             if (colorBool) AppCompatResources.getDrawable(this, R.drawable.red_raceship) else AppCompatResources.getDrawable(this, R.drawable.green_raceship)
         } else if(colorBool) AppCompatResources.getDrawable(this, R.drawable.red_car) else AppCompatResources.getDrawable(this, R.drawable.green_car)) //{
         //    true -> getDrawable(R.drawable.red_car)
