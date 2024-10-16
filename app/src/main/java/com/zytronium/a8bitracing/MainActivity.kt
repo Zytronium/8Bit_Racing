@@ -152,7 +152,7 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
 
     private fun setTextures() {
         if(spaceMode && riftRidersTest) {
-            screen.background = AppCompatResources.getDrawable(this, R.drawable.race_subspace_rift)
+            screen.background = AppCompatResources.getDrawable(this, R.drawable.race_subspace_rift_mk2)
             player.setImageDrawable(AppCompatResources.getDrawable(this, R.drawable.blue_rift_racer))
             getCars().forEach { car: ImageView ->
                 car.setImageDrawable(AppCompatResources.getDrawable(
@@ -253,19 +253,22 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
             if(gamePlaying && isAppInForeground && progressing && !paused && playing == 1) {
                 moveCars()
                 generateCars()
+
                 if(gamePlaying) { // repeated if statement here in case player died during the last 2 lines
                     score++
                     scoreSinceLastHit++
                     updateScore() // may be redundant due to being used in incrementGameSpeed()
                 }
+
                 incrementGameSpeed()
-                if(scoreSinceLastHit >= ((100.0 + score / 4.0) / 2.0).toInt()) {
+
+                if(scoreSinceLastHit >= ((100.0 + score / 4.0) / 2.0).toInt())
                     superSpeed = true
-                }
-                if(playing > 0) {
+
+                if(playing > 0)
                     playing--
-                }
-                if(playing == 0) play()
+                if(playing == 0)
+                    play()
             }
         }, adjustedGameSpeed())
         println("speed: ${adjustedGameSpeed()}")
@@ -388,6 +391,7 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
                 car.tag = null
                 car.visibility = View.GONE
                 screen.removeView(car)
+
                 if(playerLives <= 0) {
                     screen.setOnTouchListener(null)
                     if(gameOverTimeout == 0L) {
@@ -548,7 +552,6 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
             }
             4 -> {
                 if(Random.nextBoolean()) {
-
                     if(noSpawnLane != 2 && noSpawnLane != 1 && previousSpawnLane != 3 && !(noTrapFailsafe && lane == 1)) {
                         spawnCar(2)
                         spawnCar(1)
@@ -566,7 +569,6 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
             }
             5 -> {
                 if(Random.nextBoolean()) {
-
                     if(noSpawnLane != 1 && noSpawnLane != 3 && previousSpawnLane != 2) {
                         spawnCar(1)
                         spawnCar(3)
@@ -583,7 +585,6 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
             }
             6 -> {
                 if(Random.nextBoolean()) {
-
                     if(noSpawnLane != 2 && noSpawnLane != 3 && previousSpawnLane != 1 && !(noTrapFailsafe && lane == 3)) { // !(noTrapFailsafe && lane == 3) is the same as (!noTrapFailsafe || lane != 3)
                         spawnCar(2)
                         spawnCar(3)
@@ -687,10 +688,8 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
                 screen.removeView(car)
             }
         }
-
-            newCar.tag = "1${if(colorBool)"red" else "green"}"
-
-            screen.addView(newCar)
+        newCar.tag = "1${if(colorBool) "red" else "green"}"
+        screen.addView(newCar)
     }
 
     private fun moveLeft() {
@@ -759,7 +758,7 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
             fastMusic!!.stop()
             recreate()
         }
-}
+    }
 
     private fun fs() {
         val windowInsetsController =
