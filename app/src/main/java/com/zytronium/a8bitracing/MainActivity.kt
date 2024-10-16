@@ -22,13 +22,15 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.core.view.forEach
+import com.zytronium.a8bitracing.MainMenuActivity.Themes
+import com.zytronium.a8bitracing.MainMenuActivity.Theme
+import com.zytronium.a8bitracing.MainMenuActivity.Themes.*
 import java.text.DecimalFormat
 import kotlin.math.pow
 import kotlin.random.Random
 
 var slowMusic: MediaPlayer? = null
 var fastMusic: MediaPlayer? = null
-const val riftRidersTest = true
 
 class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks {
     /* uninitialized things */
@@ -46,8 +48,9 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
     private lateinit var finalScoreText: TextView
     private lateinit var playButton: Button
     private lateinit var menuButton: Button
-    private lateinit var themeSwitch: Switch
-    private lateinit var shared : SharedPreferences // saved data
+    private lateinit var themeText: TextView
+    private lateinit var themeSelector: LinearLayout
+    private lateinit var shared: SharedPreferences // saved data
 
     /* rotation variables */
     private var rot1start =  0f
@@ -59,7 +62,7 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
 
     /* misc game conditions */
     private var difficulty = MainMenuActivity.Difficulty.difficulty
-    private var spaceMode = false
+//    private var spaceMode = false
     private var isAppInForeground = true
     private var musicFaded = false
     private var gamePlaying = true
@@ -109,7 +112,8 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
         finalScoreText = findViewById(R.id.finalScoreTxt)
         playButton = findViewById(R.id.btn_play)
         menuButton = findViewById(R.id.btn_menu)
-        themeSwitch = findViewById(R.id.theme_txt)
+        themeText = findViewById(R.id.theme_txt2)
+        themeSelector = findViewById(R.id.theme_selector)
         slowMusic = MediaPlayer.create(this, R.raw.racemusicjetanger)
         fastMusic = MediaPlayer.create(this, R.raw.fastspaceracemusicsuccubus)
 
@@ -117,20 +121,7 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
         application.registerActivityLifecycleCallbacks(this)
         readData()
 
-        themeSwitch.text = if(themeSwitch.isChecked) themeSwitch.textOn else themeSwitch.textOff
-
-        themeSwitch.setOnCheckedChangeListener { _, isChecked ->
-            spaceMode = isChecked
-            themeSwitch.text = if(isChecked) themeSwitch.textOn else themeSwitch.textOff
-            if(gameOverTimeout > 0L) {
-                spaceMode = !isChecked
-                themeSwitch.text = if(!isChecked) themeSwitch.textOn else themeSwitch.textOff
-                themeSwitch.isChecked = !isChecked
-            }
-            saveData()
-            setTextures()
-        }
-
+        themeText.text = getThemeName(Theme.theme)
         setTextures()
 
         screen.setOnTouchListener { _, event ->
@@ -151,52 +142,45 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
     }
 
     private fun setTextures() {
-        if(spaceMode && riftRidersTest) {
-            screen.background = AppCompatResources.getDrawable(this, R.drawable.race_subspace_rift_mk2)
-            player.setImageDrawable(AppCompatResources.getDrawable(this, R.drawable.blue_rift_racer))
-            getCars().forEach { car: ImageView ->
-                car.setImageDrawable(AppCompatResources.getDrawable(
-                    this,
-                    if (car.tag.toString().contains("red"))
-                        R.drawable.red_rift_racer
-                    else if (car.tag.toString().contains("green"))
-                        R.drawable.green_rift_racer
-                    else
-                        R.drawable.plus_one_life
-                )
-                )
-            }
+        val backgroundTexture = when (Theme.theme) {
+            RaceTrack -> R.drawable.race_road
+            SpaceRace -> R.drawable.race_space
+            SubspaceRift -> R.drawable.race_subspace_rift_mk2
+            else -> R.drawable.race_road
         }
-        else if(spaceMode) {
-            screen.background = AppCompatResources.getDrawable(this, R.drawable.race_space)
-            player.setImageDrawable(AppCompatResources.getDrawable(this, R.drawable.blue_raceship))
-            getCars().forEach { car: ImageView ->
-                car.setImageDrawable(AppCompatResources.getDrawable(
+        val playerTexture = when (Theme.theme) {
+            RaceTrack -> R.drawable.blue_car
+            SpaceRace -> R.drawable.blue_raceship
+            SubspaceRift -> R.drawable.blue_rift_racer
+            else -> R.drawable.blue_car
+        }
+        val redVehicleTexture = when (Theme.theme) {
+            RaceTrack -> R.drawable.red_car
+            SpaceRace -> R.drawable.red_raceship
+            SubspaceRift -> R.drawable.red_rift_racer
+            else -> R.drawable.red_car
+        }
+        val greenVehicleTexture = when (Theme.theme) {
+            RaceTrack -> R.drawable.green_car
+            SpaceRace -> R.drawable.green_raceship
+            SubspaceRift -> R.drawable.green_rift_racer
+            else -> R.drawable.green_car
+        }
+
+        screen.background = AppCompatResources.getDrawable(this, backgroundTexture)
+        player.setImageDrawable(AppCompatResources.getDrawable(this, playerTexture))
+        getCars().forEach { car: ImageView ->
+            car.setImageDrawable(
+                AppCompatResources.getDrawable(
                     this,
                     if (car.tag.toString().contains("red"))
-                        R.drawable.red_raceship
+                        redVehicleTexture
                     else if (car.tag.toString().contains("green"))
-                        R.drawable.green_raceship
+                        greenVehicleTexture
                     else
                         R.drawable.plus_one_life
                 )
-                )
-            }
-        } else {
-            screen.background = AppCompatResources.getDrawable(this, R.drawable.race_road)
-            player.setImageDrawable(AppCompatResources.getDrawable(this, R.drawable.blue_car))
-            getCars().forEach { car: ImageView ->
-                car.setImageDrawable(AppCompatResources.getDrawable(
-                    this,
-                    if (car.tag.toString().contains("red"))
-                        R.drawable.red_car
-                    else if(car.tag.toString().contains("green"))
-                        R.drawable.green_car
-                    else
-                        R.drawable.plus_one_life
-                )
-                )
-            }
+            )
         }
     }
 
@@ -223,8 +207,6 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
         if (gameSpeed < speedCap) {
             gameSpeed = speedCap
         }
-
-        // Update the speedometer or other UI elements here
     }
 
 
@@ -237,7 +219,7 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
     private fun play() {
         playing++
         if(playing == 1) {
-            spaceMode = themeSwitch.isChecked
+//            spaceMode = themeText.isChecked
             updateScore()
             progressing = true
             progressRace()
@@ -402,7 +384,7 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
                     menuButton.visibility = View.VISIBLE
                     findViewById<ImageButton>(R.id.btn_pause).visibility = View.GONE
                     playButton.visibility = View.VISIBLE
-                    themeSwitch.visibility = View.VISIBLE
+                    themeSelector.visibility = View.VISIBLE
                     finalScoreText.visibility = View.VISIBLE
                     highScoreText.visibility = View.VISIBLE
                     scoreText.visibility = View.INVISIBLE
@@ -484,6 +466,41 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
         }
     }
 
+    fun themeLeft(view: View) {
+        if(gameOverTimeout <= 0L) {
+            Theme.theme = when (Theme.theme) {
+                RaceTrack -> SubspaceRift
+                SpaceRace -> RaceTrack
+                SubspaceRift -> SpaceRace
+            }
+            themeText.text = getThemeName(Theme.theme)
+            saveData()
+            setTextures()
+        }
+    }
+
+    fun themeRight(view: View) {
+        if(gameOverTimeout <= 0L) {
+            Theme.theme = when (Theme.theme) {
+                RaceTrack -> SpaceRace
+                SpaceRace -> SubspaceRift
+                SubspaceRift -> RaceTrack
+            }
+            themeText.text = getThemeName(Theme.theme)
+            saveData()
+            setTextures()
+        }
+    }
+
+    private fun getThemeName(theme: Themes): String {
+        return when (theme) {
+            RaceTrack -> "Race Track"
+            SpaceRace -> "Space Race"
+            SubspaceRift -> "Subspace Rift"
+            else -> "Unknown"
+        }
+    }
+    
     private fun generateCars() {
         when ((1..7).random()) {
             1 -> {
@@ -631,10 +648,7 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
         lParams.horizontalBias = 0.5f
         lParams.verticalBias = 0.0125f
 
-        newLife.setImageDrawable(AppCompatResources.getDrawable(this, R.drawable.plus_one_life)) //{
-        //    true -> getDrawable(R.drawable.red_car)
-        //    false -> getDrawable(R.drawable.green_car)
-        //})
+        newLife.setImageDrawable(AppCompatResources.getDrawable(this, R.drawable.plus_one_life))
 
         if(newLane == 1) newLife.x -= (pixelWidth() * 11)
         if(newLane == 3) newLife.x += (pixelWidth() * 11)
@@ -654,11 +668,25 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
     }
 
     private fun spawnCar(lane: Int) {
+        val redVehicleTexture = when (Theme.theme) {
+            RaceTrack -> R.drawable.red_car
+            SpaceRace -> R.drawable.red_raceship
+            SubspaceRift -> R.drawable.red_rift_racer
+            else -> R.drawable.red_car
+        }
+        val greenVehicleTexture = when (Theme.theme) {
+            RaceTrack -> R.drawable.green_car
+            SpaceRace -> R.drawable.green_raceship
+            SubspaceRift -> R.drawable.green_rift_racer
+            else -> R.drawable.green_car
+        }
         val newCar = ImageView(this)
+
         newCar.layoutParams = ConstraintLayout.LayoutParams(
             player.measuredWidth,
             player.measuredHeight
         )
+
         val lParams = newCar.layoutParams as ConstraintLayout.LayoutParams
         lParams.startToStart = screen.id
         lParams.endToEnd = screen.id
@@ -668,14 +696,12 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
         lParams.verticalBias = 0.0125f
 
         val colorBool = !Random.nextBoolean()
-        newCar.setImageDrawable(if(spaceMode && riftRidersTest) {
-            if (colorBool) AppCompatResources.getDrawable(this, R.drawable.red_rift_racer) else AppCompatResources.getDrawable(this, R.drawable.green_rift_racer)
-        } else if(spaceMode) {
-            if (colorBool) AppCompatResources.getDrawable(this, R.drawable.red_raceship) else AppCompatResources.getDrawable(this, R.drawable.green_raceship)
-        } else if(colorBool) AppCompatResources.getDrawable(this, R.drawable.red_car) else AppCompatResources.getDrawable(this, R.drawable.green_car)) //{
-        //    true -> getDrawable(R.drawable.red_car)
-        //    false -> getDrawable(R.drawable.green_car)
-        //})
+        newCar.setImageDrawable(
+            if (colorBool) AppCompatResources.getDrawable(
+                this,
+                redVehicleTexture
+            ) else AppCompatResources.getDrawable(this, greenVehicleTexture)
+        )
 
         if(lane == 1) newCar.x -= (pixelWidth() * 11)
         if(lane == 3) newCar.x += (pixelWidth() * 11)
@@ -717,7 +743,7 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
     }
 
     private fun pixelWidth(): Float {
-        return (screen.measuredWidth/38f)
+        return (screen.measuredWidth / 38f)
     }
 
     private fun pixelHeight(): Float {
@@ -774,9 +800,9 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
     }
 
     private fun readData() {
-        spaceMode = shared.getBoolean("SpaceMode", spaceMode)
+//        spaceMode = shared.getBoolean("SpaceMode", spaceMode)
         personalFastest = shared.getFloat("Personal Fastest", personalFastest)
-        themeSwitch.isChecked = spaceMode
+//        themeText.text = getThemeName(Theme.theme) // todo: may or may not need. Just un-comment out if needed
         difficulty = shared.getInt("Difficulty", difficulty)
         highScore1 = shared.getInt("Personal Best Lvl1", highScore1)
         highScore2 = shared.getInt("Personal Best Lvl2", highScore2)
@@ -796,6 +822,19 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
             else -> throw Exception("Unknown difficulty. Unable to correctly read high score. Closing app.")
         }
 
+        Theme.theme = when (shared.getString("Theme", Theme.theme.toString())) {
+            "RaceTrack" -> RaceTrack
+            "SpaceRace" -> SpaceRace
+            "SubspaceRift" -> SubspaceRift
+            else -> {
+                // when there is no data for the theme enum, (at least, that's what I assume this should do), try to see what the old "spaceMode" boolean is
+                when (shared.getBoolean("SpaceMode", false)) {
+                    true -> SpaceRace
+                    else -> RaceTrack // "false" or if not found, default to RaceTrack
+                }
+            }
+        }
+
         difficulty = shared.getInt("Difficulty", /*MainMenuActivity.Difficulty.*/difficulty)
 //        difficulty = MainMenuActivity.Difficulty.difficulty
 
@@ -806,7 +845,8 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
 
     private fun saveData() {
         val edit = shared.edit()
-        edit.putBoolean("SpaceMode", spaceMode)
+//        edit.putBoolean("SpaceMode", spaceMode)
+        edit.putString("Theme", Theme.theme.toString())
         edit.putFloat("Personal Fastest", personalFastest)
         when(difficulty) {
             1 -> highScore1 = highScore
@@ -845,7 +885,7 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
             pauseCooldown = true
             view.backgroundTintList = getColorStateList(R.color.pause_btn_inactive)
             menuButton.visibility = View.VISIBLE
-            themeSwitch.visibility = View.VISIBLE
+            themeSelector.visibility = View.VISIBLE
             scoreText.visibility = View.GONE
             findViewById<Button>(R.id.btn_resume).visibility = View.VISIBLE
             findViewById<Button>(R.id.btn_resume).backgroundTintList = getColorStateList(R.color.light_blue)
@@ -871,7 +911,7 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
                 pauseCooldown = true
                 view.backgroundTintList = getColorStateList(R.color.pause_btn_inactive)
                 menuButton.visibility = View.GONE
-                themeSwitch.visibility = View.GONE
+                themeSelector.visibility = View.GONE
                 scoreText.visibility = View.VISIBLE
                 findViewById<Button>(R.id.btn_resume).visibility = View.GONE
                 finalScoreText.visibility = View.GONE

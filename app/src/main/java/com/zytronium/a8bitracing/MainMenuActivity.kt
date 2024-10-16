@@ -12,7 +12,6 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.SeekBar
-import android.widget.Switch
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -26,8 +25,6 @@ class MainMenuActivity : AppCompatActivity(), Application.ActivityLifecycleCallb
     var menuMusic: MediaPlayer? = null
     private var musicFaded = false
     private var musicVol = 0.85F
-
-    private var spaceMode: Boolean = false // todo: remove this
     private lateinit var difficultyBar: SeekBar
     private lateinit var themeText: TextView
     private lateinit var difficultyNameText: TextView
@@ -47,7 +44,7 @@ class MainMenuActivity : AppCompatActivity(), Application.ActivityLifecycleCallb
         difficultyBar = findViewById(R.id.difficulty_bar)
         themeText = findViewById(R.id.theme_txt2)
         difficultyNameText = findViewById(R.id.difficulty_name_txt)
-        themeText.text = Theme.theme.toString()
+        themeText.text = getThemeName(Theme.theme)
 
         fs()
 
@@ -76,15 +73,27 @@ class MainMenuActivity : AppCompatActivity(), Application.ActivityLifecycleCallb
         setDifficultyText()
         saveData()
 
-        themeText.text = if(themeSwitch.isChecked) themeSwitch.textOn else themeSwitch.textOff // TODO
-        findViewById<ConstraintLayout>(R.id.main).setBackgroundResource(if(!spaceMode) R.drawable.race_road_blur else R.drawable.race_space_blur) // todo: change to check what theme enum is
+        themeText.text = getThemeName(Theme.theme)
+        updateBackground()
+    }
 
-        themeText.setOnCheckedChangeListener { buttonView, isChecked ->
-            spaceMode = isChecked
-            themeText.text = if(isChecked) themeSwitch.textOn else themeSwitch.textOff
-            findViewById<ConstraintLayout>(R.id.main).setBackgroundResource(if(!spaceMode) R.drawable.race_road_blur else R.drawable.race_space_blur)
-            if(spaceMode) difficultyNameText.text = difficultyNameText.text.toString().replace("Driver", "Pilot") else difficultyNameText.text = difficultyNameText.text.toString().replace("Pilot", "Driver")
-            saveData()
+    private fun updateBackground() {
+        findViewById<ConstraintLayout>(R.id.main).setBackgroundResource(
+            when (Theme.theme) {
+                Themes.RaceTrack -> R.drawable.race_road_blur
+                Themes.SpaceRace -> R.drawable.race_space_blur
+                Themes.SubspaceRift -> R.drawable.race_subspace_rift // todo: make background blur image for this theme
+                else -> R.drawable.race_road_blur
+            }
+        )
+    }
+
+    private fun getThemeName(theme: Themes): String {
+        return when (theme) {
+            Themes.RaceTrack -> "Race Track"
+            Themes.SpaceRace -> "Space Race"
+            Themes.SubspaceRift -> "Subspace Rift"
+            else -> "Unknown"
         }
     }
 
@@ -118,7 +127,7 @@ class MainMenuActivity : AppCompatActivity(), Application.ActivityLifecycleCallb
             4 -> getString(R.string.skill_level_4)
             else -> "Unknown Difficulty"
         }
-        if(spaceMode) difficultyNameText.text = difficultyNameText.text.toString().replace("Driver", "Pilot")
+        if(Theme.theme != Themes.RaceTrack) difficultyNameText.text = difficultyNameText.text.toString().replace("Driver", "Pilot")
     }
 
     private fun fs() {
@@ -152,16 +161,16 @@ class MainMenuActivity : AppCompatActivity(), Application.ActivityLifecycleCallb
         Difficulty.difficulty = shared.getInt("Difficulty", Difficulty.difficulty)
     }
 
-    enum class Themes {
-        RaceTrack, SpaceRace, SubspaceRift
-    }
-
     private fun saveData() {
         val edit = shared.edit()
 //        edit.putBoolean("SpaceMode", spaceMode)
         edit.putString("Theme", Theme.theme.toString())
         edit.putInt("Difficulty", Difficulty.difficulty)
         edit.apply()
+    }
+
+    enum class Themes {
+        RaceTrack, SpaceRace, SubspaceRift
     }
 
     fun startGame(view: View) {
@@ -221,6 +230,7 @@ class MainMenuActivity : AppCompatActivity(), Application.ActivityLifecycleCallb
         }
         saveData()
     }
+
     fun difficultyDown(view: View) {
         if(difficultyBar.progress != 0) {
             difficultyBar.progress --
@@ -239,8 +249,8 @@ class MainMenuActivity : AppCompatActivity(), Application.ActivityLifecycleCallb
             Themes.SpaceRace -> Themes.RaceTrack
             Themes.SubspaceRift -> Themes.SpaceRace
         }
-        themeText.text = Theme.theme.toString() // todo: for ALL occurrences of theme.toString(), we need to add a space between words!
-
+        themeText.text = getThemeName(Theme.theme)
+        updateTheme()
     }
 
     fun themeRight(view: View) {
@@ -249,7 +259,18 @@ class MainMenuActivity : AppCompatActivity(), Application.ActivityLifecycleCallb
             Themes.SpaceRace -> Themes.SubspaceRift
             Themes.SubspaceRift -> Themes.RaceTrack
         }
-        themeText.text = Theme.theme.toString()
+        themeText.text = getThemeName(Theme.theme)
+        updateTheme()
     }
 
+    private fun updateTheme() {
+        updateBackground()
+
+        if (Theme.theme != Themes.RaceTrack) difficultyNameText.text =
+            difficultyNameText.text.toString()
+                .replace("Driver", "Pilot") else difficultyNameText.text =
+            difficultyNameText.text.toString().replace("Pilot", "Driver")
+
+        saveData()
+    }
 }

@@ -162,7 +162,7 @@
             android:layout_height="27.5dp"
             android:layout_gravity="center"
             android:background="#00000000"
-            android:onClick="themRight"
+            android:onClick="themeRight"
             android:scaleType="fitCenter"
             android:scaleX="0.6666"
             android:scaleY="0.6666"
