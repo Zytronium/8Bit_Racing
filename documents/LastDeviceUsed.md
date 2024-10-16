@@ -1,6 +1,6 @@
 # The last device used to make an edit to the project was:
 
-- PC (Windows)
+- Dell Laptop (Linux)
 
 
 

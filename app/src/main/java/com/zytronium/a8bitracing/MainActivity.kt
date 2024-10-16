@@ -28,7 +28,7 @@ import kotlin.random.Random
 
 var slowMusic: MediaPlayer? = null
 var fastMusic: MediaPlayer? = null
-const val riftRidersTest = false
+const val riftRidersTest = true
 
 class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks {
     /* uninitialized things */
@@ -109,7 +109,7 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
         finalScoreText = findViewById(R.id.finalScoreTxt)
         playButton = findViewById(R.id.btn_play)
         menuButton = findViewById(R.id.btn_menu)
-        themeSwitch = findViewById(R.id.theme_switch)
+        themeSwitch = findViewById(R.id.theme_txt)
         slowMusic = MediaPlayer.create(this, R.raw.racemusicjetanger)
         fastMusic = MediaPlayer.create(this, R.raw.fastspaceracemusicsuccubus)
 

@@ -12,6 +12,7 @@
     <!--    <string name="skill_level_7">High Speed Police Chase</string>-->
     <string name="skill_level_3">Professional Idiotic Driver\n(hard)</string>
     <string name="skill_level_4">Absolute Maniac Driver\n(insane)</string>
+    <string name="theme_txt">Theme: %s</string>
     <string name="theme_race_track">Theme: Race Track</string>
     <string name="theme_space_race">Theme: Space Race</string>
     <string name="all_saved_data">\n\nAll saved data on this device:\n</string>
