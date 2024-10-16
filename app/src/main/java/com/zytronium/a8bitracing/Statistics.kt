@@ -3,7 +3,6 @@ package com.zytronium.a8bitracing
 import android.app.Activity
 import android.app.Application
 import android.content.Context
-import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
@@ -20,7 +19,7 @@ import java.text.DecimalFormat
 class Statistics : AppCompatActivity(), Application.ActivityLifecycleCallbacks {
 
     private lateinit var shared : SharedPreferences // saved data
-    private var spaceMode = false
+//    private var spaceMode = false
     private var personalFastest = 0F
     private var highScore1 = 0
     private var highScore2 = 0
@@ -33,7 +32,7 @@ class Statistics : AppCompatActivity(), Application.ActivityLifecycleCallbacks {
 
         shared = getSharedPreferences("Zytron8BitRaceData", Context.MODE_PRIVATE) // saved data
 
-        spaceMode = shared.getBoolean("SpaceMode", spaceMode)
+//        spaceMode = shared.getBoolean("SpaceMode", spaceMode)
         personalFastest = shared.getFloat("Personal Fastest", personalFastest)
         highScore1 = shared.getInt("Personal Best Lvl1", highScore1)
         highScore2 = shared.getInt("Personal Best Lvl2", highScore2)
@@ -59,7 +58,7 @@ class Statistics : AppCompatActivity(), Application.ActivityLifecycleCallbacks {
 
         findViewById<TextView>(R.id.statsTxt).text = "All raw data:\n${allData}"
 
-        findViewById<TextView>(R.id.StatSpaceMode).text = "SpaceMode:\n${allData["SpaceMode"]}"
+        findViewById<TextView>(R.id.StatTheme).text = "Theme:\n${allData["Theme"]}"
 
         findViewById<TextView>(R.id.StatDifficulty).text = "Difficulty:\n${allData["Difficulty"]}"
 
@@ -75,7 +74,12 @@ class Statistics : AppCompatActivity(), Application.ActivityLifecycleCallbacks {
 
         findViewById<TextView>(R.id.StatAppVersionName).text = "App Version Name:\n${BuildConfig.VERSION_NAME}"
 
-        findViewById<ConstraintLayout>(R.id.main).setBackgroundResource(if(!spaceMode) R.drawable.race_road_blur else R.drawable.race_space_blur)
+        findViewById<ConstraintLayout>(R.id.main).setBackgroundResource(when (MainMenuActivity.Theme.theme) {
+            MainMenuActivity.Themes.RaceTrack -> R.drawable.race_road_blur
+            MainMenuActivity.Themes.SpaceRace -> R.drawable.race_space_blur
+            MainMenuActivity.Themes.SubspaceRift -> R.drawable.race_subspace_rift // todo: make a background blur for this theme
+            else -> R.drawable.race_road_blur
+        } )
     }
 
     private fun fs() {

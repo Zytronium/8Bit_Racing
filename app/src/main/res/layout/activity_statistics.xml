@@ -106,7 +106,7 @@
                 android:textSize="11sp" />
 
             <TextView
-                android:id="@+id/StatSpaceMode"
+                android:id="@+id/StatTheme"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:elevation="8dp"
