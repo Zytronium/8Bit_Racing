@@ -145,7 +145,7 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
         val backgroundTexture = when (Theme.theme) {
             RaceTrack -> R.drawable.race_road
             SpaceRace -> R.drawable.race_space
-            SubspaceRift -> R.drawable.race_subspace_rift_mk2
+            SubspaceRift -> R.drawable.race_subspace_rift_mk3
             else -> R.drawable.race_road
         }
         val playerTexture = when (Theme.theme) {
