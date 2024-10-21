@@ -174,9 +174,7 @@ class MainMenuActivity : AppCompatActivity(), Application.ActivityLifecycleCallb
         startActivity(Intent(this@MainMenuActivity, Statistics::class.java))
     }
 
-    override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
-//        TODO("Not yet implemented")
-    }
+    override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {}
 
     override fun onActivityStarted(activity: Activity) {
         playMusic()
@@ -193,17 +191,11 @@ class MainMenuActivity : AppCompatActivity(), Application.ActivityLifecycleCallb
         menuMusic!!.pause()
     }
 
-    override fun onActivityStopped(activity: Activity) {
-//        menuMusic!!.stop()
-    }
+    override fun onActivityStopped(activity: Activity) {}
 
-    override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {
-//        TODO("Not yet implemented")
-    }
+    override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {}
 
-    override fun onActivityDestroyed(activity: Activity) {
-//        TODO("Not yet implemented")
-    }
+    override fun onActivityDestroyed(activity: Activity) {}
 
     object Difficulty {
         var difficulty = 0
