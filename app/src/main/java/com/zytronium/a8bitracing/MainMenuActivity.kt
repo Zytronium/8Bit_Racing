@@ -19,6 +19,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import com.zytronium.a8bitracing.Themes.themes
 
 class MainMenuActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks {
 
@@ -44,7 +45,7 @@ class MainMenuActivity : AppCompatActivity(), Application.ActivityLifecycleCallb
         difficultyBar = findViewById(R.id.difficulty_bar)
         themeText = findViewById(R.id.theme_txt2)
         difficultyNameText = findViewById(R.id.difficulty_name_txt)
-        themeText.text = getThemeName(Theme.theme)
+        themeText.text = getCurrentThemeName()
 
         fs()
 
@@ -73,28 +74,27 @@ class MainMenuActivity : AppCompatActivity(), Application.ActivityLifecycleCallb
         setDifficultyText()
         saveData()
 
-        themeText.text = getThemeName(Theme.theme)
+        themeText.text = getCurrentThemeName()
         updateBackground()
     }
 
     private fun updateBackground() {
         findViewById<ConstraintLayout>(R.id.main).setBackgroundResource(
-            when (Theme.theme) {
-                Themes.RaceTrack -> R.drawable.race_road_blur
-                Themes.SpaceRace -> R.drawable.race_space_blur
-                Themes.SubspaceRift -> R.drawable.race_subspace_rift // todo: make background blur image for this theme
-                else -> R.drawable.race_road_blur
-            }
+            CurrentTheme.theme!!.backgroundTextureBlurred
         )
     }
 
-    private fun getThemeName(theme: Themes): String {
-        return when (theme) {
-            Themes.RaceTrack -> "Race Track"
-            Themes.SpaceRace -> "Space Race"
-            Themes.SubspaceRift -> "Subspace Rift"
-            else -> "Unknown"
+    private fun getThemeByID(id: Int): Theme? {
+        for (theme in Themes.themes) {
+            if (theme.component2().id == id)
+                return theme.component2()
         }
+        // if no theme was found:
+        return null
+    }
+
+    private fun getCurrentThemeName(): String {
+        return CurrentTheme.theme?.name ?: "Unknown"
     }
 
     private fun fadeMusic() {
@@ -127,7 +127,7 @@ class MainMenuActivity : AppCompatActivity(), Application.ActivityLifecycleCallb
             4 -> getString(R.string.skill_level_4)
             else -> "Unknown Difficulty"
         }
-        if(Theme.theme != Themes.RaceTrack) difficultyNameText.text = difficultyNameText.text.toString().replace("Driver", "Pilot")
+        if(CurrentTheme.theme?.name != "Race Track") difficultyNameText.text = difficultyNameText.text.toString().replace("Driver", "Pilot")
     }
 
     private fun fs() {
@@ -144,16 +144,18 @@ class MainMenuActivity : AppCompatActivity(), Application.ActivityLifecycleCallb
     }
 
     private fun readData() {
-//        spaceMode = shared.getBoolean("SpaceMode", spaceMode)
-        Theme.theme = when (shared.getString("Theme", Theme.theme.toString())) {
-            "RaceTrack" -> Themes.RaceTrack
-            "SpaceRace" -> Themes.SpaceRace
-            "SubspaceRift" -> Themes.SubspaceRift
+        CurrentTheme.theme = when (shared.getString("CurrentTheme", CurrentTheme.theme?.name)
+            ?.replace(" ", "")) {
+            // ignore spaces because old method of doing this had no spaces in this value. However, this never made it into production, so todo: we can safely remove this very soon, and simplify this entire part by removing the whens statement
+            "RaceTrack" -> themes["Race Track"]
+            "SpaceRace" -> themes["Space Race"]
+            "SubspaceRift" -> themes["Subspace Rift"]
+            "Glitched" -> themes["Glitched"]
             else -> {
                 // when there is no data for the theme enum, (at least, that's what I assume this should do), try to see what the old "spaceMode" boolean is
                 when (shared.getBoolean("SpaceMode", false)) {
-                    true -> Themes.SpaceRace
-                    else -> Themes.RaceTrack // "false" or if not found, default to RaceTrack
+                    true -> themes["Space Race"]
+                    else -> themes["Race Track"] // "false" or if not found, default to RaceTrack
                 }
             }
         }
@@ -163,14 +165,9 @@ class MainMenuActivity : AppCompatActivity(), Application.ActivityLifecycleCallb
 
     private fun saveData() {
         val edit = shared.edit()
-//        edit.putBoolean("SpaceMode", spaceMode)
-        edit.putString("Theme", Theme.theme.toString())
+        edit.putString("CurrentTheme", CurrentTheme.theme?.name)
         edit.putInt("Difficulty", Difficulty.difficulty)
         edit.apply()
-    }
-
-    enum class Themes {
-        RaceTrack, SpaceRace, SubspaceRift
     }
 
     fun startGame(view: View) {
@@ -220,8 +217,8 @@ class MainMenuActivity : AppCompatActivity(), Application.ActivityLifecycleCallb
         var difficulty = 0
     }
 
-    object Theme {
-        var theme = Themes.RaceTrack
+    object CurrentTheme {
+        var theme = Themes.themes["Race Track"]
     }
 
     fun difficultyUp(view: View) {
@@ -244,29 +241,33 @@ class MainMenuActivity : AppCompatActivity(), Application.ActivityLifecycleCallb
     }
 
     fun themeLeft(view: View) {
-        Theme.theme = when (Theme.theme) {
-            Themes.RaceTrack -> Themes.SubspaceRift
-            Themes.SpaceRace -> Themes.RaceTrack
-            Themes.SubspaceRift -> Themes.SpaceRace
-        }
-        themeText.text = getThemeName(Theme.theme)
+        val size = themes.size - 1
+        val id = CurrentTheme.theme?.id?: 0
+
+        // set the theme
+        CurrentTheme.theme = getThemeByID(if (id == 0) size else id - 1)
+        // update theme text
+        themeText.text = getCurrentThemeName()
+
         updateTheme()
     }
 
     fun themeRight(view: View) {
-        Theme.theme = when (Theme.theme) {
-            Themes.RaceTrack -> Themes.SpaceRace
-            Themes.SpaceRace -> Themes.SubspaceRift
-            Themes.SubspaceRift -> Themes.RaceTrack
-        }
-        themeText.text = getThemeName(Theme.theme)
+        val size = themes.size - 1
+        val id = CurrentTheme.theme?.id?: 0
+
+        // set the theme
+        CurrentTheme.theme = getThemeByID(if (id == size) 0 else id + 1)
+        // update theme text
+        themeText.text = getCurrentThemeName()
+
         updateTheme()
     }
 
     private fun updateTheme() {
         updateBackground()
 
-        if (Theme.theme != Themes.RaceTrack) difficultyNameText.text =
+        if (CurrentTheme.theme?.name != "Race Track") difficultyNameText.text =
             difficultyNameText.text.toString()
                 .replace("Driver", "Pilot") else difficultyNameText.text =
             difficultyNameText.text.toString().replace("Pilot", "Driver")

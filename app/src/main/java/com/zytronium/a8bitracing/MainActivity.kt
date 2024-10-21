@@ -22,9 +22,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.core.view.forEach
-import com.zytronium.a8bitracing.MainMenuActivity.Themes
-import com.zytronium.a8bitracing.MainMenuActivity.Theme
-import com.zytronium.a8bitracing.MainMenuActivity.Themes.*
+import com.zytronium.a8bitracing.MainMenuActivity.CurrentTheme
+import com.zytronium.a8bitracing.Themes.themes
 import java.text.DecimalFormat
 import kotlin.math.pow
 import kotlin.random.Random
@@ -47,6 +46,7 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
     private lateinit var highScoreText: TextView
     private lateinit var finalScoreText: TextView
     private lateinit var playButton: Button
+    private lateinit var resumeButton: Button
     private lateinit var menuButton: Button
     private lateinit var themeText: TextView
     private lateinit var themeSelector: LinearLayout
@@ -111,6 +111,7 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
         highScoreText = findViewById(R.id.highScoreTxt)
         finalScoreText = findViewById(R.id.finalScoreTxt)
         playButton = findViewById(R.id.btn_play)
+        resumeButton = findViewById(R.id.btn_resume)
         menuButton = findViewById(R.id.btn_menu)
         themeText = findViewById(R.id.theme_txt2)
         themeSelector = findViewById(R.id.theme_selector)
@@ -121,7 +122,7 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
         application.registerActivityLifecycleCallbacks(this)
         readData()
 
-        themeText.text = getThemeName(Theme.theme)
+        themeText.text = getCurrentThemeName()
         setTextures()
 
         screen.setOnTouchListener { _, event ->
@@ -142,30 +143,10 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
     }
 
     private fun setTextures() {
-        val backgroundTexture = when (Theme.theme) {
-            RaceTrack -> R.drawable.race_road
-            SpaceRace -> R.drawable.race_space
-            SubspaceRift -> R.drawable.race_subspace_rift_mk3
-            else -> R.drawable.race_road
-        }
-        val playerTexture = when (Theme.theme) {
-            RaceTrack -> R.drawable.blue_car
-            SpaceRace -> R.drawable.blue_raceship
-            SubspaceRift -> R.drawable.blue_rift_racer
-            else -> R.drawable.blue_car
-        }
-        val redVehicleTexture = when (Theme.theme) {
-            RaceTrack -> R.drawable.red_car
-            SpaceRace -> R.drawable.red_raceship
-            SubspaceRift -> R.drawable.red_rift_racer
-            else -> R.drawable.red_car
-        }
-        val greenVehicleTexture = when (Theme.theme) {
-            RaceTrack -> R.drawable.green_car
-            SpaceRace -> R.drawable.green_raceship
-            SubspaceRift -> R.drawable.green_rift_racer
-            else -> R.drawable.green_car
-        }
+        val backgroundTexture = CurrentTheme.theme?.backgroundTexture ?: R.drawable.race_road
+        val playerTexture = CurrentTheme.theme?.blueVehicleTexture ?: R.drawable.blue_car
+        val redVehicleTexture = CurrentTheme.theme?.redVehicleTexture ?: R.drawable.red_car
+        val greenVehicleTexture = CurrentTheme.theme?.greenVehicleTexture ?: R.drawable.green_car
 
         screen.background = AppCompatResources.getDrawable(this, backgroundTexture)
         player.setImageDrawable(AppCompatResources.getDrawable(this, playerTexture))
@@ -468,12 +449,14 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
 
     fun themeLeft(view: View) {
         if(gameOverTimeout <= 0L) {
-            Theme.theme = when (Theme.theme) {
-                RaceTrack -> SubspaceRift
-                SpaceRace -> RaceTrack
-                SubspaceRift -> SpaceRace
-            }
-            themeText.text = getThemeName(Theme.theme)
+            val size = themes.size - 1
+            val id = CurrentTheme.theme?.id?: 0
+
+            // set the theme
+            CurrentTheme.theme = getThemeByID(if (id == 0) size else id - 1)
+            // update theme text
+            themeText.text = getCurrentThemeName()
+
             saveData()
             setTextures()
         }
@@ -481,24 +464,30 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
 
     fun themeRight(view: View) {
         if(gameOverTimeout <= 0L) {
-            Theme.theme = when (Theme.theme) {
-                RaceTrack -> SpaceRace
-                SpaceRace -> SubspaceRift
-                SubspaceRift -> RaceTrack
-            }
-            themeText.text = getThemeName(Theme.theme)
+            val size = themes.size - 1
+            val id = CurrentTheme.theme?.id?: 0
+
+            // set the theme
+            CurrentTheme.theme = getThemeByID(if (id == size) 0 else id + 1)
+            // update theme text
+            themeText.text = getCurrentThemeName()
+
             saveData()
             setTextures()
         }
     }
 
-    private fun getThemeName(theme: Themes): String {
-        return when (theme) {
-            RaceTrack -> "Race Track"
-            SpaceRace -> "Space Race"
-            SubspaceRift -> "Subspace Rift"
-            else -> "Unknown"
+    private fun getThemeByID(id: Int): Theme? {
+        for (theme in Themes.themes) {
+            if (theme.component2().id == id)
+                return theme.component2()
         }
+        // if no theme was found:
+        return null
+    }
+
+    private fun getCurrentThemeName(): String {
+        return CurrentTheme.theme?.name ?: "Unknown"
     }
     
     private fun generateCars() {
@@ -668,18 +657,8 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
     }
 
     private fun spawnCar(lane: Int) {
-        val redVehicleTexture = when (Theme.theme) {
-            RaceTrack -> R.drawable.red_car
-            SpaceRace -> R.drawable.red_raceship
-            SubspaceRift -> R.drawable.red_rift_racer
-            else -> R.drawable.red_car
-        }
-        val greenVehicleTexture = when (Theme.theme) {
-            RaceTrack -> R.drawable.green_car
-            SpaceRace -> R.drawable.green_raceship
-            SubspaceRift -> R.drawable.green_rift_racer
-            else -> R.drawable.green_car
-        }
+        val redVehicleTexture = CurrentTheme.theme?.redVehicleTexture ?: R.drawable.red_car
+        val greenVehicleTexture = CurrentTheme.theme?.greenVehicleTexture ?: R.drawable.green_car
         val newCar = ImageView(this)
 
         newCar.layoutParams = ConstraintLayout.LayoutParams(
@@ -800,18 +779,15 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
     }
 
     private fun readData() {
-//        spaceMode = shared.getBoolean("SpaceMode", spaceMode)
         personalFastest = shared.getFloat("Personal Fastest", personalFastest)
-//        themeText.text = getThemeName(Theme.theme) // todo: may or may not need. Just un-comment out if needed
+//        themeText.text = getThemeName(CurrentTheme.theme) // todo: may or may not need. Just un-comment out if needed
         difficulty = shared.getInt("Difficulty", difficulty)
         highScore1 = shared.getInt("Personal Best Lvl1", highScore1)
         highScore2 = shared.getInt("Personal Best Lvl2", highScore2)
         highScore3 = shared.getInt("Personal Best Lvl3", highScore3)
         highScore4 = shared.getInt("Personal Best Lvl4", highScore4)
 //        highScore5 = shared.getInt("Personal Best Dif5", highScore5)
-//        highScore6 = shared.getInt("Personal Best Dif6", highScore6)
-//        highScore7 = shared.getInt("Personal Best Dif7", highScore7)
-//        highScore8 = shared.getInt("Personal Best Dif8", highScore8)
+//        ...
 //        highScore9 = shared.getInt("Personal Best Dif9", highScore9)
 
         highScore = when(difficulty) {
@@ -819,34 +795,31 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
             2 -> highScore2
             3 -> highScore3
             4 -> highScore4
-            else -> throw Exception("Unknown difficulty. Unable to correctly read high score. Closing app.")
+            else -> throw Exception("Unknown difficulty. Unable to correctly read high score.")
         }
 
-        Theme.theme = when (shared.getString("Theme", Theme.theme.toString())) {
-            "RaceTrack" -> RaceTrack
-            "SpaceRace" -> SpaceRace
-            "SubspaceRift" -> SubspaceRift
+        CurrentTheme.theme = when (shared.getString("CurrentTheme", CurrentTheme.theme?.name)
+            ?.replace(" ", "")) {
+            // ignore spaces because old method of doing this had no spaces in this value. However, this never made it into production, so todo: we can safely remove this very soon, and simplify this entire part by removing the whens statement
+            "RaceTrack" -> themes["Race Track"]
+            "SpaceRace" -> themes["Space Race"]
+            "SubspaceRift" -> themes["Subspace Rift"]
+            "Glitched" -> themes["Glitched"]
             else -> {
-                // when there is no data for the theme enum, (at least, that's what I assume this should do), try to see what the old "spaceMode" boolean is
+                // when there is no data for the theme, (at least, that's what I assume this should do), try to see what the old "spaceMode" boolean is
                 when (shared.getBoolean("SpaceMode", false)) {
-                    true -> SpaceRace
-                    else -> RaceTrack // "false" or if not found, default to RaceTrack
+                    true -> themes["Space Race"]
+                    else -> themes["Race Track"] // "false" or if not found, default to RaceTrack
                 }
             }
         }
 
-        difficulty = shared.getInt("Difficulty", /*MainMenuActivity.Difficulty.*/difficulty)
-//        difficulty = MainMenuActivity.Difficulty.difficulty
-
-//        varName = shared.getInt("var name", varName)
-//        var2name = shared.getFloat("var 2 name", var2name)
-//        pingPoints.text = getString(R.string.balance, pings1.toString())
+        difficulty = shared.getInt("Difficulty", difficulty)
     }
 
     private fun saveData() {
         val edit = shared.edit()
-//        edit.putBoolean("SpaceMode", spaceMode)
-        edit.putString("Theme", Theme.theme.toString())
+        edit.putString("CurrentTheme", CurrentTheme.theme?.name)
         edit.putFloat("Personal Fastest", personalFastest)
         when(difficulty) {
             1 -> highScore1 = highScore
@@ -860,8 +833,6 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
         edit.putInt("Personal Best Lvl3", highScore3)
         edit.putInt("Personal Best Lvl4", highScore4)
         edit.putInt("Difficulty", difficulty)
-//        edit.putInt("var name" , varName )
-//        edit.putFloat("var 2 name", var2name )
         edit.apply()
     }
 
@@ -887,8 +858,8 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
             menuButton.visibility = View.VISIBLE
             themeSelector.visibility = View.VISIBLE
             scoreText.visibility = View.GONE
-            findViewById<Button>(R.id.btn_resume).visibility = View.VISIBLE
-            findViewById<Button>(R.id.btn_resume).backgroundTintList = getColorStateList(R.color.light_blue)
+            resumeButton.visibility = View.VISIBLE
+            resumeButton.backgroundTintList = getColorStateList(R.color.light_blue)
             finalScoreText.visibility = View.VISIBLE
             finalScoreText.text = getString(R.string.score, score.toString())
             playing--

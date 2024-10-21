@@ -14,12 +14,12 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import com.zytronium.a8bitracing.Themes.themes
 import java.text.DecimalFormat
 
 class Statistics : AppCompatActivity(), Application.ActivityLifecycleCallbacks {
 
     private lateinit var shared : SharedPreferences // saved data
-//    private var spaceMode = false
     private var personalFastest = 0F
     private var highScore1 = 0
     private var highScore2 = 0
@@ -31,8 +31,6 @@ class Statistics : AppCompatActivity(), Application.ActivityLifecycleCallbacks {
         super.onCreate(savedInstanceState)
 
         shared = getSharedPreferences("Zytron8BitRaceData", Context.MODE_PRIVATE) // saved data
-
-//        spaceMode = shared.getBoolean("SpaceMode", spaceMode)
         personalFastest = shared.getFloat("Personal Fastest", personalFastest)
         highScore1 = shared.getInt("Personal Best Lvl1", highScore1)
         highScore2 = shared.getInt("Personal Best Lvl2", highScore2)
@@ -49,37 +47,35 @@ class Statistics : AppCompatActivity(), Application.ActivityLifecycleCallbacks {
         }
 
         fs()
-
         application.registerActivityLifecycleCallbacks(this)
 
+        setText()
+    }
+
+    private fun setText() {
         val allData = shared.all
         val df = DecimalFormat("#.#")
         val fastest = 1.0 / (allData["Personal Fastest"] as Float / 1000.0) * 10.0
 
+        // set text for statistics
         findViewById<TextView>(R.id.statsTxt).text = "All raw data:\n${allData}"
-
-        findViewById<TextView>(R.id.StatTheme).text = "Theme:\n${allData["Theme"]}"
-
+        findViewById<TextView>(R.id.StatTheme).text = "CurrentTheme:\n${allData["CurrentTheme"]}"
         findViewById<TextView>(R.id.StatDifficulty).text = "Difficulty:\n${allData["Difficulty"]}"
-
-        findViewById<TextView>(R.id.StatPersonalFastest).text = "Personal Fastest (ticks per second * 10):\n${df.format(fastest)} SU"
-
-        findViewById<TextView>(R.id.StatHiScore1).text = "Personal Best Lvl1:\n${allData["Personal Best Lvl1"]}"
-
-        findViewById<TextView>(R.id.StatHiScore2).text = "Personal Best Lvl2:\n${allData["Personal Best Lvl2"]}"
-
-        findViewById<TextView>(R.id.StatHiScore3).text = "Personal Best Lvl3:\n${allData["Personal Best Lvl3"]}"
-
-        findViewById<TextView>(R.id.StatHiScore4).text = "Personal Best Lvl4:\n${allData["Personal Best Lvl4"]}"
-
-        findViewById<TextView>(R.id.StatAppVersionName).text = "App Version Name:\n${BuildConfig.VERSION_NAME}"
-
-        findViewById<ConstraintLayout>(R.id.main).setBackgroundResource(when (MainMenuActivity.Theme.theme) {
-            MainMenuActivity.Themes.RaceTrack -> R.drawable.race_road_blur
-            MainMenuActivity.Themes.SpaceRace -> R.drawable.race_space_blur
-            MainMenuActivity.Themes.SubspaceRift -> R.drawable.race_subspace_rift // todo: make a background blur for this theme
-            else -> R.drawable.race_road_blur
-        } )
+        findViewById<TextView>(R.id.StatPersonalFastest).text =
+            "Personal Fastest (ticks per second * 10):\n${df.format(fastest)} SU"
+        findViewById<TextView>(R.id.StatHiScore1).text =
+            "Personal Best Lvl1:\n${allData["Personal Best Lvl1"]}"
+        findViewById<TextView>(R.id.StatHiScore2).text =
+            "Personal Best Lvl2:\n${allData["Personal Best Lvl2"]}"
+        findViewById<TextView>(R.id.StatHiScore3).text =
+            "Personal Best Lvl3:\n${allData["Personal Best Lvl3"]}"
+        findViewById<TextView>(R.id.StatHiScore4).text =
+            "Personal Best Lvl4:\n${allData["Personal Best Lvl4"]}"
+        findViewById<TextView>(R.id.StatAppVersionName).text =
+            "App Version Name:\n${BuildConfig.VERSION_NAME}"
+        
+        // set background based on current theme
+        findViewById<ConstraintLayout>(R.id.main).setBackgroundResource(MainMenuActivity.CurrentTheme.theme!!.backgroundTextureBlurred)
     }
 
     private fun fs() {
@@ -96,39 +92,25 @@ class Statistics : AppCompatActivity(), Application.ActivityLifecycleCallbacks {
     }
 
     fun back(view: View) {
-//        fadeMusic()
-//        startActivity(Intent(this@Statistics, MainMenuActivity::class.java))
         finish()
     }
 
-    override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
-//        TODO("Not yet implemented")
-    }
+    override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {}
 
-    override fun onActivityStarted(activity: Activity) {
-//        playMusic()
-    }
+    override fun onActivityStarted(activity: Activity) {}
 
     override fun onActivityResumed(activity: Activity) {
         println("Activity Resumed")
-//        menuMusic!!.start()
     }
 
 
     override fun onActivityPaused(activity: Activity) {
         println("Activity Paused")
-//        menuMusic!!.pause()
     }
 
-    override fun onActivityStopped(activity: Activity) {
-//        menuMusic!!.stop()
-    }
+    override fun onActivityStopped(activity: Activity) {}
 
-    override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {
-//        TODO("Not yet implemented")
-    }
+    override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {}
 
-    override fun onActivityDestroyed(activity: Activity) {
-//        TODO("Not yet implemented")
-    }
+    override fun onActivityDestroyed(activity: Activity) {}
 }
