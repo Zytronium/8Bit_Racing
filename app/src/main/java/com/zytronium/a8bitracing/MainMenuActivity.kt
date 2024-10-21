@@ -144,22 +144,14 @@ class MainMenuActivity : AppCompatActivity(), Application.ActivityLifecycleCallb
     }
 
     private fun readData() {
-        CurrentTheme.theme = when (shared.getString("CurrentTheme", CurrentTheme.theme?.name)
-            ?.replace(" ", "")) {
-            // ignore spaces because old method of doing this had no spaces in this value. However, this never made it into production, so todo: we can safely remove this very soon, and simplify this entire part by removing the whens statement
-            "RaceTrack" -> themes["Race Track"]
-            "SpaceRace" -> themes["Space Race"]
-            "SubspaceRift" -> themes["Subspace Rift"]
-            "Glitched" -> themes["Glitched"]
-            else -> {
-                // when there is no data for the theme enum, (at least, that's what I assume this should do), try to see what the old "spaceMode" boolean is
-                when (shared.getBoolean("SpaceMode", false)) {
-                    true -> themes["Space Race"]
-                    else -> themes["Race Track"] // "false" or if not found, default to RaceTrack
+        CurrentTheme.theme = themes[(shared.getString(
+            "CurrentTheme", CurrentTheme.theme?.name
+                ?: when (shared.getBoolean("SpaceMode", false)) {
+                    true -> "Space Race"
+                    else -> "Race Track" // "false" or if not found, default to RaceTrack
                 }
-            }
-        }
-//        themeSwitch.isChecked = spaceMode
+        ))]
+
         Difficulty.difficulty = shared.getInt("Difficulty", Difficulty.difficulty)
     }
 
