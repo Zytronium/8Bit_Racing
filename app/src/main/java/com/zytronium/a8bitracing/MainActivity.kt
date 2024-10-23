@@ -91,7 +91,7 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
     private var highScore2: Int = 0
     private var highScore3: Int = 0
     private var highScore4: Int = 0
-    private var personalFastest: Float = 0F
+    private var personalFastest: Float = Float.POSITIVE_INFINITY
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
