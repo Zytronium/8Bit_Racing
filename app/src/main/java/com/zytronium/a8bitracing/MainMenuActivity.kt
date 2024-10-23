@@ -171,6 +171,7 @@ class MainMenuActivity : AppCompatActivity(), Application.ActivityLifecycleCallb
     }
 
     fun viewStats(view: View) {
+        saveData()
         startActivity(Intent(this@MainMenuActivity, Statistics::class.java))
     }
 
@@ -198,7 +199,7 @@ class MainMenuActivity : AppCompatActivity(), Application.ActivityLifecycleCallb
     override fun onActivityDestroyed(activity: Activity) {}
 
     object Difficulty {
-        var difficulty = 0
+        var difficulty = 1
     }
 
     object CurrentTheme {

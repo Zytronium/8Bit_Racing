@@ -55,7 +55,12 @@ class Statistics : AppCompatActivity(), Application.ActivityLifecycleCallbacks {
     private fun setText() {
         val allData = shared.all
         val df = DecimalFormat("#.#")
-        val fastest = 1.0 / (allData["Personal Fastest"] as Float / 1000.0) * 10.0
+        var fastest = 0.0
+        try {
+            fastest = 1.0 / (allData["Personal Fastest"] as Float / 1000.0) * 10.0
+        } catch (e: NullPointerException) {
+            fastest = 0.0
+        }
 
         // set text for statistics
         findViewById<TextView>(R.id.statsTxt).text = "All raw data:\n${allData}"

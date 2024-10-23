@@ -1,8 +1,7 @@
 # Todo list
 ### Most immediate changes that should happen; **NOT** an extensive list of every feature to be added
-"*" means it must be done before next rele
+"*" means it must be done before next release
 
-- Fix crash on opening statistics before any data exists.*
 - Fix theme switcher buttons.*
   - Buttons are too small and are not at fixed positions.
 - Polish and finalize the "Subspace Rift" theme textures.*
