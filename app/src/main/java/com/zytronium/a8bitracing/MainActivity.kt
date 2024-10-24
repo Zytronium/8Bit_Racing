@@ -252,8 +252,8 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
                     play()
             }
         }, adjustedGameSpeed())
-        println("speed: ${adjustedGameSpeed()}")
-        if(adjustedGameSpeed() <= 310 && (fastMusic == null || !fastMusic!!.isPlaying) && score > 3) {
+//        println("speed: ${adjustedGameSpeed()}")
+        if(CurrentTheme.theme?.name != "Rainbow Kart" && (adjustedGameSpeed() <= 310 && (fastMusic == null || !fastMusic!!.isPlaying) && score > 3)) {
             if(slowMusic!!.isPlaying && !musicFaded) {
                 fadeSlowMusic()
             }
@@ -1009,7 +1009,7 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
         println("Activity Resumed")
 //        if(!paused) {
             if(!progressing && gamePlaying && !paused) {
-                if(adjustedGameSpeed() > 310 && difficulty != 4) {
+                if(CurrentTheme.theme?.name == "Rainbow Kart" || (adjustedGameSpeed() > 310 && difficulty != 4)) {
                     slowMusic!!.start()
                 } else if(score > 5 || difficulty == 4) {
                     playFastMusic()
