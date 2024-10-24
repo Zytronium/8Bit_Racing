@@ -29,6 +29,7 @@ class MainMenuActivity : AppCompatActivity(), Application.ActivityLifecycleCallb
     private lateinit var difficultyBar: SeekBar
     private lateinit var themeText: TextView
     private lateinit var difficultyNameText: TextView
+    private var previousTheme = CurrentTheme.theme?.name
 
     private lateinit var shared : SharedPreferences // saved data
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,7 +41,11 @@ class MainMenuActivity : AppCompatActivity(), Application.ActivityLifecycleCallb
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        menuMusic = MediaPlayer.create(this, R.raw.menubackgroundmusicelevators)
+
+        menuMusic = if (CurrentTheme.theme?.name != "Rainbow Kart")
+            MediaPlayer.create(this, R.raw.menubackgroundmusicelevators)
+        else
+            MediaPlayer.create(this, R.raw.rainbow_kart_main_menu)
         shared = getSharedPreferences("Zytron8BitRaceData", Context.MODE_PRIVATE) // saved data
         difficultyBar = findViewById(R.id.difficulty_bar)
         themeText = findViewById(R.id.theme_txt2)
@@ -256,6 +261,16 @@ class MainMenuActivity : AppCompatActivity(), Application.ActivityLifecycleCallb
             difficultyNameText.text.toString()
                 .replace("Driver", "Pilot") else difficultyNameText.text =
             difficultyNameText.text.toString().replace("Pilot", "Driver")
+
+        if (previousTheme == "Rainbow Kart" || CurrentTheme.theme?.name == "Rainbow Kart") {
+            menuMusic!!.stop()
+            menuMusic = if (CurrentTheme.theme?.name != "Rainbow Kart")
+                MediaPlayer.create(this, R.raw.menubackgroundmusicelevators)
+            else
+                MediaPlayer.create(this, R.raw.rainbow_kart_main_menu)
+            playMusic()
+        }
+        previousTheme = CurrentTheme.theme?.name
 
         saveData()
     }
