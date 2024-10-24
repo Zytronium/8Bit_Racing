@@ -132,7 +132,7 @@ class MainMenuActivity : AppCompatActivity(), Application.ActivityLifecycleCallb
             4 -> getString(R.string.skill_level_4)
             else -> "Unknown Difficulty"
         }
-        if(CurrentTheme.theme?.name != "Race Track") difficultyNameText.text = difficultyNameText.text.toString().replace("Driver", "Pilot")
+        if(CurrentTheme.theme?.name != "Race Track" && CurrentTheme.theme?.name != "Rainbow Kart") difficultyNameText.text = difficultyNameText.text.toString().replace("Driver", "Pilot")
     }
 
     private fun fs() {
@@ -256,21 +256,22 @@ class MainMenuActivity : AppCompatActivity(), Application.ActivityLifecycleCallb
 
     private fun updateTheme() {
         updateBackground()
+        val currentTheme = CurrentTheme.theme?.name
 
-        if (CurrentTheme.theme?.name != "Race Track") difficultyNameText.text =
+        if (currentTheme != "Race Track" && currentTheme != "Rainbow Kart") difficultyNameText.text =
             difficultyNameText.text.toString()
                 .replace("Driver", "Pilot") else difficultyNameText.text =
             difficultyNameText.text.toString().replace("Pilot", "Driver")
 
-        if (previousTheme == "Rainbow Kart" || CurrentTheme.theme?.name == "Rainbow Kart") {
+        if (previousTheme == "Rainbow Kart" || currentTheme == "Rainbow Kart") {
             menuMusic!!.stop()
-            menuMusic = if (CurrentTheme.theme?.name != "Rainbow Kart")
+            menuMusic = if (currentTheme != "Rainbow Kart")
                 MediaPlayer.create(this, R.raw.menubackgroundmusicelevators)
             else
                 MediaPlayer.create(this, R.raw.rainbow_kart_main_menu)
             playMusic()
         }
-        previousTheme = CurrentTheme.theme?.name
+        previousTheme = currentTheme
 
         saveData()
     }
