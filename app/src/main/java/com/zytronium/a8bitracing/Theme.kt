@@ -50,6 +50,16 @@ val glitch = Theme(
 	R.drawable.green_glitched_racer
 )
 
+val rainbowKart = Theme(
+	4,
+	"Rainbow Kart",
+	R.drawable.rainbow_road,
+	R.drawable.rainbow_road_blur,
+	R.drawable.blue_car,
+	R.drawable.red_car,
+	R.drawable.green_car
+)
+
 object Themes {
-	val themes = mapOf("Race Track" to raceTrack, "Space Race" to spaceRace, "Subspace Rift" to subspaceRift, "Glitched" to glitch)
+	val themes = mapOf("Race Track" to raceTrack, "Space Race" to spaceRace, "Subspace Rift" to subspaceRift, "Glitched" to glitch, "Rainbow Kart" to rainbowKart)
 }

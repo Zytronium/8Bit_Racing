@@ -118,6 +118,9 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
         slowMusic = MediaPlayer.create(this, R.raw.racemusicjetanger)
         fastMusic = MediaPlayer.create(this, R.raw.fastspaceracemusicsuccubus)
 
+        if (CurrentTheme.theme?.name == "Rainbow Kart")
+            slowMusic = MediaPlayer.create(this, R.raw.rainbow_road_8_bit)
+
         fs()
         application.registerActivityLifecycleCallbacks(this)
         readData()
