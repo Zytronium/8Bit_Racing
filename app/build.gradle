@@ -11,7 +11,7 @@ android {
         minSdk 23
         targetSdk 35
         versionCode 13
-        versionName "1.0.0.9 debug 1.0.0.10 - 4"
+        versionName "1.0.0.9.5 debug Rainbow"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
