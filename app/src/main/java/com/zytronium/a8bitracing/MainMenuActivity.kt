@@ -45,7 +45,7 @@ class MainMenuActivity : AppCompatActivity(), Application.ActivityLifecycleCallb
         difficultyBar = findViewById(R.id.difficulty_bar)
         themeText = findViewById(R.id.theme_txt2)
         difficultyNameText = findViewById(R.id.difficulty_name_txt)
-        themeText.text = getCurrentThemeName()
+//        themeText.text = getCurrentThemeName()
 
         fs()
 
@@ -80,7 +80,7 @@ class MainMenuActivity : AppCompatActivity(), Application.ActivityLifecycleCallb
 
     private fun updateBackground() {
         findViewById<ConstraintLayout>(R.id.main).setBackgroundResource(
-            CurrentTheme.theme!!.backgroundTextureBlurred
+            CurrentTheme.theme?.backgroundTextureBlurred ?: themes["Race Track"]!!.backgroundTextureBlurred
         )
     }
 
