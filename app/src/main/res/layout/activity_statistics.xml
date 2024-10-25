@@ -653,7 +653,7 @@
                     android:shadowRadius="4.75"
                     android:textAllCaps="false"
                     android:textColor="@color/red_orange"
-                    android:textSize="10sp"/>
+                    android:textSize="12sp"/>
 
                 <ImageButton
                     android:id="@+id/btn_raw_data"
@@ -663,8 +663,8 @@
                     android:elevation="11dp"
                     android:onClick="viewRawData"
                     android:scaleType="fitCenter"
-                    android:scaleX="0.9"
-                    android:scaleY="0.9"
+                    android:scaleX="0.666"
+                    android:scaleY="0.666"
                     android:shadowColor="#E64D1F00"
                     android:shadowDx="3.25"
                     android:shadowDy="3.25"
