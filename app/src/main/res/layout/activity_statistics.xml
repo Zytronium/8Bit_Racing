@@ -628,6 +628,59 @@
                 android:scaleY="0.15"
                 android:padding="2.5dp"
                 android:background="#33FF3300" />
+            <!-- Lives Collected Subsection -->
+            <LinearLayout
+                android:id="@+id/lives_collected_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:foregroundGravity="center"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <!-- Lives Collected Subsection Title -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:elevation="8dp"
+                    android:fontFamily="@font/press_start_2p"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:shadowColor="#E64D1F00"
+                    android:shadowDx="7.5"
+                    android:shadowDy="7.5"
+                    android:shadowRadius="4.75"
+                    android:text="Extra Lives Collected"
+                    android:textColor="@color/red_orange"
+                    android:textSize="16sp" />
+
+                <!-- Total Races Stat -->
+                <TextView
+                    android:id="@+id/StatExtraLives"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:elevation="8dp"
+                    android:fontFamily="@font/press_start_2p"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:shadowColor="#E64D1F00"
+                    android:shadowDx="7.5"
+                    android:shadowDy="7.5"
+                    android:shadowRadius="4.75"
+                    android:text="0"
+                    android:textAllCaps="false"
+                    android:textColor="@color/red_orange"
+                    android:textSize="14.5sp" />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/divider4"
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                android:scaleX="0.9"
+                android:scaleY="0.15"
+                android:padding="2.5dp"
+                android:background="#33FF3300" />
 
             <!-- Raw Data Subsection -->
             <LinearLayout
@@ -677,6 +730,15 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.012" />
             </LinearLayout>
+
+            <View
+                android:id="@+id/divider5"
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                android:scaleX="0.9"
+                android:scaleY="0.15"
+                android:padding="2.5dp"
+                android:background="#33FF3300" />
 
             <!-- App Version Name Text -->
             <TextView

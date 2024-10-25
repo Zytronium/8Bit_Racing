@@ -56,42 +56,41 @@ class StatisticsActivity : AppCompatActivity(), Application.ActivityLifecycleCal
         val df = DecimalFormat("#.#")
         var fastest = 0.0
         try {
-            fastest = 1.0 / (allData["Personal Fastest"] as Float / 1000.0) * 10.0
+            fastest = 1.0 / (personalFastest / 1000.0) * 10.0
         } catch (e: NullPointerException) {
             fastest = 0.0
         }
 
-        // set text for statistics
+        // Set text for statistics
 
         // High Scores
-        findViewById<TextView>(R.id.StatHiScore1).text =
-            allData["Personal Best Lvl1"].toString().replace("null", "0")
-        findViewById<TextView>(R.id.StatHiScore2).text =
-            allData["Personal Best Lvl2"].toString().replace("null", "0")
-        findViewById<TextView>(R.id.StatHiScore3).text =
-            allData["Personal Best Lvl3"].toString().replace("null", "0")
-        findViewById<TextView>(R.id.StatHiScore4).text =
-            allData["Personal Best Lvl4"].toString().replace("null", "0")
+        findViewById<TextView>(R.id.StatHiScore1).text = highScore1.toString()
+        findViewById<TextView>(R.id.StatHiScore2).text = highScore2.toString()
+        findViewById<TextView>(R.id.StatHiScore3).text = highScore3.toString()
+        findViewById<TextView>(R.id.StatHiScore4).text = highScore4.toString()
         // Personal Fastest
         findViewById<TextView>(R.id.StatPersonalFastest).text =
-            "${df.format(fastest)} SU"
+            getString(R.string.personal_fastest, df.format(fastest))
         // Average Scores
-        findViewById<TextView>(R.id.StatHiScore1).text =
+        findViewById<TextView>(R.id.StatAvrgScore1).text =
             allData["Average Score Lvl1"].toString().replace("null", "0")
-        findViewById<TextView>(R.id.StatHiScore2).text =
+        findViewById<TextView>(R.id.StatAvrgScore2).text =
             allData["Average Score Lvl2"].toString().replace("null", "0")
-        findViewById<TextView>(R.id.StatHiScore3).text =
+        findViewById<TextView>(R.id.StatAvrgScore3).text =
             allData["Average Score Lvl3"].toString().replace("null", "0")
-        findViewById<TextView>(R.id.StatHiScore4).text =
+        findViewById<TextView>(R.id.StatAvrgScore4).text =
             allData["Average Score Lvl4"].toString().replace("null", "0")
         // Total Races Completed
-        findViewById<TextView>(R.id.StatHiScore4).text =
+        findViewById<TextView>(R.id.StatTotalRaces).text =
             allData["Total Races"].toString().replace("null", "0")
+        // Lives Collected
+        findViewById<TextView>(R.id.StatExtraLives).text =
+            allData["Lives Collected"].toString().replace("null", "0")
         // App Version Name
         findViewById<TextView>(R.id.StatAppVersionName).text =
             "App Version Name:\n${BuildConfig.VERSION_NAME}"
         
-        // set background based on current theme
+        // Set background based on current theme
         findViewById<ConstraintLayout>(R.id.main).setBackgroundResource(MainMenuActivity.CurrentTheme.theme?.backgroundTextureBlurred ?: R.drawable.race_road_blur)
     }
 
