@@ -124,7 +124,7 @@
 
             <!-- High Scores Subsection -->
             <LinearLayout
-                android:id="@+id/recordsStatGroup"
+                android:id="@+id/records_stat_group"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -305,42 +305,323 @@
                 android:layout_width="wrap_content"
                 android:layout_height="15dp"/>
 
-            <!-- Fastest Speed Subsection Title -->
-            <TextView
-                android:layout_width="wrap_content"
+            <!-- Fastest Speed Subsection -->
+            <LinearLayout
+                android:id="@+id/fastest_speed_group"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:elevation="8dp"
-                android:fontFamily="@font/press_start_2p"
+                android:foregroundGravity="center"
                 android:gravity="center"
-                android:padding="10dp"
-                android:shadowColor="#E64D1F00"
-                android:shadowDx="7.5"
-                android:shadowDy="7.5"
-                android:shadowRadius="4.75"
-                android:textColor="@color/red_orange"
-                android:textSize="16sp"
-                android:text="Fastest Speed (SU)"/>
+                android:orientation="vertical">
 
-            <!-- Fastest Speed Stat -->
-            <TextView
-                android:id="@+id/StatPersonalFastest"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:elevation="8dp"
-                android:fontFamily="@font/press_start_2p"
-                android:gravity="center"
-                android:padding="5dp"
-                android:shadowColor="#E64D1F00"
-                android:shadowDx="7.5"
-                android:shadowDy="7.5"
-                android:shadowRadius="4.75"
-                android:text="0"
-                android:textAllCaps="false"
-                android:textColor="@color/red_orange"
-                android:textSize="14.5sp" />
+                <!-- Fastest Speed Subsection Title -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:elevation="8dp"
+                    android:fontFamily="@font/press_start_2p"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:shadowColor="#E64D1F00"
+                    android:shadowDx="7.5"
+                    android:shadowDy="7.5"
+                    android:shadowRadius="4.75"
+                    android:text="Fastest Speed (SU)"
+                    android:textColor="@color/red_orange"
+                    android:textSize="16sp" />
+
+                <!-- Fastest Speed Stat -->
+                <TextView
+                    android:id="@+id/StatPersonalFastest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:elevation="8dp"
+                    android:fontFamily="@font/press_start_2p"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:shadowColor="#E64D1F00"
+                    android:shadowDx="7.5"
+                    android:shadowDy="7.5"
+                    android:shadowRadius="4.75"
+                    android:text="0"
+                    android:textAllCaps="false"
+                    android:textColor="@color/red_orange"
+                    android:textSize="14.5sp" />
+
+            </LinearLayout>
 
             <View
-                android:id="@+id/divider"
+                android:id="@+id/divider1"
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                android:scaleX="0.9"
+                android:scaleY="0.15"
+                android:padding="2.5dp"
+                android:background="#33FF3300" />
+
+
+            <!-- Average Score Subsection -->
+            <LinearLayout
+                android:id="@+id/avrg_score_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:foregroundGravity="center"
+                android:orientation="vertical">
+
+                <!-- Average Score Subsection Title -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:elevation="8dp"
+                    android:fontFamily="@font/press_start_2p"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:shadowColor="#E64D1F00"
+                    android:shadowDx="7.5"
+                    android:shadowDy="7.5"
+                    android:shadowRadius="4.75"
+                    android:textColor="@color/red_orange"
+                    android:textSize="16sp"
+                    android:text="Average Scores"/>
+
+                <!-- Average Scores Subsection -->
+                <LinearLayout
+                    android:id="@+id/avrg_scores_stat_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <!-- Easy High Score -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_gravity="center">
+
+                        <!-- Difficulty Label -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:elevation="8dp"
+                            android:fontFamily="@font/press_start_2p"
+                            android:gravity="center"
+                            android:padding="5dp"
+                            android:shadowColor="#E64D1F00"
+                            android:shadowDx="7.5"
+                            android:shadowDy="7.5"
+                            android:shadowRadius="4.75"
+                            android:text="Easy"
+                            android:textColor="@color/red_orange"
+                            android:textSize="13sp" />
+
+                        <!-- Score -->
+                        <TextView
+                            android:id="@+id/StatAvrgScore1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:elevation="8dp"
+                            android:fontFamily="@font/press_start_2p"
+                            android:gravity="center"
+                            android:shadowColor="#E64D1F00"
+                            android:shadowDx="7.5"
+                            android:shadowDy="7.5"
+                            android:shadowRadius="4.75"
+                            android:text="0"
+                            android:textColor="@color/red_orange"
+                            android:textSize="13sp" />
+
+                    </LinearLayout>
+
+                    <!-- Intermediate High Score -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_gravity="center">
+
+                        <!-- Difficulty Label -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:elevation="8dp"
+                            android:fontFamily="@font/press_start_2p"
+                            android:gravity="center"
+                            android:padding="5dp"
+                            android:shadowColor="#E64D1F00"
+                            android:shadowDx="7.5"
+                            android:shadowDy="7.5"
+                            android:shadowRadius="4.75"
+                            android:text="Intermediate"
+                            android:textColor="@color/red_orange"
+                            android:textSize="13sp" />
+
+                        <!-- Score -->
+                        <TextView
+                            android:id="@+id/StatAvrgScore2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:elevation="8dp"
+                            android:fontFamily="@font/press_start_2p"
+                            android:gravity="center"
+                            android:shadowColor="#E64D1F00"
+                            android:shadowDx="7.5"
+                            android:shadowDy="7.5"
+                            android:shadowRadius="4.75"
+                            android:text="0"
+                            android:textColor="@color/red_orange"
+                            android:textSize="13sp" />
+
+                    </LinearLayout>
+
+                    <!-- Hard High Score -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_gravity="center">
+
+                        <!-- Difficulty Label -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:elevation="8dp"
+                            android:fontFamily="@font/press_start_2p"
+                            android:gravity="center"
+                            android:padding="5dp"
+                            android:shadowColor="#E64D1F00"
+                            android:shadowDx="7.5"
+                            android:shadowDy="7.5"
+                            android:shadowRadius="4.75"
+                            android:text="Hard"
+                            android:textColor="@color/red_orange"
+                            android:textSize="13sp" />
+
+                        <!-- Score -->
+                        <TextView
+                            android:id="@+id/StatAvrgScore3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:elevation="8dp"
+                            android:fontFamily="@font/press_start_2p"
+                            android:gravity="center"
+                            android:shadowColor="#E64D1F00"
+                            android:shadowDx="7.5"
+                            android:shadowDy="7.5"
+                            android:shadowRadius="4.75"
+                            android:text="0"
+                            android:textColor="@color/red_orange"
+                            android:textSize="13sp" />
+
+                    </LinearLayout>
+
+                    <!-- Insane High Score -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_gravity="center">
+
+                        <!-- Difficulty Label -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:elevation="8dp"
+                            android:fontFamily="@font/press_start_2p"
+                            android:gravity="center"
+                            android:padding="5dp"
+                            android:shadowColor="#E64D1F00"
+                            android:shadowDx="7.5"
+                            android:shadowDy="7.5"
+                            android:shadowRadius="4.75"
+                            android:text="Insane"
+                            android:textColor="@color/red_orange"
+                            android:textSize="13sp" />
+
+                        <!-- Score -->
+                        <TextView
+                            android:id="@+id/StatAvrgScore4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:elevation="8dp"
+                            android:fontFamily="@font/press_start_2p"
+                            android:gravity="center"
+                            android:shadowColor="#E64D1F00"
+                            android:shadowDx="7.5"
+                            android:shadowDy="7.5"
+                            android:shadowRadius="4.75"
+                            android:text="0"
+                            android:textColor="@color/red_orange"
+                            android:textSize="13sp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/divider2"
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                android:scaleX="0.9"
+                android:scaleY="0.15"
+                android:padding="2.5dp"
+                android:background="#33FF3300" />
+
+            <!-- Total Races Subsection -->
+            <LinearLayout
+                android:id="@+id/total_races_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:foregroundGravity="center"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <!-- Total Races Subsection Title -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:elevation="8dp"
+                    android:fontFamily="@font/press_start_2p"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:shadowColor="#E64D1F00"
+                    android:shadowDx="7.5"
+                    android:shadowDy="7.5"
+                    android:shadowRadius="4.75"
+                    android:text="Total Races Completed"
+                    android:textColor="@color/red_orange"
+                    android:textSize="16sp" />
+
+                <!-- Total Races Stat -->
+                <TextView
+                    android:id="@+id/StatTotalRaces"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:elevation="8dp"
+                    android:fontFamily="@font/press_start_2p"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:shadowColor="#E64D1F00"
+                    android:shadowDx="7.5"
+                    android:shadowDy="7.5"
+                    android:shadowRadius="4.75"
+                    android:text="0"
+                    android:textAllCaps="false"
+                    android:textColor="@color/red_orange"
+                    android:textSize="14.5sp" />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/divider3"
                 android:layout_width="match_parent"
                 android:layout_height="15dp"
                 android:scaleX="0.9"

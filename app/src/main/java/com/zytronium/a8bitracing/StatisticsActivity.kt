@@ -62,8 +62,8 @@ class StatisticsActivity : AppCompatActivity(), Application.ActivityLifecycleCal
         }
 
         // set text for statistics
-        findViewById<TextView>(R.id.StatPersonalFastest).text =
-            "${df.format(fastest)} SU"
+
+        // High Scores
         findViewById<TextView>(R.id.StatHiScore1).text =
             allData["Personal Best Lvl1"].toString().replace("null", "0")
         findViewById<TextView>(R.id.StatHiScore2).text =
@@ -72,6 +72,22 @@ class StatisticsActivity : AppCompatActivity(), Application.ActivityLifecycleCal
             allData["Personal Best Lvl3"].toString().replace("null", "0")
         findViewById<TextView>(R.id.StatHiScore4).text =
             allData["Personal Best Lvl4"].toString().replace("null", "0")
+        // Personal Fastest
+        findViewById<TextView>(R.id.StatPersonalFastest).text =
+            "${df.format(fastest)} SU"
+        // Average Scores
+        findViewById<TextView>(R.id.StatHiScore1).text =
+            allData["Average Score Lvl1"].toString().replace("null", "0")
+        findViewById<TextView>(R.id.StatHiScore2).text =
+            allData["Average Score Lvl2"].toString().replace("null", "0")
+        findViewById<TextView>(R.id.StatHiScore3).text =
+            allData["Average Score Lvl3"].toString().replace("null", "0")
+        findViewById<TextView>(R.id.StatHiScore4).text =
+            allData["Average Score Lvl4"].toString().replace("null", "0")
+        // Total Races Completed
+        findViewById<TextView>(R.id.StatHiScore4).text =
+            allData["Total Races"].toString().replace("null", "0")
+        // App Version Name
         findViewById<TextView>(R.id.StatAppVersionName).text =
             "App Version Name:\n${BuildConfig.VERSION_NAME}"
         
