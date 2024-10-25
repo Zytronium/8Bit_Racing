@@ -17,5 +17,5 @@
     <string name="theme_space_race">Theme: Space Race</string>
     <string name="all_saved_data">\n\nAll saved data on this device:\n</string>
     <string name="back_button"><![CDATA[<< Back />]]></string>
-    <string name="saved_data">Saved Data</string>
+    <string name="saved_data">Statistics</string>
 </resources>

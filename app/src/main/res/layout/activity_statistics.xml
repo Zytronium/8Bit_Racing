@@ -29,40 +29,37 @@
         app:layout_constraintHorizontal_bias="0.6125"
         app:layout_constraintStart_toEndOf="@+id/backBTN"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.8495" />
+        app:layout_constraintVertical_bias="0.725" />
 
-    <Button
+    <ImageButton
         android:id="@+id/backBTN"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#A11499FF"
+        android:layout_width="110dp"
+        android:layout_height="55dp"
+        android:background="#00000000"
         android:elevation="11dp"
-        android:fontFamily="@font/press_start_2p"
-        android:gravity="center"
         android:onClick="back"
-        android:padding="2.5dp"
+        android:scaleType="fitCenter"
+        android:scaleX="0.55"
+        android:scaleY="0.55"
         android:shadowColor="#E64D1F00"
         android:shadowDx="3.25"
         android:shadowDy="3.25"
         android:shadowRadius="2.5"
-        android:text="@string/back_button"
-        android:textAllCaps="false"
-        android:textColor="@color/red_orange"
-        android:textSize="11.75sp"
-        app:cornerRadius="17.6dp"
+        android:src="@drawable/arrow_left"
+        android:translationX="-7dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.056"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.018" />
+        app:layout_constraintVertical_bias="0.012" />
 
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="805dp"
         android:orientation="vertical"
-        android:padding="6dp"
+        android:padding="0.5dp"
         android:scrollbarSize="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
