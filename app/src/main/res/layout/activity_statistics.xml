@@ -155,6 +155,7 @@
                             android:elevation="8dp"
                             android:fontFamily="@font/press_start_2p"
                             android:gravity="center"
+                            android:padding="2dp"
                             android:shadowColor="@color/stats_value_shadow"
                             android:shadowDx="7.5"
                             android:shadowDy="7.5"
@@ -197,6 +198,7 @@
                             android:elevation="8dp"
                             android:fontFamily="@font/press_start_2p"
                             android:gravity="center"
+                            android:padding="2dp"
                             android:shadowColor="@color/stats_value_shadow"
                             android:shadowDx="7.5"
                             android:shadowDy="7.5"
@@ -239,6 +241,7 @@
                             android:elevation="8dp"
                             android:fontFamily="@font/press_start_2p"
                             android:gravity="center"
+                            android:padding="2dp"
                             android:shadowColor="@color/stats_value_shadow"
                             android:shadowDx="7.5"
                             android:shadowDy="7.5"
@@ -281,6 +284,7 @@
                             android:elevation="8dp"
                             android:fontFamily="@font/press_start_2p"
                             android:gravity="center"
+                            android:padding="2dp"
                             android:shadowColor="@color/stats_value_shadow"
                             android:shadowDx="7.5"
                             android:shadowDy="7.5"
@@ -426,7 +430,8 @@
                             android:shadowRadius="4.75"
                             android:text="0"
                             android:textColor="@color/stats_value_color"
-                            android:textSize="13sp" />
+                            android:textSize="13sp"
+                            android:padding="2dp" />
 
                     </LinearLayout>
 
@@ -462,6 +467,7 @@
                             android:elevation="8dp"
                             android:fontFamily="@font/press_start_2p"
                             android:gravity="center"
+                            android:padding="2dp"
                             android:shadowColor="@color/stats_value_shadow"
                             android:shadowDx="7.5"
                             android:shadowDy="7.5"
@@ -504,6 +510,7 @@
                             android:elevation="8dp"
                             android:fontFamily="@font/press_start_2p"
                             android:gravity="center"
+                            android:padding="2dp"
                             android:shadowColor="@color/stats_value_shadow"
                             android:shadowDx="7.5"
                             android:shadowDy="7.5"
@@ -546,6 +553,7 @@
                             android:elevation="8dp"
                             android:fontFamily="@font/press_start_2p"
                             android:gravity="center"
+                            android:padding="2dp"
                             android:shadowColor="@color/stats_value_shadow"
                             android:shadowDx="7.5"
                             android:shadowDy="7.5"
