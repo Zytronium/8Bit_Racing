@@ -64,23 +64,21 @@ class Statistics : AppCompatActivity(), Application.ActivityLifecycleCallbacks {
 
         // set text for statistics
         findViewById<TextView>(R.id.statsTxt).text = "All raw data:\n${allData}"
-        findViewById<TextView>(R.id.StatTheme).text = "CurrentTheme:\n${allData["CurrentTheme"]}"
-        findViewById<TextView>(R.id.StatDifficulty).text = "Difficulty:\n${allData["Difficulty"]}"
         findViewById<TextView>(R.id.StatPersonalFastest).text =
-            "Personal Fastest (ticks per second * 10):\n${df.format(fastest)} SU"
+            "${df.format(fastest)} SU"
         findViewById<TextView>(R.id.StatHiScore1).text =
-            "Personal Best Lvl1:\n${allData["Personal Best Lvl1"]}"
+            allData["Personal Best Lvl1"].toString().replace("null", "0")
         findViewById<TextView>(R.id.StatHiScore2).text =
-            "Personal Best Lvl2:\n${allData["Personal Best Lvl2"]}"
+            allData["Personal Best Lvl2"].toString().replace("null", "0")
         findViewById<TextView>(R.id.StatHiScore3).text =
-            "Personal Best Lvl3:\n${allData["Personal Best Lvl3"]}"
+            allData["Personal Best Lvl3"].toString().replace("null", "0")
         findViewById<TextView>(R.id.StatHiScore4).text =
-            "Personal Best Lvl4:\n${allData["Personal Best Lvl4"]}"
+            allData["Personal Best Lvl4"].toString().replace("null", "0")
         findViewById<TextView>(R.id.StatAppVersionName).text =
             "App Version Name:\n${BuildConfig.VERSION_NAME}"
         
         // set background based on current theme
-        findViewById<ConstraintLayout>(R.id.main).setBackgroundResource(MainMenuActivity.CurrentTheme.theme!!.backgroundTextureBlurred)
+        findViewById<ConstraintLayout>(R.id.main).setBackgroundResource(MainMenuActivity.CurrentTheme.theme?.backgroundTextureBlurred ?: R.drawable.race_road_blur)
     }
 
     private fun fs() {
