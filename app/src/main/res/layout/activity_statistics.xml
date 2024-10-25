@@ -322,7 +322,7 @@
                         android:shadowDx="7.5"
                         android:shadowDy="7.5"
                         android:shadowRadius="4.75"
-                        android:text="Fastest Speed (SU)"
+                        android:text="Fastest Speed"
                         android:textColor="@color/stats_header2_color"
                         android:textSize="15sp" />
 
