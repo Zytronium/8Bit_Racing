@@ -172,7 +172,7 @@ class MainMenuActivity : AppCompatActivity(), Application.ActivityLifecycleCallb
 
     fun viewStats(view: View) {
         saveData()
-        startActivity(Intent(this@MainMenuActivity, Statistics::class.java))
+        startActivity(Intent(this@MainMenuActivity, StatisticsActivity::class.java))
     }
 
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {}

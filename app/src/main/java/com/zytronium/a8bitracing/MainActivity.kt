@@ -15,6 +15,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.WindowManager
 import android.widget.*
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -96,7 +97,9 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         setContentView(R.layout.activity_main)
+
         shared = getSharedPreferences("Zytron8BitRaceData", Context.MODE_PRIVATE) // saved data
         screen = findViewById(R.id.display)
         player = findViewById(R.id.player)

@@ -15,9 +15,13 @@
         android:theme="@style/Theme.8BitRacing"
         tools:targetApi="33">
         <activity
-            android:name=".Statistics"
+            android:name=".LocalDataViewActivity"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".StatisticsActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MainMenuActivity"
             android:exported="true"

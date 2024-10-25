@@ -15,7 +15,8 @@
     <string name="theme_txt">Theme: %s</string>
     <string name="theme_race_track">Theme: Race Track</string>
     <string name="theme_space_race">Theme: Space Race</string>
-<!--    <string name="all_saved_data">\n\nAll saved data on this device:\n</string>-->
+    <!--    <string name="all_saved_data">\n\nAll saved data on this device:\n</string>-->
     <string name="back_button"><![CDATA[<< Back />]]></string>
-    <string name="saved_data">Statistics</string>
+    <string name="stats_label">Statistics</string>
+    <string name="raw_data_label">Local Raw Data</string>
 </resources>

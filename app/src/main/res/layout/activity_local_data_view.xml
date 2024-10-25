@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/race_road_blur"
+    tools:context=".LocalDataViewActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="13dp"
+        android:elevation="11.5dp"
+        android:fontFamily="@font/press_start_2p"
+        android:gravity="center"
+        android:padding="5.5dp"
+        android:shadowColor="#E64D1F00"
+        android:shadowDx="4"
+        android:shadowDy="4"
+        android:shadowRadius="3.125"
+        android:text="@string/raw_data_label"
+        android:textAllCaps="false"
+        android:textColor="@color/red_orange"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6125"
+        app:layout_constraintStart_toEndOf="@+id/backBTN"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.725" />
+
+    <ImageButton
+        android:id="@+id/backBTN"
+        android:layout_width="110dp"
+        android:layout_height="55dp"
+        android:background="#00000000"
+        android:elevation="11dp"
+        android:onClick="back"
+        android:scaleType="fitCenter"
+        android:scaleX="0.55"
+        android:scaleY="0.55"
+        android:shadowColor="#E64D1F00"
+        android:shadowDx="3.25"
+        android:shadowDy="3.25"
+        android:shadowRadius="2.5"
+        android:src="@drawable/arrow_left"
+        android:translationX="-7dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.012" />
+
+    <!-- Statistics Content Scroll View -->
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="805dp"
+        android:orientation="vertical"
+        android:padding="0.5dp"
+        android:scrollbarSize="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/backBTN">
+
+        <!-- Statistics Content -->
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <!-- Raw Data Subsection -->
+            <TextView
+                android:id="@+id/statsTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="8dp"
+                android:fontFamily="@font/press_start_2p"
+                android:gravity="center"
+                android:padding="2.5dp"
+                android:shadowColor="#E64D1F00"
+                android:shadowDx="7.05"
+                android:shadowDy="7.05"
+                android:shadowRadius="4.75"
+                android:text=""
+                android:textAllCaps="false"
+                android:textColor="@color/red_orange"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

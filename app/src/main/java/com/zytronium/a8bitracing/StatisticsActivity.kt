@@ -3,6 +3,7 @@ package com.zytronium.a8bitracing
 import android.app.Activity
 import android.app.Application
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
@@ -14,10 +15,9 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
-import com.zytronium.a8bitracing.Themes.themes
 import java.text.DecimalFormat
 
-class Statistics : AppCompatActivity(), Application.ActivityLifecycleCallbacks {
+class StatisticsActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks {
 
     private lateinit var shared : SharedPreferences // saved data
     private var personalFastest = 0F
@@ -29,7 +29,6 @@ class Statistics : AppCompatActivity(), Application.ActivityLifecycleCallbacks {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         shared = getSharedPreferences("Zytron8BitRaceData", Context.MODE_PRIVATE) // saved data
         personalFastest = shared.getFloat("Personal Fastest", personalFastest)
         highScore1 = shared.getInt("Personal Best Lvl1", highScore1)
@@ -63,7 +62,6 @@ class Statistics : AppCompatActivity(), Application.ActivityLifecycleCallbacks {
         }
 
         // set text for statistics
-        findViewById<TextView>(R.id.statsTxt).text = "All raw data:\n${allData}"
         findViewById<TextView>(R.id.StatPersonalFastest).text =
             "${df.format(fastest)} SU"
         findViewById<TextView>(R.id.StatHiScore1).text =
@@ -92,6 +90,10 @@ class Statistics : AppCompatActivity(), Application.ActivityLifecycleCallbacks {
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
         )
+    }
+
+    fun viewRawData(view: View) {
+        startActivity(Intent(this@StatisticsActivity, LocalDataViewActivity::class.java))
     }
 
     fun back(view: View) {
