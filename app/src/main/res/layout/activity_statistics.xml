@@ -90,12 +90,12 @@
                     android:fontFamily="@font/press_start_2p"
                     android:gravity="center"
                     android:paddingTop="20dp"
-                    android:shadowColor="#E64D1F00"
+                    android:shadowColor="@color/stats_header1_shadow"
                     android:shadowDx="7.5"
                     android:shadowDy="7.5"
                     android:shadowRadius="4.75"
                     android:text="Personal Records"
-                    android:textColor="@color/red_orange"
+                    android:textColor="@color/stats_header1_color"
                     android:textSize="18sp" />
 
                 <!-- High Scores Subsection Title -->
@@ -106,12 +106,12 @@
                     android:fontFamily="@font/press_start_2p"
                     android:gravity="center"
                     android:padding="10dp"
-                    android:shadowColor="#E64D1F00"
+                    android:shadowColor="@color/stats_header2_shadow"
                     android:shadowDx="7.5"
                     android:shadowDy="7.5"
                     android:shadowRadius="4.75"
                     android:text="High Scores"
-                    android:textColor="@color/red_orange"
+                    android:textColor="@color/stats_header2_color"
                     android:textSize="15sp" />
 
                 <!-- High Scores Subsection -->
@@ -139,12 +139,12 @@
                             android:fontFamily="@font/press_start_2p"
                             android:gravity="center"
                             android:padding="5dp"
-                            android:shadowColor="#E64D1F00"
+                            android:shadowColor="@color/stats_difficulty_easy_shadow"
                             android:shadowDx="7.5"
                             android:shadowDy="7.5"
                             android:shadowRadius="4.75"
                             android:text="Easy"
-                            android:textColor="@color/red_orange"
+                            android:textColor="@color/stats_difficulty_easy_color"
                             android:textSize="13sp" />
 
                         <!-- Score -->
@@ -155,12 +155,12 @@
                             android:elevation="8dp"
                             android:fontFamily="@font/press_start_2p"
                             android:gravity="center"
-                            android:shadowColor="#E64D1F00"
+                            android:shadowColor="@color/stats_difficulty_easy_shadow"
                             android:shadowDx="7.5"
                             android:shadowDy="7.5"
                             android:shadowRadius="4.75"
                             android:text="0"
-                            android:textColor="@color/red_orange"
+                            android:textColor="@color/stats_difficulty_easy_color"
                             android:textSize="13sp" />
 
                     </LinearLayout>
@@ -181,12 +181,12 @@
                             android:fontFamily="@font/press_start_2p"
                             android:gravity="center"
                             android:padding="5dp"
-                            android:shadowColor="#E64D1F00"
+                            android:shadowColor="@color/stats_difficulty_medium_shadow"
                             android:shadowDx="7.5"
                             android:shadowDy="7.5"
                             android:shadowRadius="4.75"
                             android:text="Intermediate"
-                            android:textColor="@color/red_orange"
+                            android:textColor="@color/stats_difficulty_medium_color"
                             android:textSize="13sp" />
 
                         <!-- Score -->
@@ -197,12 +197,12 @@
                             android:elevation="8dp"
                             android:fontFamily="@font/press_start_2p"
                             android:gravity="center"
-                            android:shadowColor="#E64D1F00"
+                            android:shadowColor="@color/stats_difficulty_medium_shadow"
                             android:shadowDx="7.5"
                             android:shadowDy="7.5"
                             android:shadowRadius="4.75"
                             android:text="0"
-                            android:textColor="@color/red_orange"
+                            android:textColor="@color/stats_difficulty_medium_color"
                             android:textSize="13sp" />
 
                     </LinearLayout>
@@ -223,12 +223,12 @@
                             android:fontFamily="@font/press_start_2p"
                             android:gravity="center"
                             android:padding="5dp"
-                            android:shadowColor="#E64D1F00"
+                            android:shadowColor="@color/stats_difficulty_hard_shadow"
                             android:shadowDx="7.5"
                             android:shadowDy="7.5"
                             android:shadowRadius="4.75"
                             android:text="Hard"
-                            android:textColor="@color/red_orange"
+                            android:textColor="@color/stats_difficulty_hard_color"
                             android:textSize="13sp" />
 
                         <!-- Score -->
@@ -239,12 +239,12 @@
                             android:elevation="8dp"
                             android:fontFamily="@font/press_start_2p"
                             android:gravity="center"
-                            android:shadowColor="#E64D1F00"
+                            android:shadowColor="@color/stats_difficulty_hard_shadow"
                             android:shadowDx="7.5"
                             android:shadowDy="7.5"
                             android:shadowRadius="4.75"
                             android:text="0"
-                            android:textColor="@color/red_orange"
+                            android:textColor="@color/stats_difficulty_hard_color"
                             android:textSize="13sp" />
 
                     </LinearLayout>
@@ -265,12 +265,12 @@
                             android:fontFamily="@font/press_start_2p"
                             android:gravity="center"
                             android:padding="5dp"
-                            android:shadowColor="#E64D1F00"
+                            android:shadowColor="@color/stats_difficulty_insane_shadow"
                             android:shadowDx="7.5"
                             android:shadowDy="7.5"
                             android:shadowRadius="4.75"
                             android:text="Insane"
-                            android:textColor="@color/red_orange"
+                            android:textColor="@color/stats_difficulty_insane_color"
                             android:textSize="13sp" />
 
                         <!-- Score -->
@@ -281,12 +281,12 @@
                             android:elevation="8dp"
                             android:fontFamily="@font/press_start_2p"
                             android:gravity="center"
-                            android:shadowColor="#E64D1F00"
+                            android:shadowColor="@color/stats_difficulty_insane_shadow"
                             android:shadowDx="7.5"
                             android:shadowDy="7.5"
                             android:shadowRadius="4.75"
                             android:text="0"
-                            android:textColor="@color/red_orange"
+                            android:textColor="@color/stats_difficulty_insane_color"
                             android:textSize="13sp" />
 
                     </LinearLayout>
@@ -314,12 +314,12 @@
                         android:fontFamily="@font/press_start_2p"
                         android:gravity="center"
                         android:padding="10dp"
-                        android:shadowColor="#E64D1F00"
+                        android:shadowColor="@color/stats_header2_shadow"
                         android:shadowDx="7.5"
                         android:shadowDy="7.5"
                         android:shadowRadius="4.75"
                         android:text="Fastest Speed (SU)"
-                        android:textColor="@color/red_orange"
+                        android:textColor="@color/stats_header2_color"
                         android:textSize="15sp" />
 
                     <!-- Fastest Speed Stat -->
@@ -331,13 +331,13 @@
                         android:fontFamily="@font/press_start_2p"
                         android:gravity="center"
                         android:padding="5dp"
-                        android:shadowColor="#E64D1F00"
+                        android:shadowColor="@color/stats_regular_value_shadow"
                         android:shadowDx="7.5"
                         android:shadowDy="7.5"
                         android:shadowRadius="4.75"
                         android:text="0"
                         android:textAllCaps="false"
-                        android:textColor="@color/red_orange"
+                        android:textColor="@color/stats_regular_value_color"
                         android:textSize="14.5sp" />
 
                 </LinearLayout>
@@ -371,12 +371,12 @@
                     android:fontFamily="@font/press_start_2p"
                     android:gravity="center"
                     android:padding="10dp"
-                    android:shadowColor="#E64D1F00"
+                    android:shadowColor="@color/stats_header1_shadow"
                     android:shadowDx="7.5"
                     android:shadowDy="7.5"
                     android:shadowRadius="4.75"
                     android:text="Average Scores"
-                    android:textColor="@color/red_orange"
+                    android:textColor="@color/stats_header1_color"
                     android:textSize="18sp" />
 
                 <!-- Average Scores Subsection -->
@@ -404,12 +404,12 @@
                             android:fontFamily="@font/press_start_2p"
                             android:gravity="center"
                             android:padding="5dp"
-                            android:shadowColor="#E64D1F00"
+                            android:shadowColor="@color/stats_difficulty_easy_shadow"
                             android:shadowDx="7.5"
                             android:shadowDy="7.5"
                             android:shadowRadius="4.75"
                             android:text="Easy"
-                            android:textColor="@color/red_orange"
+                            android:textColor="@color/stats_difficulty_easy_color"
                             android:textSize="13sp" />
 
                         <!-- Score -->
@@ -420,12 +420,12 @@
                             android:elevation="8dp"
                             android:fontFamily="@font/press_start_2p"
                             android:gravity="center"
-                            android:shadowColor="#E64D1F00"
+                            android:shadowColor="@color/stats_difficulty_easy_shadow"
                             android:shadowDx="7.5"
                             android:shadowDy="7.5"
                             android:shadowRadius="4.75"
                             android:text="0"
-                            android:textColor="@color/red_orange"
+                            android:textColor="@color/stats_difficulty_easy_color"
                             android:textSize="13sp" />
 
                     </LinearLayout>
@@ -446,12 +446,12 @@
                             android:fontFamily="@font/press_start_2p"
                             android:gravity="center"
                             android:padding="5dp"
-                            android:shadowColor="#E64D1F00"
+                            android:shadowColor="@color/stats_difficulty_medium_shadow"
                             android:shadowDx="7.5"
                             android:shadowDy="7.5"
                             android:shadowRadius="4.75"
                             android:text="Intermediate"
-                            android:textColor="@color/red_orange"
+                            android:textColor="@color/stats_difficulty_medium_color"
                             android:textSize="13sp" />
 
                         <!-- Score -->
@@ -462,12 +462,12 @@
                             android:elevation="8dp"
                             android:fontFamily="@font/press_start_2p"
                             android:gravity="center"
-                            android:shadowColor="#E64D1F00"
+                            android:shadowColor="@color/stats_difficulty_medium_shadow"
                             android:shadowDx="7.5"
                             android:shadowDy="7.5"
                             android:shadowRadius="4.75"
                             android:text="0"
-                            android:textColor="@color/red_orange"
+                            android:textColor="@color/stats_difficulty_medium_color"
                             android:textSize="13sp" />
 
                     </LinearLayout>
@@ -488,12 +488,12 @@
                             android:fontFamily="@font/press_start_2p"
                             android:gravity="center"
                             android:padding="5dp"
-                            android:shadowColor="#E64D1F00"
+                            android:shadowColor="@color/stats_difficulty_hard_shadow"
                             android:shadowDx="7.5"
                             android:shadowDy="7.5"
                             android:shadowRadius="4.75"
                             android:text="Hard"
-                            android:textColor="@color/red_orange"
+                            android:textColor="@color/stats_difficulty_hard_color"
                             android:textSize="13sp" />
 
                         <!-- Score -->
@@ -504,12 +504,12 @@
                             android:elevation="8dp"
                             android:fontFamily="@font/press_start_2p"
                             android:gravity="center"
-                            android:shadowColor="#E64D1F00"
+                            android:shadowColor="@color/stats_difficulty_hard_shadow"
                             android:shadowDx="7.5"
                             android:shadowDy="7.5"
                             android:shadowRadius="4.75"
                             android:text="0"
-                            android:textColor="@color/red_orange"
+                            android:textColor="@color/stats_difficulty_hard_color"
                             android:textSize="13sp" />
 
                     </LinearLayout>
@@ -530,12 +530,12 @@
                             android:fontFamily="@font/press_start_2p"
                             android:gravity="center"
                             android:padding="5dp"
-                            android:shadowColor="#E64D1F00"
+                            android:shadowColor="@color/stats_difficulty_insane_shadow"
                             android:shadowDx="7.5"
                             android:shadowDy="7.5"
                             android:shadowRadius="4.75"
                             android:text="Insane"
-                            android:textColor="@color/red_orange"
+                            android:textColor="@color/stats_difficulty_insane_color"
                             android:textSize="13sp" />
 
                         <!-- Score -->
@@ -546,12 +546,12 @@
                             android:elevation="8dp"
                             android:fontFamily="@font/press_start_2p"
                             android:gravity="center"
-                            android:shadowColor="#E64D1F00"
+                            android:shadowColor="@color/stats_difficulty_insane_shadow"
                             android:shadowDx="7.5"
                             android:shadowDy="7.5"
                             android:shadowRadius="4.75"
                             android:text="0"
-                            android:textColor="@color/red_orange"
+                            android:textColor="@color/stats_difficulty_insane_color"
                             android:textSize="13sp" />
 
                     </LinearLayout>
@@ -586,12 +586,12 @@
                     android:fontFamily="@font/press_start_2p"
                     android:gravity="center"
                     android:padding="10dp"
-                    android:shadowColor="#E64D1F00"
+                    android:shadowColor="@color/stats_header1_shadow"
                     android:shadowDx="7.5"
                     android:shadowDy="7.5"
                     android:shadowRadius="4.75"
                     android:text="Total Races Completed"
-                    android:textColor="@color/red_orange"
+                    android:textColor="@color/stats_header1_color"
                     android:textSize="18sp" />
 
                 <!-- Total Races Stat -->
@@ -603,13 +603,13 @@
                     android:fontFamily="@font/press_start_2p"
                     android:gravity="center"
                     android:padding="5dp"
-                    android:shadowColor="#E64D1F00"
+                    android:shadowColor="@color/stats_regular_value_shadow"
                     android:shadowDx="7.5"
                     android:shadowDy="7.5"
                     android:shadowRadius="4.75"
                     android:text="0"
                     android:textAllCaps="false"
-                    android:textColor="@color/red_orange"
+                    android:textColor="@color/stats_regular_value_color"
                     android:textSize="14.5sp" />
 
             </LinearLayout>
@@ -639,12 +639,12 @@
                     android:fontFamily="@font/press_start_2p"
                     android:gravity="center"
                     android:padding="10dp"
-                    android:shadowColor="#E64D1F00"
+                    android:shadowColor="@color/stats_header1_shadow"
                     android:shadowDx="7.5"
                     android:shadowDy="7.5"
                     android:shadowRadius="4.75"
                     android:text="Extra Lives Collected"
-                    android:textColor="@color/red_orange"
+                    android:textColor="@color/stats_header1_color"
                     android:textSize="18sp" />
 
                 <!-- Total Races Stat -->
@@ -656,13 +656,13 @@
                     android:fontFamily="@font/press_start_2p"
                     android:gravity="center"
                     android:padding="5dp"
-                    android:shadowColor="#E64D1F00"
+                    android:shadowColor="@color/stats_regular_value_shadow"
                     android:shadowDx="7.5"
                     android:shadowDy="7.5"
                     android:shadowRadius="4.75"
                     android:text="0"
                     android:textAllCaps="false"
-                    android:textColor="@color/red_orange"
+                    android:textColor="@color/stats_regular_value_color"
                     android:textSize="14.5sp" />
 
             </LinearLayout>
@@ -734,6 +734,24 @@
                 android:scaleX="0.9"
                 android:scaleY="0.15" />
 
+            <!-- App Version Name Label -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="8dp"
+                android:fontFamily="@font/press_start_2p"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:paddingBottom="5dp"
+                android:shadowColor="@color/stats_header2_shadow"
+                android:shadowDx="7.05"
+                android:shadowDy="7.05"
+                android:shadowRadius="4.75"
+                android:text="App Version Name:"
+                android:textAllCaps="false"
+                android:textColor="@color/stats_header2_color"
+                android:textSize="14sp" />
+
             <!-- App Version Name Text -->
             <TextView
                 android:id="@+id/StatAppVersionName"
@@ -742,15 +760,14 @@
                 android:elevation="8dp"
                 android:fontFamily="@font/press_start_2p"
                 android:gravity="center"
-                android:padding="20dp"
-                android:shadowColor="#E64D1F00"
+                android:shadowColor="@color/stats_regular_value_shadow"
                 android:shadowDx="1.5"
                 android:shadowDy="1.5"
                 android:shadowRadius="3.75"
                 android:text=""
                 android:textAllCaps="false"
-                android:textColor="@color/red_orange"
-                android:textSize="12sp" />
+                android:textColor="@color/stats_regular_value_color"
+                android:textSize="10sp" />
 
 
         </LinearLayout>

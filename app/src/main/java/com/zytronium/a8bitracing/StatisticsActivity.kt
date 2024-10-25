@@ -87,8 +87,7 @@ class StatisticsActivity : AppCompatActivity(), Application.ActivityLifecycleCal
         findViewById<TextView>(R.id.StatExtraLives).text =
             allData["Lives Collected"].toString().replace("null", "0")
         // App Version Name
-        findViewById<TextView>(R.id.StatAppVersionName).text =
-            "App Version Name:\n${BuildConfig.VERSION_NAME}"
+        findViewById<TextView>(R.id.StatAppVersionName).text = BuildConfig.VERSION_NAME
         
         // Set background based on current theme
         findViewById<ConstraintLayout>(R.id.main).setBackgroundResource(MainMenuActivity.CurrentTheme.theme?.backgroundTextureBlurred ?: R.drawable.race_road_blur)

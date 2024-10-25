@@ -5,7 +5,7 @@
     <color name="light_blue">#0090FF</color>
     <color name="light_blue_shadow">#E6001F4D</color>
     <color name="red_orange">#FF3300</color>
-    <color name="red_orange_shadow">#E64D1F00</color>
+    <color name="red_orange_shadow">#E64D1C00</color>
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
@@ -13,4 +13,18 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="stats_header1_color">#FF5722</color>
+    <color name="stats_header1_shadow">#E6633000</color>
+    <color name="stats_header2_color">#2196F3</color>
+    <color name="stats_header2_shadow">#E605224C</color>
+    <color name="stats_regular_value_color">#F2BB00</color>
+    <color name="stats_regular_value_shadow">#564108</color>
+    <color name="stats_difficulty_easy_color">#6AE300</color>
+    <color name="stats_difficulty_easy_shadow">#305C08</color>
+    <color name="stats_difficulty_medium_color">#E3A90B</color>
+    <color name="stats_difficulty_medium_shadow">#4D390D</color>
+    <color name="stats_difficulty_hard_color">#FF4A18</color>
+    <color name="stats_difficulty_hard_shadow">#4C1D07</color>
+    <color name="stats_difficulty_insane_color">#F50440</color>
+    <color name="stats_difficulty_insane_shadow">#4C0714</color>
 </resources>
