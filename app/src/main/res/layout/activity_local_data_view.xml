@@ -36,6 +36,7 @@
         android:layout_width="110dp"
         android:layout_height="55dp"
         android:background="#00000000"
+        android:contentDescription="@string/back_button_descr"
         android:elevation="11dp"
         android:onClick="back"
         android:scaleType="fitCenter"

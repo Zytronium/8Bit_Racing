@@ -20,4 +20,5 @@
     <string name="stats_label">Statistics</string>
     <string name="raw_data_label">Local Raw Data</string>
     <string name="personal_fastest">%1$s SU</string>
+    <string name="back_button_descr">Back Button</string>
 </resources>
