@@ -88,11 +88,23 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
     private var hiScoreBeat: Boolean = false
     private var score: Int = 0
     private var highScore: Int = 0
+
+    /* other saved data variables */
     private var highScore1: Int = 0
     private var highScore2: Int = 0
     private var highScore3: Int = 0
     private var highScore4: Int = 0
     private var personalFastest: Float = Float.POSITIVE_INFINITY
+    private var averageScore1: Int = 0
+    private var averageScore2: Int = 0
+    private var averageScore3: Int = 0
+    private var averageScore4: Int = 0
+    private var totalRacesCompleted: Int = 0
+    private var totalRacesDiff1: Int = 0
+    private var totalRacesDiff2: Int = 0
+    private var totalRacesDiff3: Int = 0
+    private var totalRacesDiff4: Int = 0
+    private var extraLivesCollected: Int = 0
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -342,60 +354,82 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
     @SuppressLint("ClickableViewAccessibility")
     private fun checkCollisions(cars: Array<ImageView>) {
         cars.forEach { car: ImageView ->
-            if(collided(player, car)) {
-                if(car.tag.toString().contains("life")) {
-                    if(playerLives < 5) playerLives++ else score += (5 + (5 * (roundDownToInt(score / 100.0))))
-                } else {
-                    playerLives--
-                    scoreSinceLastHit = 0
-                    superSpeed = false
-                    shakeScreen()
-                }
+            if (collided(player, car)) {
+
+                if (car.tag.toString().contains("life"))
+                    collectLife()
+                else
+                    takeDamage()
 
                 updateLives()
-                vibrate(if(car.tag.toString().contains("life")) 20 else 175)
                 car.tag = null
                 car.visibility = View.GONE
                 screen.removeView(car)
 
-                if(playerLives <= 0) {
-                    screen.setOnTouchListener(null)
-                    if(gameOverTimeout == 0L) {
-                        gameOverTimeout = 350L
-                        doGameOverTimeout()
-                    }
-
-                    menuButton.visibility = View.VISIBLE
-                    findViewById<ImageButton>(R.id.btn_pause).visibility = View.GONE
-                    playButton.visibility = View.VISIBLE
-                    themeSelector.visibility = View.VISIBLE
-                    finalScoreText.visibility = View.VISIBLE
-                    highScoreText.visibility = View.VISIBLE
-                    scoreText.visibility = View.INVISIBLE
-                    gamePlaying = false
-                    if(score > highScore) {
-                        highScore = score
-                        hiScoreBeat = true
-                    }
-                    finalScoreText.text = getString(R.string.score, score.toString())
-                    highScoreText.text = getString(R.string.hi_score, highScore.toString())
-                    if(hiScoreBeat) {
-                        recordScoreText.visibility = View.VISIBLE
-                        rainbowText(finalScoreText, 350f, 15)
-                        rainbowText(highScoreText, 350f, 15)
-                        animateRecordScoreText()
-                    }
-                    vibrate(333)
-                    if(adjustedGameSpeed().toFloat() < personalFastest)
-                        personalFastest = adjustedGameSpeed().toFloat()
-                    saveData()
-                }
+                if(playerLives <= 0)
+                    gameOver()
             }
         }
     }
 
-    private fun roundDownToInt(input: Double): Int {
-        return input.toString().split(".").first().toInt()
+    private fun takeDamage() {
+        playerLives--
+        scoreSinceLastHit = 0
+        superSpeed = false
+        shakeScreen()
+        vibrate(175)
+    }
+
+    private fun collectLife() {
+        extraLivesCollected++
+        if (playerLives < 5)
+            playerLives++
+        else
+            score += (5 + (5 * (roundDownToInt(score / 100.0))))
+
+        vibrate(20)
+    }
+
+    private fun gameOver() {
+        screen.setOnTouchListener(null)
+        if (gameOverTimeout == 0L) {
+            gameOverTimeout = 350L
+            doGameOverTimeout()
+        }
+
+        menuButton.visibility = View.VISIBLE
+        findViewById<ImageButton>(R.id.btn_pause).visibility = View.GONE
+        playButton.visibility = View.VISIBLE
+        themeSelector.visibility = View.VISIBLE
+        finalScoreText.visibility = View.VISIBLE
+        highScoreText.visibility = View.VISIBLE
+        scoreText.visibility = View.INVISIBLE
+        gamePlaying = false
+        if (score > highScore) {
+            highScore = score
+            hiScoreBeat = true
+        }
+        finalScoreText.text = getString(R.string.score, score.toString())
+        highScoreText.text = getString(R.string.hi_score, highScore.toString())
+        if (hiScoreBeat) {
+            recordScoreText.visibility = View.VISIBLE
+            rainbowText(finalScoreText, 350f, 15)
+            rainbowText(highScoreText, 350f, 15)
+            animateRecordScoreText()
+        }
+        vibrate(333)
+        totalRacesCompleted ++
+        when (difficulty) {
+            1 -> totalRacesDiff1++
+            2 -> totalRacesDiff2++
+            3 -> totalRacesDiff3++
+            4 -> totalRacesDiff4++
+            else -> throw IllegalArgumentException("Invalid difficulty level: $difficulty. Expected values are 1 through 4.")
+        }
+        if (adjustedGameSpeed().toFloat() < personalFastest)
+            personalFastest = adjustedGameSpeed().toFloat()
+
+        saveData()
     }
 
     private fun doGameOverTimeout() {
@@ -405,6 +439,10 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
                 doGameOverTimeout()
             }, 50L)
         }
+    }
+
+    private fun roundDownToInt(input: Double): Int {
+        return input.toString().split(".").first().toInt()
     }
 
     private fun animateRecordScoreText() {
@@ -782,16 +820,28 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
     }
 
     private fun readData() {
-        personalFastest = shared.getFloat("Personal Fastest", personalFastest)
-//        themeText.text = getThemeName(CurrentTheme.theme) // todo: may or may not need. Just un-comment out if needed
         difficulty = shared.getInt("Difficulty", difficulty)
+
+        personalFastest = shared.getFloat("Personal Fastest", personalFastest)
+
         highScore1 = shared.getInt("Personal Best Lvl1", highScore1)
         highScore2 = shared.getInt("Personal Best Lvl2", highScore2)
         highScore3 = shared.getInt("Personal Best Lvl3", highScore3)
         highScore4 = shared.getInt("Personal Best Lvl4", highScore4)
-//        highScore5 = shared.getInt("Personal Best Dif5", highScore5)
-//        ...
-//        highScore9 = shared.getInt("Personal Best Dif9", highScore9)
+
+        averageScore1 = shared.getInt("Average Score Lvl1", averageScore1)
+        averageScore2 = shared.getInt("Average Score Lvl2", averageScore2)
+        averageScore3 = shared.getInt("Average Score Lvl3", averageScore3)
+        averageScore4 = shared.getInt("Average Score Lvl4", averageScore4)
+
+        extraLivesCollected = shared.getInt("Lives Collected", extraLivesCollected)
+
+        totalRacesCompleted = shared.getInt("Total Races", totalRacesCompleted)
+
+        totalRacesDiff1 = shared.getInt("Total Races Lvl1", totalRacesDiff1)
+        totalRacesDiff2 = shared.getInt("Total Races Lvl2", totalRacesDiff2)
+        totalRacesDiff3 = shared.getInt("Total Races Lvl3", totalRacesDiff3)
+        totalRacesDiff4 = shared.getInt("Total Races Lvl4", totalRacesDiff4)
 
         highScore = when(difficulty) {
             1 -> highScore1
@@ -815,20 +865,60 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
     private fun saveData() {
         val edit = shared.edit()
         edit.putString("CurrentTheme", CurrentTheme.theme?.name)
-        edit.putFloat("Personal Fastest", personalFastest)
         when(difficulty) {
-            1 -> highScore1 = highScore
-            2 -> highScore2 = highScore
-            3 -> highScore3 = highScore
-            4 -> highScore4 = highScore
+            1 -> {
+                highScore1 = highScore
+                averageScore1 = calculateAverageScore()
+            }
+            2 -> {
+                highScore2 = highScore
+                averageScore2 = calculateAverageScore()
+            }
+            3 -> {
+                highScore3 = highScore
+                averageScore3 = calculateAverageScore()
+            }
+            4 -> {
+                highScore4 = highScore
+                averageScore4 = calculateAverageScore()
+            }
             else -> {}
         }
+        edit.putInt("Difficulty", difficulty)
         edit.putInt("Personal Best Lvl1", highScore1)
         edit.putInt("Personal Best Lvl2", highScore2)
         edit.putInt("Personal Best Lvl3", highScore3)
         edit.putInt("Personal Best Lvl4", highScore4)
-        edit.putInt("Difficulty", difficulty)
+        edit.putFloat("Personal Fastest", personalFastest)
+        edit.putInt("Average Score Lvl1", averageScore1)
+        edit.putInt("Average Score Lvl2", averageScore2)
+        edit.putInt("Average Score Lvl3", averageScore3)
+        edit.putInt("Average Score Lvl4", averageScore4)
+        edit.putInt("Lives Collected", extraLivesCollected)
+        edit.putInt("Total Races", totalRacesCompleted)
+        edit.putInt("Total Races Lvl1", totalRacesDiff1)
+        edit.putInt("Total Races Lvl2", totalRacesDiff2)
+        edit.putInt("Total Races Lvl3", totalRacesDiff3)
+        edit.putInt("Total Races Lvl4", totalRacesDiff4)
         edit.apply()
+    }
+
+    private fun calculateAverageScore(): Int {
+        val oldTotalRaces = when (difficulty) {
+            1 -> totalRacesDiff1 - 1
+            2 -> totalRacesDiff2 - 1
+            3 -> totalRacesDiff3 - 1
+            4 -> totalRacesDiff4 - 1
+            else -> throw IllegalArgumentException("Invalid difficulty level: $difficulty. Expected values are 1 through 4.")
+        }
+        var oldAverage = when (difficulty) {
+            1 -> averageScore1
+            2 -> averageScore2
+            3 -> averageScore3
+            4 -> averageScore4
+            else -> throw IllegalArgumentException("Invalid difficulty level: $difficulty. Expected values are 1 through 4.")
+        }
+        return ((oldAverage * oldTotalRaces) + score) / (oldTotalRaces + 1)
     }
 
     private fun rainbowText(target: TextView, hue: Float, speed: Long) {
