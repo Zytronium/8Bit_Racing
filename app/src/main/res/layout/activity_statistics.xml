@@ -156,12 +156,12 @@
                             android:fontFamily="@font/press_start_2p"
                             android:gravity="center"
                             android:padding="2dp"
-                            android:shadowColor="@color/stats_value_shadow"
+                            android:shadowColor="@color/stats_difficulty_easy_shadow"
                             android:shadowDx="7.5"
                             android:shadowDy="7.5"
                             android:shadowRadius="4.75"
                             android:text="0"
-                            android:textColor="@color/stats_value_color"
+                            android:textColor="@color/stats_difficulty_easy_color"
                             android:textSize="13sp" />
 
                     </LinearLayout>
@@ -199,12 +199,12 @@
                             android:fontFamily="@font/press_start_2p"
                             android:gravity="center"
                             android:padding="2dp"
-                            android:shadowColor="@color/stats_value_shadow"
+                            android:shadowColor="@color/stats_difficulty_medium_shadow"
                             android:shadowDx="7.5"
                             android:shadowDy="7.5"
                             android:shadowRadius="4.75"
                             android:text="0"
-                            android:textColor="@color/stats_value_color"
+                            android:textColor="@color/stats_difficulty_medium_color"
                             android:textSize="13sp" />
 
                     </LinearLayout>
@@ -242,12 +242,12 @@
                             android:fontFamily="@font/press_start_2p"
                             android:gravity="center"
                             android:padding="2dp"
-                            android:shadowColor="@color/stats_value_shadow"
+                            android:shadowColor="@color/stats_difficulty_hard_shadow"
                             android:shadowDx="7.5"
                             android:shadowDy="7.5"
                             android:shadowRadius="4.75"
                             android:text="0"
-                            android:textColor="@color/stats_value_color"
+                            android:textColor="@color/stats_difficulty_hard_color"
                             android:textSize="13sp" />
 
                     </LinearLayout>
@@ -285,12 +285,12 @@
                             android:fontFamily="@font/press_start_2p"
                             android:gravity="center"
                             android:padding="2dp"
-                            android:shadowColor="@color/stats_value_shadow"
+                            android:shadowColor="@color/stats_difficulty_insane_shadow"
                             android:shadowDx="7.5"
                             android:shadowDy="7.5"
                             android:shadowRadius="4.75"
                             android:text="0"
-                            android:textColor="@color/stats_value_color"
+                            android:textColor="@color/stats_difficulty_insane_color"
                             android:textSize="13sp" />
 
                     </LinearLayout>
@@ -335,13 +335,13 @@
                         android:fontFamily="@font/press_start_2p"
                         android:gravity="center"
                         android:padding="5dp"
-                        android:shadowColor="@color/stats_value_shadow"
+                        android:shadowColor="@color/light_blue_shadow"
                         android:shadowDx="7.5"
                         android:shadowDy="7.5"
                         android:shadowRadius="4.75"
                         android:text="0"
                         android:textAllCaps="false"
-                        android:textColor="@color/stats_value_color"
+                        android:textColor="@color/light_blue"
                         android:textSize="14.5sp" />
 
                 </LinearLayout>
@@ -424,14 +424,14 @@
                             android:elevation="8dp"
                             android:fontFamily="@font/press_start_2p"
                             android:gravity="center"
-                            android:shadowColor="@color/stats_value_shadow"
+                            android:padding="2dp"
+                            android:shadowColor="@color/stats_difficulty_easy_shadow"
                             android:shadowDx="7.5"
                             android:shadowDy="7.5"
                             android:shadowRadius="4.75"
                             android:text="0"
-                            android:textColor="@color/stats_value_color"
-                            android:textSize="13sp"
-                            android:padding="2dp" />
+                            android:textColor="@color/stats_difficulty_easy_color"
+                            android:textSize="13sp" />
 
                     </LinearLayout>
 
@@ -468,12 +468,12 @@
                             android:fontFamily="@font/press_start_2p"
                             android:gravity="center"
                             android:padding="2dp"
-                            android:shadowColor="@color/stats_value_shadow"
+                            android:shadowColor="@color/stats_difficulty_medium_shadow"
                             android:shadowDx="7.5"
                             android:shadowDy="7.5"
                             android:shadowRadius="4.75"
                             android:text="0"
-                            android:textColor="@color/stats_value_color"
+                            android:textColor="@color/stats_difficulty_medium_color"
                             android:textSize="13sp" />
 
                     </LinearLayout>
@@ -511,12 +511,12 @@
                             android:fontFamily="@font/press_start_2p"
                             android:gravity="center"
                             android:padding="2dp"
-                            android:shadowColor="@color/stats_value_shadow"
+                            android:shadowColor="@color/stats_difficulty_hard_shadow"
                             android:shadowDx="7.5"
                             android:shadowDy="7.5"
                             android:shadowRadius="4.75"
                             android:text="0"
-                            android:textColor="@color/stats_value_color"
+                            android:textColor="@color/stats_difficulty_hard_color"
                             android:textSize="13sp" />
 
                     </LinearLayout>
@@ -554,12 +554,12 @@
                             android:fontFamily="@font/press_start_2p"
                             android:gravity="center"
                             android:padding="2dp"
-                            android:shadowColor="@color/stats_value_shadow"
+                            android:shadowColor="@color/stats_difficulty_insane_shadow"
                             android:shadowDx="7.5"
                             android:shadowDy="7.5"
                             android:shadowRadius="4.75"
                             android:text="0"
-                            android:textColor="@color/stats_value_color"
+                            android:textColor="@color/stats_difficulty_insane_color"
                             android:textSize="13sp" />
 
                     </LinearLayout>
@@ -611,13 +611,13 @@
                     android:fontFamily="@font/press_start_2p"
                     android:gravity="center"
                     android:padding="5dp"
-                    android:shadowColor="@color/stats_value_shadow"
+                    android:shadowColor="@color/light_blue_shadow"
                     android:shadowDx="7.5"
                     android:shadowDy="7.5"
                     android:shadowRadius="4.75"
                     android:text="0"
                     android:textAllCaps="false"
-                    android:textColor="@color/stats_value_color"
+                    android:textColor="@color/light_blue"
                     android:textSize="14.5sp" />
 
             </LinearLayout>
@@ -664,13 +664,13 @@
                     android:fontFamily="@font/press_start_2p"
                     android:gravity="center"
                     android:padding="5dp"
-                    android:shadowColor="@color/stats_value_shadow"
+                    android:shadowColor="@color/light_blue_shadow"
                     android:shadowDx="7.5"
                     android:shadowDy="7.5"
                     android:shadowRadius="4.75"
                     android:text="0"
                     android:textAllCaps="false"
-                    android:textColor="@color/stats_value_color"
+                    android:textColor="@color/light_blue"
                     android:textSize="14.5sp" />
 
             </LinearLayout>
@@ -751,13 +751,13 @@
                 android:gravity="center"
                 android:paddingTop="15dp"
                 android:paddingBottom="5dp"
-                android:shadowColor="@color/stats_header2_shadow"
+                android:shadowColor="@color/stats_value_shadow"
                 android:shadowDx="7.05"
                 android:shadowDy="7.05"
                 android:shadowRadius="4.75"
                 android:text="App Version Name:"
                 android:textAllCaps="false"
-                android:textColor="@color/stats_header2_color"
+                android:textColor="@color/stats_value_color"
                 android:textSize="14sp" />
 
             <!-- App Version Name Text -->
@@ -768,13 +768,13 @@
                 android:elevation="8dp"
                 android:fontFamily="@font/press_start_2p"
                 android:gravity="center"
-                android:shadowColor="@color/stats_value_shadow"
+                android:shadowColor="@color/light_blue_shadow"
                 android:shadowDx="1.5"
                 android:shadowDy="1.5"
                 android:shadowRadius="3.75"
                 android:text="1.2.3.4"
                 android:textAllCaps="false"
-                android:textColor="@color/stats_value_color"
+                android:textColor="@color/light_blue"
                 android:textSize="10sp" />
 
 
