@@ -310,7 +310,7 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
             2 -> 1.5
             3 -> 2.5
             4 -> 6.0
-            else -> 1.0
+            else -> throw IllegalArgumentException("Invalid difficulty level: $difficulty. Expected values are 1 through 4.")
         }).toLong()
     }
 
@@ -429,7 +429,7 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
         if (adjustedGameSpeed().toFloat() < personalFastest)
             personalFastest = adjustedGameSpeed().toFloat()
 
-        saveData()
+        saveData(true)
     }
 
     private fun doGameOverTimeout() {
@@ -843,7 +843,7 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
         totalRacesDiff3 = shared.getInt("Total Races Lvl3", totalRacesDiff3)
         totalRacesDiff4 = shared.getInt("Total Races Lvl4", totalRacesDiff4)
 
-        highScore = when(difficulty) {
+        highScore = when (difficulty) {
             1 -> highScore1
             2 -> highScore2
             3 -> highScore3
@@ -862,44 +862,50 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
         difficulty = shared.getInt("Difficulty", difficulty)
     }
 
-    private fun saveData() {
+    private fun saveData(raceEnded: Boolean = false) {
         val edit = shared.edit()
         edit.putString("CurrentTheme", CurrentTheme.theme?.name)
-        when(difficulty) {
-            1 -> {
-                highScore1 = highScore
-                averageScore1 = calculateAverageScore()
+        if (raceEnded) {
+            when (difficulty) {
+                1 -> {
+                    highScore1 = highScore
+                    averageScore1 = calculateAverageScore()
+                }
+
+                2 -> {
+                    highScore2 = highScore
+                    averageScore2 = calculateAverageScore()
+                }
+
+                3 -> {
+                    highScore3 = highScore
+                    averageScore3 = calculateAverageScore()
+                }
+
+                4 -> {
+                    highScore4 = highScore
+                    averageScore4 = calculateAverageScore()
+                }
+
+                else -> throw IllegalArgumentException("Invalid difficulty level: $difficulty. Expected values are 1 through 4.")
             }
-            2 -> {
-                highScore2 = highScore
-                averageScore2 = calculateAverageScore()
-            }
-            3 -> {
-                highScore3 = highScore
-                averageScore3 = calculateAverageScore()
-            }
-            4 -> {
-                highScore4 = highScore
-                averageScore4 = calculateAverageScore()
-            }
-            else -> {}
+            edit.putInt("Difficulty", difficulty) // may not be needed here
+            edit.putInt("Personal Best Lvl1", highScore1)
+            edit.putInt("Personal Best Lvl2", highScore2)
+            edit.putInt("Personal Best Lvl3", highScore3)
+            edit.putInt("Personal Best Lvl4", highScore4)
+            edit.putFloat("Personal Fastest", personalFastest)
+            edit.putInt("Average Score Lvl1", averageScore1)
+            edit.putInt("Average Score Lvl2", averageScore2)
+            edit.putInt("Average Score Lvl3", averageScore3)
+            edit.putInt("Average Score Lvl4", averageScore4)
+            edit.putInt("Lives Collected", extraLivesCollected)
+            edit.putInt("Total Races", totalRacesCompleted)
+            edit.putInt("Total Races Lvl1", totalRacesDiff1)
+            edit.putInt("Total Races Lvl2", totalRacesDiff2)
+            edit.putInt("Total Races Lvl3", totalRacesDiff3)
+            edit.putInt("Total Races Lvl4", totalRacesDiff4)
         }
-        edit.putInt("Difficulty", difficulty)
-        edit.putInt("Personal Best Lvl1", highScore1)
-        edit.putInt("Personal Best Lvl2", highScore2)
-        edit.putInt("Personal Best Lvl3", highScore3)
-        edit.putInt("Personal Best Lvl4", highScore4)
-        edit.putFloat("Personal Fastest", personalFastest)
-        edit.putInt("Average Score Lvl1", averageScore1)
-        edit.putInt("Average Score Lvl2", averageScore2)
-        edit.putInt("Average Score Lvl3", averageScore3)
-        edit.putInt("Average Score Lvl4", averageScore4)
-        edit.putInt("Lives Collected", extraLivesCollected)
-        edit.putInt("Total Races", totalRacesCompleted)
-        edit.putInt("Total Races Lvl1", totalRacesDiff1)
-        edit.putInt("Total Races Lvl2", totalRacesDiff2)
-        edit.putInt("Total Races Lvl3", totalRacesDiff3)
-        edit.putInt("Total Races Lvl4", totalRacesDiff4)
         edit.apply()
     }
 
