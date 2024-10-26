@@ -66,8 +66,11 @@ class MainMenuActivity : AppCompatActivity(), Application.ActivityLifecycleCallb
                 saveData()
             }
         })
-        findViewById<TextView>(R.id.difficultySelectTxt).text = when((0..44).random()) {
-            in 1..2 -> "Maniac Driver Skill Level:"
+        findViewById<TextView>(R.id.difficultySelectTxt).text = when((0..24).random()) {
+            24 -> getString(
+                R.string.maniac_skill_level_text,
+                CurrentTheme.theme?.operatorName ?: "Driver"
+            )
             else -> "Speed Level:"
         }
         difficultyBar.progress = Difficulty.difficulty - 1
@@ -85,7 +88,7 @@ class MainMenuActivity : AppCompatActivity(), Application.ActivityLifecycleCallb
     }
 
     private fun getThemeByID(id: Int): Theme? {
-        for (theme in Themes.themes) {
+        for (theme in themes) {
             if (theme.component2().id == id)
                 return theme.component2()
         }
@@ -121,13 +124,12 @@ class MainMenuActivity : AppCompatActivity(), Application.ActivityLifecycleCallb
 
     private fun setDifficultyText(progress: Int = difficultyBar.progress + 1) {
         difficultyNameText.text = when(progress) {
-            1 -> getString(R.string.skill_level_1)
-            2 -> getString(R.string.skill_level_2)
-            3 -> getString(R.string.skill_level_3)
-            4 -> getString(R.string.skill_level_4)
+            1 -> getString(R.string.skill_level_1, CurrentTheme.theme?.operatorName ?: "Driver")
+            2 -> getString(R.string.skill_level_2, CurrentTheme.theme?.operatorName ?: "Driver")
+            3 -> getString(R.string.skill_level_3, CurrentTheme.theme?.operatorName ?: "Driver")
+            4 -> getString(R.string.skill_level_4, CurrentTheme.theme?.operatorName ?: "Driver")
             else -> "Unknown Difficulty"
         }
-        if(CurrentTheme.theme?.name != "Race Track") difficultyNameText.text = difficultyNameText.text.toString().replace("Driver", "Pilot")
     }
 
     private fun fs() {
@@ -203,7 +205,7 @@ class MainMenuActivity : AppCompatActivity(), Application.ActivityLifecycleCallb
     }
 
     object CurrentTheme {
-        var theme = Themes.themes["Race Track"]
+        var theme = themes["Race Track"]
     }
 
     fun difficultyUp(view: View) {
@@ -215,7 +217,7 @@ class MainMenuActivity : AppCompatActivity(), Application.ActivityLifecycleCallb
 
     fun difficultyDown(view: View) {
         if(difficultyBar.progress != 0) {
-            difficultyBar.progress --
+            difficultyBar.progress--
         }
         saveData()
     }
@@ -251,11 +253,13 @@ class MainMenuActivity : AppCompatActivity(), Application.ActivityLifecycleCallb
 
     private fun updateTheme() {
         updateBackground()
+        setDifficultyText()
 
-        if (CurrentTheme.theme?.name != "Race Track") difficultyNameText.text =
-            difficultyNameText.text.toString()
-                .replace("Driver", "Pilot") else difficultyNameText.text =
-            difficultyNameText.text.toString().replace("Pilot", "Driver")
+        if (findViewById<TextView>(R.id.difficultySelectTxt).text != "Speed Level:")
+            findViewById<TextView>(R.id.difficultySelectTxt).text = getString(
+                R.string.maniac_skill_level_text,
+                CurrentTheme.theme?.operatorName ?: "Driver"
+            )
 
         saveData()
     }

@@ -3,22 +3,17 @@
     <string name="score">Score: %s</string>
     <string name="speed">Speed: %s SU</string>
     <string name="hi_score">High Score: %s</string>
-    <string name="skill_level_1">Impatient Driver\n(easy)</string>
-    <!--    <string name="skill_level_2">Fast Driver</string>-->
-    <!--    <string name="skill_level_3">Faster Driver</string>-->
-    <!--    <string name="skill_level_4">Rushed Driver</string>-->
-    <!--    <string name="skill_level_5">Very Rushed Driver</string>-->
-    <string name="skill_level_2">Rushed Driver\n(intermediate)</string>
-    <!--    <string name="skill_level_7">High Speed Police Chase</string>-->
-    <string name="skill_level_3">Professional Idiotic Driver\n(hard)</string>
-    <string name="skill_level_4">Absolute Maniac Driver\n(insane)</string>
+    <string name="skill_level_1">Impatient %s\n(easy)</string>
+    <string name="skill_level_2">Rushed %s\n(intermediate)</string>
+    <string name="skill_level_3">Professional Idiotic %s\n(hard)</string>
+    <string name="skill_level_4">Absolute Maniac %s\n(insane)</string>
     <string name="theme_txt">Theme: %s</string>
-    <string name="theme_race_track">Theme: Race Track</string>
-    <string name="theme_space_race">Theme: Space Race</string>
-    <!--    <string name="all_saved_data">\n\nAll saved data on this device:\n</string>-->
-    <string name="back_button"><![CDATA[<< Back />]]></string>
+<!--    <string name="theme_race_track">Theme: Race Track</string>-->
+<!--    <string name="theme_space_race">Theme: Space Race</string>-->
+<!--    <string name="back_button"><![CDATA[<< Back />]]></string>-->
     <string name="stats_label">Statistics</string>
     <string name="raw_data_label">Local Raw Data</string>
-    <string name="personal_fastest">%1$s SU</string>
+    <string name="personal_fastest" translatable="false">%s SU</string>
     <string name="back_button_descr">Back Button</string>
+    <string name="maniac_skill_level_text">Maniac %s Skill Level:</string>
 </resources>
