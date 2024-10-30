@@ -73,4 +73,33 @@ class LocalDataViewActivity : AppCompatActivity(), Application.ActivityLifecycle
     override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {}
 
     override fun onActivityDestroyed(activity: Activity) {}
+
+    fun cleanData(view: View) {
+        val legalDataKeys = arrayOf(
+            "Total Races"
+            "Total Races Lvl1",
+            "Total Races Lvl2",
+            "Total Races Lvl3",
+            "Total Races Lvl4",
+            "Average Score Lvl1",
+            "Average Score Lvl2",
+            "Average Score Lvl3",
+            "Average Score Lvl4",
+            "Personal Best Lvl1",
+            "Personal Best Lvl2",
+            "Personal Best Lvl3",
+            "Personal Best Lvl4",
+            "Personal Fastest",
+            "Lives Collected",
+            "Difficulty",
+            "CurrentTheme"
+            )
+        shared.all.keys.forEach { key: String ->
+            val item = shared.all[key]
+
+            if (key !in legalDataKeys) {
+//                delete item
+            }
+        }
+    }
 }
