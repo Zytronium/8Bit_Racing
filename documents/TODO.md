@@ -2,11 +2,9 @@
 ### Most immediate changes that should happen; **NOT** an extensive list of every feature to be added
 "*" means it must be done before next release
 
-- Fix theme switcher buttons.*
-  - Buttons are too small and are not at fixed positions.
-- Polish and finalize the "Subspace Rift" theme textures.*
-- Polish and finalize the "Glitched" theme textures.*
-- Polish Statistics screen.
+- Add new theme switcher GUI for main menu separate from the one in the pause menu
+- Polish and finalize the "Glitched" theme textures.
+- Polish credits display
 - Consider making game speed increase slower and start slightly faster in all gamemodes.
   - Maybe even make Insane speed slower. Or maybe faster.
 

@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
     private lateinit var resumeButton: Button
     private lateinit var menuButton: Button
     private lateinit var themeText: TextView
-    private lateinit var themeSelector: LinearLayout
+    private lateinit var themeSelector: ConstraintLayout
     private lateinit var shared: SharedPreferences // saved data
 
     /* rotation variables */

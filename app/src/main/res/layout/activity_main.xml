@@ -55,7 +55,6 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:visibility="visible" />
 
-
         <TextView
             android:id="@+id/newRecordTxt"
             android:layout_width="wrap_content"
@@ -140,6 +139,7 @@
             android:textColor="#FF3C00" />
 
         </LinearLayout>
+
         <ImageView
             android:id="@+id/player"
             android:layout_width="0dp"
@@ -158,7 +158,7 @@
 
         <LinearLayout
             android:id="@+id/postgame_menu_options"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:elevation="15dp"
             android:gravity="center"
@@ -242,73 +242,95 @@
                 android:layout_width="1dp"
                 android:layout_height="19dp" />
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/theme_selector"
-                android:foregroundGravity="center"
-                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/statsBtn"
-                android:paddingTop="12dp"
+                android:paddingTop="8dp"
                 android:elevation="11dp"
                 android:visibility="gone"
                 tools:visibility="visible">
 
                 <ImageButton
+                    android:id="@+id/btn_theme_left"
                     android:layout_width="55dp"
                     android:layout_height="27.5dp"
                     android:layout_gravity="center"
                     android:background="#00000000"
                     android:onClick="themeLeft"
                     android:scaleType="fitCenter"
-                    android:scaleX="0.6666"
-                    android:scaleY="0.6666"
-                    android:src="@drawable/arrow_left"/>
+                    android:scaleX="0.9"
+                    android:scaleY="0.9"
+                    android:src="@drawable/arrow_left"
+                    android:translationX="5dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/theme_txt1"
+                <LinearLayout
+                    android:id="@+id/theme_txt_group"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/press_start_2p"
-                    android:text="Theme: "
-                    android:textColor="@color/red_orange"
-                    android:shadowColor="@color/red_orange_shadow"
-                    android:shadowDy="7.5"
-                    android:shadowDx="7.5"
-                    android:shadowRadius="5"
-                    android:textSize="14sp"
-                    tools:ignore="HardcodedText" />
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    app:layout_constraintStart_toEndOf="@id/btn_theme_left"
+                    app:layout_constraintEnd_toStartOf="@id/btn_theme_right"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent">
+
+                    <TextView
+                        android:id="@+id/theme_txt1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/press_start_2p"
+                        android:text="Theme:"
+                        android:paddingRight="6sp"
+                        android:textColor="@color/red_orange"
+                        android:shadowColor="@color/red_orange_shadow"
+                        android:shadowDy="7.5"
+                        android:shadowDx="7.5"
+                        android:shadowRadius="5"
+                        android:textSize="14sp"
+                        tools:ignore="HardcodedText" />
 
 
-                <TextView
-                    android:id="@+id/theme_txt2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/press_start_2p"
-                    android:text="Loading..."
-                    android:textColor="@color/light_blue"
-                    android:shadowColor="@color/ic_launcher_background"
-                    android:shadowDy="7.5"
-                    android:shadowDx="7.5"
-                    android:shadowRadius="5"
-                    android:textSize="14sp"
-                    tools:ignore="HardcodedText" />
+                    <TextView
+                        android:id="@+id/theme_txt2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/press_start_2p"
+                        android:text="Loading..."
+                        android:textColor="@color/light_blue"
+                        android:shadowColor="@color/ic_launcher_background"
+                        android:shadowDy="7.5"
+                        android:shadowDx="7.5"
+                        android:shadowRadius="5"
+                        android:textSize="14sp"
+                        tools:ignore="HardcodedText" />
+
+                </LinearLayout>
 
                 <ImageButton
+                    android:id="@+id/btn_theme_right"
                     android:layout_width="55dp"
                     android:layout_height="27.5dp"
                     android:layout_gravity="center"
                     android:background="#00000000"
                     android:onClick="themeRight"
                     android:scaleType="fitCenter"
-                    android:scaleX="0.6666"
-                    android:scaleY="0.6666"
-                    android:src="@drawable/arrow_right" />
+                    android:scaleX="0.9"
+                    android:scaleY="0.9"
+                    android:src="@drawable/arrow_right"
+                    android:translationX="-5dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
         </LinearLayout>
 
         <LinearLayout

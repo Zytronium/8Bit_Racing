@@ -104,36 +104,51 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.7333" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/theme_selector"
-        android:foregroundGravity="center"
-        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/statsBtn"
-        android:paddingTop="12dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="5dp"
         android:elevation="11dp">
 
         <ImageButton
+            android:id="@+id/btn_theme_left"
             android:layout_width="55dp"
             android:layout_height="27.5dp"
             android:layout_gravity="center"
             android:background="#00000000"
             android:onClick="themeLeft"
             android:scaleType="fitCenter"
-            android:scaleX="0.6666"
-            android:scaleY="0.6666"
-            android:src="@drawable/arrow_left"/>
+            android:scaleX="0.9"
+            android:scaleY="0.9"
+            android:src="@drawable/arrow_left"
+            android:translationX="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/theme_txt_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            app:layout_constraintStart_toEndOf="@id/btn_theme_left"
+            app:layout_constraintEnd_toStartOf="@id/btn_theme_right"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
 
         <TextView
             android:id="@+id/theme_txt1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/press_start_2p"
-            android:text="Theme: "
+            android:text="Theme:"
+            android:paddingRight="6sp"
             android:textColor="@color/red_orange"
             android:shadowColor="@color/red_orange_shadow"
             android:shadowDy="7.5"
@@ -157,18 +172,25 @@
             android:textSize="14sp"
             tools:ignore="HardcodedText" />
 
+        </LinearLayout>
+
         <ImageButton
+            android:id="@+id/btn_theme_right"
             android:layout_width="55dp"
             android:layout_height="27.5dp"
             android:layout_gravity="center"
             android:background="#00000000"
             android:onClick="themeRight"
             android:scaleType="fitCenter"
-            android:scaleX="0.6666"
-            android:scaleY="0.6666"
-            android:src="@drawable/arrow_right" />
+            android:scaleX="0.9"
+            android:scaleY="0.9"
+            android:src="@drawable/arrow_right"
+            android:translationX="-5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:id="@+id/difficulty_selector"
