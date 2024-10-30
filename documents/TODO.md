@@ -2,7 +2,12 @@
 ### Most immediate changes that should happen; **NOT** an extensive list of every feature to be added
 "*" means it must be done before next release
 
+- Final tweaks before compiling release bundle/apk:*
+  - Update app version name and number
+  - Temporarily delete currently unused textures (glitched theme) and kotlin files (leaderboard name blacklist)
+- Add button in raw data view screen to clear any old unused data (i.e. spaceMode boolean)*
 - Add new theme switcher GUI for main menu separate from the one in the pause menu
+- Polish Speedometer
 - Polish and finalize the "Glitched" theme textures.
 - Polish credits display
 - Consider making game speed increase slower and start slightly faster in all gamemodes.

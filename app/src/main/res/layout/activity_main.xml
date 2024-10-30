@@ -132,6 +132,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/press_start_2p"
             android:shadowColor="#E64D1F00"
+            android:paddingTop="4dp"
             android:shadowDx="3.33"
             android:shadowDy="3.33"
             android:shadowRadius="1.5"
