@@ -14,7 +14,6 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
-import kotlin.random.Random
 
 class LocalDataViewActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks  {
 
