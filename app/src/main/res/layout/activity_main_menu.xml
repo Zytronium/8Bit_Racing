@@ -121,15 +121,17 @@
             android:layout_height="27.5dp"
             android:layout_gravity="center"
             android:background="#00000000"
+            android:contentDescription="Theme Left Button"
             android:onClick="themeLeft"
             android:scaleType="fitCenter"
-            android:scaleX="0.9"
-            android:scaleY="0.9"
+            android:scaleX="0.95"
+            android:scaleY="0.95"
             android:src="@drawable/arrow_left"
             android:translationX="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <LinearLayout
             android:id="@+id/theme_txt_group"
@@ -180,15 +182,17 @@
             android:layout_height="27.5dp"
             android:layout_gravity="center"
             android:background="#00000000"
+            android:contentDescription="Theme Right Button"
             android:onClick="themeRight"
             android:scaleType="fitCenter"
-            android:scaleX="0.9"
-            android:scaleY="0.9"
+            android:scaleX="0.95"
+            android:scaleY="0.95"
             android:src="@drawable/arrow_right"
             android:translationX="-5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="TouchTargetSizeCheck" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -208,6 +212,7 @@
             android:layout_width="110dp"
             android:layout_height="55dp"
             android:background="#00000000"
+            android:contentDescription="Difficulty Down Button"
             android:onClick="difficultyDown"
             android:scaleType="fitCenter"
             android:scaleX="0.5"
@@ -241,6 +246,7 @@
             android:layout_width="110dp"
             android:layout_height="55dp"
             android:background="#00000000"
+            android:contentDescription="Difficulty Up Button"
             android:onClick="difficultyUp"
             android:scaleType="fitCenter"
             android:scaleX="0.5"
@@ -249,8 +255,6 @@
 
     </LinearLayout>
 
-
-    
     <TextView
         android:id="@+id/difficulty_name_txt"
         android:layout_width="wrap_content"

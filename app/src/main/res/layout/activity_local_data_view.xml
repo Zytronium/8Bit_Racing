@@ -59,11 +59,11 @@
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
-        android:layout_height="805dp"
+        android:layout_height="0dp"
         android:orientation="vertical"
         android:padding="0.5dp"
         android:scrollbarSize="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/delDataBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/backBTN">
@@ -97,6 +97,31 @@
         </LinearLayout>
 
     </ScrollView>
+
+    <Button
+        android:id="@+id/delDataBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/red_orange"
+        android:elevation="11.5dp"
+        android:fontFamily="@font/press_start_2p"
+        android:foregroundGravity="bottom"
+        android:gravity="center"
+        android:lineSpacingExtra="14dp"
+        android:onClick="cleanData"
+        android:padding="12dp"
+        android:shadowColor="#8E474747"
+        android:shadowDx="7.5"
+        android:shadowDy="7.5"
+        android:shadowRadius="4.75"
+        android:text="Delete Irrelevant Data"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:cornerRadius="23dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/scrollView2" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
