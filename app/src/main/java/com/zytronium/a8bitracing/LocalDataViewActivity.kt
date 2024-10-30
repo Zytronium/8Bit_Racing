@@ -14,6 +14,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import kotlin.random.Random
 
 class LocalDataViewActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks  {
 
@@ -33,10 +34,15 @@ class LocalDataViewActivity : AppCompatActivity(), Application.ActivityLifecycle
         fs()
         application.registerActivityLifecycleCallbacks(this)
 
-        val formattedString = shared.all.toString().replace(", ", ",\n\n")
-        findViewById<TextView>(R.id.statsTxt).text = formattedString.substring(1, formattedString.length - 1)
+        setText()
         findViewById<ConstraintLayout>(R.id.main).setBackgroundResource(MainMenuActivity.CurrentTheme.theme?.backgroundTextureBlurred ?: R.drawable.race_road_blur)
 
+    }
+
+    private fun setText() {
+        val formattedString = shared.all.toString().replace(", ", ",\n\n")
+        findViewById<TextView>(R.id.statsTxt).text =
+            formattedString.substring(1, formattedString.length - 1)
     }
 
     private fun fs() {
@@ -76,7 +82,7 @@ class LocalDataViewActivity : AppCompatActivity(), Application.ActivityLifecycle
 
     fun cleanData(view: View) {
         val legalDataKeys = arrayOf(
-            "Total Races"
+            "Total Races",
             "Total Races Lvl1",
             "Total Races Lvl2",
             "Total Races Lvl3",
@@ -94,12 +100,17 @@ class LocalDataViewActivity : AppCompatActivity(), Application.ActivityLifecycle
             "Difficulty",
             "CurrentTheme"
             )
-        shared.all.keys.forEach { key: String ->
-            val item = shared.all[key]
+        val edit = shared.edit()
 
+        shared.all.keys.forEach { key: String ->
             if (key !in legalDataKeys) {
-//                delete item
+                println("key \"$key\" deleted. Its value was ${shared.all[key]}")
+                edit.remove(key)
             }
         }
+
+        edit.apply()
+        setText()
     }
+
 }
