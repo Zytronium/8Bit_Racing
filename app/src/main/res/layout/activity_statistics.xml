@@ -162,7 +162,7 @@
                             android:shadowRadius="4.75"
                             android:text="0"
                             android:textColor="@color/stats_difficulty_easy_color"
-                            android:textSize="13sp" />
+                            android:textSize="11.5sp" />
 
                     </LinearLayout>
 
@@ -205,7 +205,7 @@
                             android:shadowRadius="4.75"
                             android:text="0"
                             android:textColor="@color/stats_difficulty_medium_color"
-                            android:textSize="13sp" />
+                            android:textSize="11.5sp" />
 
                     </LinearLayout>
 
@@ -248,7 +248,7 @@
                             android:shadowRadius="4.75"
                             android:text="0"
                             android:textColor="@color/stats_difficulty_hard_color"
-                            android:textSize="13sp" />
+                            android:textSize="11.5sp" />
 
                     </LinearLayout>
 
@@ -291,7 +291,7 @@
                             android:shadowRadius="4.75"
                             android:text="0"
                             android:textColor="@color/stats_difficulty_insane_color"
-                            android:textSize="13sp" />
+                            android:textSize="11.5sp" />
 
                     </LinearLayout>
 
@@ -431,7 +431,7 @@
                             android:shadowRadius="4.75"
                             android:text="0"
                             android:textColor="@color/stats_difficulty_easy_color"
-                            android:textSize="13sp" />
+                            android:textSize="10.5sp" />
 
                     </LinearLayout>
 
@@ -474,7 +474,7 @@
                             android:shadowRadius="4.75"
                             android:text="0"
                             android:textColor="@color/stats_difficulty_medium_color"
-                            android:textSize="13sp" />
+                            android:textSize="10.5sp" />
 
                     </LinearLayout>
 
@@ -517,7 +517,7 @@
                             android:shadowRadius="4.75"
                             android:text="0"
                             android:textColor="@color/stats_difficulty_hard_color"
-                            android:textSize="13sp" />
+                            android:textSize="10.5sp" />
 
                     </LinearLayout>
 
@@ -560,7 +560,7 @@
                             android:shadowRadius="4.75"
                             android:text="0"
                             android:textColor="@color/stats_difficulty_insane_color"
-                            android:textSize="13sp" />
+                            android:textSize="10.5sp" />
 
                     </LinearLayout>
 

@@ -95,10 +95,10 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
     private var highScore3: Int = 0
     private var highScore4: Int = 0
     private var personalFastest: Float = Float.POSITIVE_INFINITY
-    private var averageScore1: Int = 0
-    private var averageScore2: Int = 0
-    private var averageScore3: Int = 0
-    private var averageScore4: Int = 0
+    private var averageScore1: Float = 0F
+    private var averageScore2: Float = 0F
+    private var averageScore3: Float = 0F
+    private var averageScore4: Float = 0F
     private var totalRacesCompleted: Int = 0
     private var totalRacesDiff1: Int = 0
     private var totalRacesDiff2: Int = 0
@@ -385,7 +385,7 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
         if (playerLives < 5)
             playerLives++
         else
-            score += (5 + (5 * (roundDownToInt(score / 100.0))))
+            score += (5 + (5 * (roundDownToInt(score / 100.0)))) // note: I'm pretty sure Kotlin already rounds down 100% of the time when converting decimal to int.
 
         vibrate(20)
     }
@@ -829,10 +829,34 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
         highScore3 = shared.getInt("Personal Best Lvl3", highScore3)
         highScore4 = shared.getInt("Personal Best Lvl4", highScore4)
 
-        averageScore1 = shared.getInt("Average Score Lvl1", averageScore1)
-        averageScore2 = shared.getInt("Average Score Lvl2", averageScore2)
-        averageScore3 = shared.getInt("Average Score Lvl3", averageScore3)
-        averageScore4 = shared.getInt("Average Score Lvl4", averageScore4)
+        averageScore1 = try {
+            // Attempt to read as Float
+            shared.getFloat("Average Score Lvl1", 0f)
+        } catch (e: ClassCastException) {
+            // If it's an Int, read as Int and convert to Float
+            shared.getInt("Average Score Lvl1", 0).toFloat()
+        }
+        averageScore2 = try {
+            // Attempt to read as Float
+            shared.getFloat("Average Score Lvl2", 0f)
+        } catch (e: ClassCastException) {
+            // If it's an Int, read as Int and convert to Float
+            shared.getInt("Average Score Lvl2", 0).toFloat()
+        }
+        averageScore3 = try {
+            // Attempt to read as Float
+            shared.getFloat("Average Score Lvl3", 0f)
+        } catch (e: ClassCastException) {
+            // If it's an Int, read as Int and convert to Float
+            shared.getInt("Average Score Lvl3", 0).toFloat()
+        }
+        averageScore4 = try {
+            // Attempt to read as Float
+            shared.getFloat("Average Score Lvl4", 0f)
+        } catch (e: ClassCastException) {
+            // If it's an Int, read as Int and convert to Float
+            shared.getInt("Average Score Lvl4", 0).toFloat()
+        }
 
         extraLivesCollected = shared.getInt("Lives Collected", extraLivesCollected)
 
@@ -895,10 +919,10 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
             edit.putInt("Personal Best Lvl3", highScore3)
             edit.putInt("Personal Best Lvl4", highScore4)
             edit.putFloat("Personal Fastest", personalFastest)
-            edit.putInt("Average Score Lvl1", averageScore1)
-            edit.putInt("Average Score Lvl2", averageScore2)
-            edit.putInt("Average Score Lvl3", averageScore3)
-            edit.putInt("Average Score Lvl4", averageScore4)
+            edit.putFloat("Average Score Lvl1", averageScore1)
+            edit.putFloat("Average Score Lvl2", averageScore2)
+            edit.putFloat("Average Score Lvl3", averageScore3)
+            edit.putFloat("Average Score Lvl4", averageScore4)
             edit.putInt("Lives Collected", extraLivesCollected)
             edit.putInt("Total Races", totalRacesCompleted)
             edit.putInt("Total Races Lvl1", totalRacesDiff1)
@@ -909,15 +933,15 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
         edit.apply()
     }
 
-    private fun calculateAverageScore(): Int {
+    private fun calculateAverageScore(): Float {
         val oldTotalRaces = when (difficulty) {
-            1 -> totalRacesDiff1 - 1
-            2 -> totalRacesDiff2 - 1
-            3 -> totalRacesDiff3 - 1
-            4 -> totalRacesDiff4 - 1
+            1 -> totalRacesDiff1 - 1F
+            2 -> totalRacesDiff2 - 1F
+            3 -> totalRacesDiff3 - 1F
+            4 -> totalRacesDiff4 - 1F
             else -> throw IllegalArgumentException("Invalid difficulty level: $difficulty. Expected values are 1 through 4.")
         }
-        var oldAverage = when (difficulty) {
+        val oldAverage = when (difficulty) {
             1 -> averageScore1
             2 -> averageScore2
             3 -> averageScore3
