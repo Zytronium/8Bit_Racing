@@ -205,7 +205,6 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
         }
     }
 
-
     private fun updateScore() {
         val df = DecimalFormat("#.#")
         scoreText.text = getString(R.string.score, score.toString())
@@ -215,7 +214,6 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
     private fun play() {
         playing++
         if(playing == 1) {
-//            spaceMode = themeText.isChecked
             updateScore()
             progressing = true
             progressRace()
