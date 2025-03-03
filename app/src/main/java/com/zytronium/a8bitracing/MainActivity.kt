@@ -1001,7 +1001,7 @@ class MainActivity : AppCompatActivity(), Application.ActivityLifecycleCallbacks
                 finalScoreText.visibility = View.GONE
                 if(adjustedGameSpeed() > 310 && difficulty != 4) {
                     slowMusic!!.start()
-                } else if(score > 5 || difficulty == 4){
+                } else if(score > 5 || difficulty == 4) {
                     playFastMusic()
                 }
                 if(!progressing && gamePlaying) {
